@@ -1,36 +1,25 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Spots', {
+    return queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      address: {
+      startDate: {
         allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.DATEONLY
       },
-      city: {
+      endDate: {
         allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.DATEONLY
       },
-      state: {
+      spotId: {
         allowNull: false,
-        type: Sequelize.STRING(30)
-      },
-      country: {
-        allowNull: false,
-        type: Sequelize.STRING(50)
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING(255)
-      },
-      price: {
-        allowNull: false,
-        type: Sequelize.DECIMAL
+        type: Sequelize.INTEGER,
+        references: { model: 'Spots' }
       },
       userId: {
         allowNull: false,
@@ -39,15 +28,17 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Spots');
+    return queryInterface.dropTable('Bookings');
   }
 };

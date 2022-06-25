@@ -10,123 +10,123 @@ module.exports = {
       */
       return queryInterface.bulkInsert('Images', [
           {
-            url: 'https://onboat.co/wp-content/uploads/2021/09/cocokai-1.jpg',
+            url: 'backend/db/assets/images/sailboat1.jpg',
             spotId: 1
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht1.jpg',
             spotId: 2
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht1.jpg',
             spotId: 3
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat2.jpg',
             spotId: 4
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht2.jpg',
             spotId: 5
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht2.jpg',
             spotId: 6
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat3.jpg',
             spotId: 7
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht3.jpg',
             spotId: 8
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht3.jpg',
             spotId: 9
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat4.jpg',
             spotId: 10
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht4.jpg',
             spotId: 11
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht4.jpg',
             spotId: 12
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat5.jpg',
             spotId: 13
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht5.jpg',
             spotId: 14
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht5.jpg',
             spotId: 15
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat6.jpg',
             spotId: 16
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht6.jpg',
             spotId: 17
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht6.jpg',
             spotId: 18
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat7.jpg',
             spotId: 19
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht7.jpg',
             spotId: 20
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht7.jpg',
             spotId: 21
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat8.jpg',
             spotId: 22
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht8.jpg',
             spotId: 23
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht8.jpg',
             spotId: 24
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat9.jpg',
             spotId: 25
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht9.jpg',
             spotId: 26
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht9.jpg',
             spotId: 27
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/sailboat10.jpg',
             spotId: 28
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/medyacht10.jpg',
             spotId: 29
           },
           {
-            url: '',
+            url: 'backend/db/assets/images/superyacht10.jpg',
             spotId: 30
           },
       ], {});
