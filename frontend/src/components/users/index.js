@@ -6,20 +6,26 @@ export default function Users() {
 
   const dispatch = useDispatch();
   const userSelector = useSelector(state => state.users);
+  const [users, setUsers] = useState();
 
 
 
   useEffect(() => {
-    dispatch(thunkGetAllUsers(1))
+    dispatch(thunkGetAllUsers())
     console.log('sent dispatch');
   }, [dispatch])
+
+  useEffect(() => {
+    console.log(userSelector)
+    setUsers(Object.values(userSelector))
+  }, [userSelector])
 
   return (
     <div>
       <h1>Users</h1>
-      <ol>
-
-      </ol>
+      {
+        <p>{typeof users}</p>
+      }
     </div>
   )
 }
