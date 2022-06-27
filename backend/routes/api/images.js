@@ -1,16 +1,13 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { Spot } = require('../../db/models');
+
+const { Image } = require('../../db/models')
+
 const router = express.Router();
 
 router.get('/', asyncHandler(async(req, res) => {
-  const spots = await Spot.findAll({
-    include: [
-      'User',
-      'Marina',
-    ]
-  });
-  return res.json(spots);
+  const images = await Image.findAll()
+  return res.json(images)
 }))
 
 module.exports = router;
