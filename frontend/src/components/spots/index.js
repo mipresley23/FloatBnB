@@ -48,7 +48,9 @@ export default function Spots() {
       {
         spots.map(spot => (
           <div>
-            <p>{spot.name}</p>
+            <h3>{spot.name}</h3>
+            <p>{`$${spot.price}/night`}</p>
+            <p></p>
           </div>
         ))
       }

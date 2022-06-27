@@ -6,10 +6,11 @@ const router = express.Router();
 router.get('/', asyncHandler(async(req, res) => {
   const spots = await Spot.findAll({
     include: [
-      'User',
-      'Marina',
+        'Marina',
+        'User'
     ]
   });
+  console.log(spots.Marina)
   return res.json(spots);
 }))
 

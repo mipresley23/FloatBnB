@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Users from './components/users';
 import Spots from "./components/spots";
 import Bookings from "./components/bookings";
+import Splash from "./components/splash";
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/'>
+            <Splash />
+          </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
