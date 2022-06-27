@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useParams } from "react-router-dom";
-import {thunkGetAllSpots} from "../../store/spots";
+import {thunkCreateSpot, thunkGetAllSpots} from "../../store/spots";
 import { thunkGetImages } from "../../store/images";
 
 
@@ -11,12 +11,16 @@ export default function Spots() {
 
   const spotSelector = useSelector(state => state.spots);
 
-  const imageSelector = useSelector(state => state.images);
+  //const imageSelector = useSelector(state => state.images);
+
 
 
 
   const [spots, setSpots] = useState([]);
-  const [images, setImages] = useState([]);
+  const [spotName, setSpotName] = useState('');
+  const [spotPrice, setSpotPrice] = useState(0);
+  const [marinaId, setMarinaId] = useState(0);
+
 
 
 
@@ -26,39 +30,85 @@ export default function Spots() {
     console.log('sent dispatch');
   }, [dispatch])
 
-  useEffect(() => {
-    dispatch(thunkGetImages())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(thunkGetImages())
+  // }, [dispatch])
 
   useEffect(() => {
     setSpots(Object.values(spotSelector))
   }, [spotSelector])
 
-  useEffect(() => {
-    setImages(Object.values(imageSelector))
-  }, [imageSelector])
+  // useEffect(() => {
+  //   setImages(Object.values(imageSelector))
+  // }, [imageSelector])
+
+  // useEffect(() => {
+  //   dispatch(thunkCreateSpot())
+  //   console.log('create dispatch has been reached');
+  // }, [dispatch])
 
 
+
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const payload = {
+    spotName,
+    spotPrice,
+    userId: 3,
+    marinaId
+  }
+  const newSpot = await dispatch(thunkCreateSpot(payload))
+
+}
 
   return (
     <div>
       <h1>Spots</h1>
+      <div className="create_spot_constainer">
+
+        <form onSubmit={handleSubmit}>
+          <input
+          type='text'
+          value={spotName}
+          onChange={(e) => setSpotName(e.target.value)}>
+          </input>
+          <input
+          type='number'
+          value={spotPrice}
+          onChange={(e) => setSpotPrice(e.target.value)}>
+          </input>
+          <select onChange={setMarinaId}>
+            {
+              spots.map(spot => (
+                <option key={spot.id}>{spot.Marina.id}</option>
+              ))
+            }
+          </select>
+          <button type="submit">Create</button>
+
+        </form>
+      </div>
       <div>
         <table>
           <thead>
-            <th>Spot Name</th>
-            <th>Price</th>
-            <th>Owned By</th>
-            <th>Docked At</th>
+            <tr>
+              <th>Spot Name</th>
+              <th>Price</th>
+              <th>Owned By</th>
+              <th>Docked At</th>
+            </tr>
           </thead>
       {
         spots.map(spot => (
-          <tbody>
-            <td>{spot.name}</td>
-            <td>{`$${spot.price}/night`}</td>
-            <td>{spot.User.username}</td>
-            <td>{spot.Marina.name}</td>
-
+          <tbody key={spot.name}>
+            <tr>
+              <td>{spot.name}</td>
+              <td>{`$${spot.price}/night`}</td>
+              <td>{spot.User.username}</td>
+              <td>{spot.Marina.name}</td>
+            </tr>
 
           </tbody>
         ))
