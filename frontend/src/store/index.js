@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import bookingsReducer from './bookings';
 import imageReducer from './images';
+import marinaReducer from './marinas';
 import sessionReducer from './session';
 import spotReducer from './spots';
 import usersReducer from './users';
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   users: usersReducer,
   spots: spotReducer,
   bookings: bookingsReducer,
-  images: imageReducer
+  images: imageReducer,
+  marinas: marinaReducer
 });
 
 

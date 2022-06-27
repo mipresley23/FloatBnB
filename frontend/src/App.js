@@ -8,6 +8,10 @@ import Users from './components/users';
 import Spots from "./components/spots";
 import Bookings from "./components/bookings";
 import Splash from "./components/splash";
+import EachSpot from "./components/EachSpot";
+import NewSpot from './components/CreateSpotForm';
+import Marinas from "./components/marinas";
+
 
 
 function App() {
@@ -31,11 +35,20 @@ function App() {
           <Route path='/api/users'>
             <Users />
           </Route>
-          <Route path='/api/spots'>
+          <Route exact path='/api/spots'>
             <Spots />
+          </Route>
+          <Route path='/api/spots/new'>
+            <NewSpot />
+          </Route>
+          <Route path='/api/spots/:id'>
+            <EachSpot />
           </Route>
           <Route path='/api/bookings'>
             <Bookings />
+          </Route>
+          <Route path='/api/marinas'>
+            <Marinas />
           </Route>
         </Switch>
       )}
