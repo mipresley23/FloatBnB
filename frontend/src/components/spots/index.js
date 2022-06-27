@@ -44,16 +44,26 @@ export default function Spots() {
     <div>
       <h1>Spots</h1>
       <div>
-
+        <table>
+          <thead>
+            <th>Spot Name</th>
+            <th>Price</th>
+            <th>Owned By</th>
+            <th>Docked At</th>
+          </thead>
       {
         spots.map(spot => (
-          <div>
-            <h3>{spot.name}</h3>
-            <p>{`$${spot.price}/night`}</p>
-            <p></p>
-          </div>
+          <tbody>
+            <td>{spot.name}</td>
+            <td>{`$${spot.price}/night`}</td>
+            <td>{spot.User.username}</td>
+            <td>{spot.Marina.name}</td>
+
+
+          </tbody>
         ))
       }
+      </table>
       </div>
       <div>
         <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8eWFjaHR8ZW58MHx8MHx8&w=1000&q=80" alt="boat"></img>
