@@ -54,13 +54,7 @@ export default function Spots() {
       }
       </div>
       <div>
-      {
-        images.map(image => (
-          <div>
-            <img key={`${image.id}`} src={`${image.url}`} alt='spot image'></img>
-          </div>
-        ))
-      }
+        <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8eWFjaHR8ZW58MHx8MHx8&w=1000&q=80" alt="boat"></img>
       </div>
     </div>
   )
