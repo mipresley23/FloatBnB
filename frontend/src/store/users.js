@@ -11,11 +11,11 @@ const actionGetUsers = (users) => {
 }
 
 //thunk
-export const thunkGetAllUsers = () => async (dispatch) => {
+export const thunkGetAllUsers = (id) => async (dispatch) => {
   const res = await csrfFetch('/api/users');
   if(res.ok){
-    const data = await res.json();
-    dispatch(actionGetUsers(data))
+    const users = await res.json();
+    dispatch(actionGetUsers(users))
     return res;
   } else {
     return await res.json()
