@@ -11,85 +11,35 @@ export default function Spots() {
 
   const spotSelector = useSelector(state => state.spots);
 
-  //const imageSelector = useSelector(state => state.images);
-
-
-
-
   const [spots, setSpots] = useState([]);
   const [spotName, setSpotName] = useState('');
   const [spotPrice, setSpotPrice] = useState(0);
   const [marinaId, setMarinaId] = useState(0);
-
-
-
-
 
   useEffect(() => {
     dispatch(thunkGetAllSpots())
     console.log('sent dispatch');
   }, [dispatch])
 
-  // useEffect(() => {
-  //   dispatch(thunkGetImages())
-  // }, [dispatch])
-
   useEffect(() => {
     setSpots(Object.values(spotSelector))
   }, [spotSelector])
 
-  // useEffect(() => {
-  //   setImages(Object.values(imageSelector))
-  // }, [imageSelector])
-
-  // useEffect(() => {
-  //   dispatch(thunkCreateSpot())
-  //   console.log('create dispatch has been reached');
-  // }, [dispatch])
-
-
-
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const payload = {
-    spotName,
-    spotPrice,
-    userId: 3,
-    marinaId
-  }
-  const newSpot = await dispatch(thunkCreateSpot(payload))
-
-}
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   const payload = {
+//     spotName,
+//     spotPrice,
+//     userId: 3,
+//     marinaId
+//   }
+//   const newSpot = await dispatch(thunkCreateSpot(payload))
+// }
 
   return (
     <div>
       <h1>Spots</h1>
-      <div className="create_spot_constainer">
 
-        <form onSubmit={handleSubmit}>
-          <input
-          type='text'
-          value={spotName}
-          onChange={(e) => setSpotName(e.target.value)}>
-          </input>
-          <input
-          type='number'
-          value={spotPrice}
-          onChange={(e) => setSpotPrice(e.target.value)}>
-          </input>
-          <select onChange={setMarinaId}>
-            {
-              spots.map(spot => (
-                <option key={spot.id}>{spot.Marina.id}</option>
-              ))
-            }
-          </select>
-          <button type="submit">Create</button>
-
-        </form>
-      </div>
       <div>
         <table>
           <thead>

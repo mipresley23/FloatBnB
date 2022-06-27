@@ -60,7 +60,7 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 }
 
 export const thunkCreateSpot = (spot) => async (dispatch) => {
-  const response = await csrfFetch("/api/spots", {
+  const response = await csrfFetch("/api/spots/new", {
     method: "POST",
     headers: {'Content-Type': "application/json"},
     body: JSON.stringify(spot),

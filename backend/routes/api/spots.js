@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { Spot } = require('../../db/models');
+const {Spot} = require('../../db/models');
 const router = express.Router();
 
 router.get('/', asyncHandler(async(req, res) => {
@@ -25,7 +25,7 @@ router.get('/:id', asyncHandler(async(req, res) => {
 }))
 
 
-router.post('/', asyncHandler(async (req, res, next) => {
+router.post('/new', asyncHandler(async (req, res, next) => {
     const { name, price, userId, marinaId } = req.body;
 
     const spot = await Spot.create({
