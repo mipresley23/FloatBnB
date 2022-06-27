@@ -6,6 +6,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Users from './components/users';
 import Spots from "./components/spots";
+import Users from "./components/users";
+import Bookings from "./components/bookings";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +30,9 @@ function App() {
           </Route>
           <Route path='/api/spots'>
             <Spots />
+          </Route>
+          <Route path='/api/bookings'>
+            <Bookings />
           </Route>
         </Switch>
       )}
