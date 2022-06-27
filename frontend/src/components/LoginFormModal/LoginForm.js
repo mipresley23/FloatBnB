@@ -19,6 +19,10 @@ function LoginForm() {
     );
   };
 
+  const handleDemo = () => {
+      return dispatch(sessionActions.loginDemo());
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <ul>
@@ -44,6 +48,7 @@ function LoginForm() {
           required
         />
       </label>
+      <button type="button" onClick={handleDemo}>Demo</button>
       <button type="submit">Log In</button>
     </form>
   );
