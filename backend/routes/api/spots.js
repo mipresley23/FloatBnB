@@ -33,8 +33,9 @@ router.post('/', asyncHandler(async (req, res, next) => {
 );
 
 router.put('/:id', asyncHandler(async(req, res) => {
+  const spotEdit = await Spot.findByPk(req.params.id);
   const {name, price, userId, marinaId} = req.body;
-  const spot = await Spot.update({
+  const spot = await spotEdit.update({
     name,
     price,
     userId,

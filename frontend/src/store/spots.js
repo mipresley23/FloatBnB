@@ -68,13 +68,13 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
   if (response.ok){
     const newSpot = await response.json();
     dispatch(actionCreateSpot(newSpot));
-    return newSpot;
+    return response;
   }
 };
 
 export const thunkEditSpot = (spot, spotId) => async (dispatch) => {
   const {name, price, userId, marinaId} = spot;
-  const res = await csrfFetch(`/api/spots/${spotId}`, {
+  const res = await csrfFetch(`/api/spots/${spot.id}`, {
     method: "PUT",
     body: JSON.stringify({
       name,
@@ -109,11 +109,15 @@ const spotReducer = (state = {}, action) => {
     })
     return newState;
 
-    // case GET_ONE_SPOT:
-    //   newState[action.spot.id] = action.spot
-    //   return newState;
+    case GET_ONE_SPOT:
+      newState[action.spot.id] = action.spot
+      return newState;
 
     case CREATE_SPOT:
+      newState[action.spot.id] = action.spot
+      return newState
+
+    case UPDATE_SPOT:
       newState[action.spot.id] = action.spot
       return newState
 

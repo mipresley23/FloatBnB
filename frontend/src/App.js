@@ -11,6 +11,7 @@ import Splash from "./components/splash";
 import EachSpot from "./components/EachSpot";
 import Marinas from "./components/marinas";
 import CreateSpotForm from "./components/CreateSpotFormModal";
+import EditSpotForm from "./components/EditSpotFormModal/editSpotForm";
 
 
 

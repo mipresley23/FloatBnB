@@ -1,12 +1,13 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import {thunkGetAllSpots, thunkCreateSpot} from "../../store/spots";
+import { useHistory, useParams } from "react-router-dom";
+import {thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
 import '../spots/spots.css';
 
 
-export default function CreateSpotForm() {
+export default function EditSpotForm() {
+  const {id} = useParams();
 
   const dispatch = useDispatch();
   const history = useHistory()
@@ -39,35 +40,36 @@ export default function CreateSpotForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newSpot = {
+      id: id,
       name: spotName,
       price: spotPrice,
       userId: user,
       marinaId: user
     }
-    await dispatch(thunkCreateSpot(newSpot))
+    await dispatch(thunkEditSpot(newSpot))
     history.replace('/api/spots')
   }
 
 
 return (
-  <section className="spot-form-container">
-    <form className="create-spot-form" onSubmit={handleSubmit}>
+  <section className="edit-spot-form-container">
+    <form className="edit-spot-form" onSubmit={handleSubmit}>
       <input
         type="test"
-        placeholder="Spot Name"
+        placeholder={spotName}
         required
         value={spotName}
         onChange={(e) => setSpotName(e.target.value)} />
       <input
         type="number"
-        placeholder="Price"
+        placeholder={spotPrice}
         min="0"
         required
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
       <input
         type="text"
-        placeholder="Owner"
+        placeholder={user}
         value={user}
         onChange={(e) => setUser(e.target.value)} />
       {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
@@ -77,7 +79,7 @@ return (
       </select> */}
 
       <h3>{}</h3>
-      <button type="submit">Create new Spot</button>
+      <button type="submit">Edit this Spot</button>
 
     </form>
   </section>
