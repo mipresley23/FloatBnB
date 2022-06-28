@@ -10,7 +10,6 @@ router.get('/', asyncHandler(async(req, res) => {
         'User'
     ]
   });
-  console.log(spots.Marina)
   return res.json(spots);
 }))
 

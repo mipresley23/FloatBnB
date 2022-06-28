@@ -65,7 +65,7 @@ export const thunkDeleteBooking = (bookingId) => async(dispatch) => {
 
 //reducer
 const bookingsReducer = (state = {}, action) => {
-  const newState = {...state}
+  let newState = {...state}
   switch(action.type){
     case GET_BOOKINGS:
     action.bookings.forEach(booking => {

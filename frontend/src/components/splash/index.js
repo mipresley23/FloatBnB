@@ -7,7 +7,6 @@ export default function Splash() {
       <NavLink to='/api/spots'>Spots</NavLink>
       <NavLink to='/api/bookings'>Bookings</NavLink>
       <NavLink to='/api/marinas'>Marinas</NavLink>
-      <NavLink to='/api/spots/new'>Create New Spot</NavLink>
     </div>
   )
 }
