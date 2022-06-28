@@ -27,14 +27,6 @@ export default function CreateSpotForm() {
     setMarinaId(Object.values(marinaSelector))
   }, [marinaSelector])
 
-  useEffect(() => {
-    dispatch(thunkGetAllSpots())
-  }, [dispatch])
-
-
-  useEffect(() => {
-    setSpots(Object.values(spotSelector))
-  }, [spotSelector])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +37,7 @@ export default function CreateSpotForm() {
       marinaId: user
     }
     await dispatch(thunkCreateSpot(newSpot))
-    history.replace('/api/spots')
+    history.push('/api/spots')
   }
 
 

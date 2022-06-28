@@ -21,22 +21,23 @@ export default function EachSpot() {
     history.push('/api/spots')
   }
 
-//   //const selectorEachSpot = useSelector(state => state.spot);
+const selectorEachSpot = useSelector(state => state.spot);
 
 // //const [spot, setSpot] = useState(id);
 
 
   useEffect(() => {
-    setSpot(dispatch(thunkGetOneSpot(id)))
+    dispatch(thunkGetOneSpot(id))
   }, [dispatch])
 
+  console.log(spot)
 // useEffect(() => {
-//   setSpot(Object.values(spot))
-// }, [spot])
+//   setSpot(Object.values(selectorEachSpot))
+// }, [selectorEachSpot])
 
 return(
   <div>
-    <h1>Spot</h1>
+    <h1></h1>
     <NavLink to='/api/spots'>Back to Spots</NavLink>
     <button id='editSpotModal' onClick={() => setShowModal(true)}>Edit this Spot</button>
       {showModal && (
