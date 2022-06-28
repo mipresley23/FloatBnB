@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { thunkGetMarinas } from "../../store/marinas";
 import {thunkGetAllSpots, thunkCreateSpot, thunkDeleteSpot} from "../../store/spots";
+import { Modal } from "../../context/Modal";
+import './spots.css';
 
 
 export default function Spots() {
@@ -61,37 +63,6 @@ const handleSubmit = async (e) => {
   return (
     <div>
       <h1>Spots</h1>
-        <section className="spot-form-container">
-          <form className="create-spot-form" onSubmit={handleSubmit}>
-            <input
-              type="test"
-              placeholder="Spot Name"
-              required
-              value={spotName}
-              onChange={(e) => setSpotName(e.target.value)} />
-            <input
-              type="number"
-              placeholder="Price"
-              min="0"
-              required
-              value={spotPrice}
-              onChange={(e) => setSpotPrice(e.target.value)} />
-            <input
-              type="text"
-              placeholder="Owner"
-              value={user}
-              onChange={(e) => setUser(e.target.value)} />
-            {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
-              {marinaId.map(marina => (
-                <option key={marina.id}>{marina.name}</option>
-                ))}
-            </select> */}
-
-            <h3>{}</h3>
-            <button type="submit">Create new Spot</button>
-
-          </form>
-      </section>
         <table>
           <thead>
             <tr>

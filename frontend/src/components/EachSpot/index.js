@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, NavLink} from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot} from "../../store/spots";
 
 export default function EachSpot() {
@@ -33,6 +33,7 @@ export default function EachSpot() {
 return(
   <div>
     <h1>Spot</h1>
+    <NavLink to='/api/spots'>Back to Spots</NavLink>
     <button type="button" onClick={handleDelete}>Delete Spot</button>
     <p></p>
   </div>

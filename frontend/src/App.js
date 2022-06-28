@@ -10,7 +10,7 @@ import Bookings from "./components/bookings";
 import Splash from "./components/splash";
 import EachSpot from "./components/EachSpot";
 import Marinas from "./components/marinas";
-import CreateSpot from "./components/CreateSpotForm";
+import CreateSpotForm from "./components/CreateSpotFormModal";
 
 
 
@@ -37,9 +37,7 @@ function App() {
           </Route>
           <Route exact path='/api/spots'>
             <Spots />
-          </Route>
-          <Route path='/api/spots/new'>
-            <CreateSpot />
+            <CreateSpotForm />
           </Route>
           <Route path='/api/spots/:id'>
             <EachSpot />
