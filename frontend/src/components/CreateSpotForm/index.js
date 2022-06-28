@@ -1,57 +1,80 @@
-// import { useEffect, useState } from "react"
-// import { useDispatch } from "react-redux";
-// import {useHistory} from 'react-router-dom'
-// import { thunkCreateSpot } from "../../store/spots"
+import { useState,useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
 
-// export default function NewSpot() {
-//   const history = useHistory();
-//   const dispatch = useDispatch();
-
-//   const [spotName, setSpotName] = useState('');
-//   const [spotPrice, setSpotPrice] = useState(0);
+import {thunkGetAllSpots, thunkCreateSpot} from "../../store/spots";
+import { thunkGetMarinas } from "../../store/marinas";
 
 
-//   const updateName = (e) => setSpotName(e.target.value);
-//   const updatePrice = (e) => setSpotPrice(e.target.value);
+export default function CreateSpot() {
 
-//   const handleSubmit = async() => {
-//     const payload = {
-//       spotName,
-//       spotPrice,
-//       userId,
-//       marinaId
-//     }
-//     history.redirect('/api/spots')
-//     return await dispatch(thunkCreateSpot(payload));
-//   }
+  const dispatch = useDispatch();
+
+  const spotSelector = useSelector(state => state.spots);
+  const marinaSelector = useSelector(state => state.marinas);
+
+  const [spots, setSpots] = useState([]);
+  const [spotName, setSpotName] = useState('');
+  const [spotPrice, setSpotPrice] = useState(0);
+  const [user, setUser] = useState('')
+  const [marinas, setMarinas] = useState('');
+
+  useEffect(() => {
+    dispatch(thunkGetMarinas())
+  }, [dispatch])
+
+  useEffect(() => {
+    setMarinas(Object.values(marinaSelector))
+  }, [marinaSelector])
+
+  useEffect(() => {
+    dispatch(thunkGetAllSpots())
+  }, [dispatch])
+
+  useEffect(() => {
+    setSpots(Object.values(spotSelector))
+  }, [spotSelector])
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const payload = {
+    spotName,
+    spotPrice,
+    user,
+    marinas
+  }
+ await dispatch(thunkCreateSpot(payload))
+}
 
 
-//   return(
-//     <div>
-//         <h1>Create New Spot</h1>
-//         {/* <div className="create_spot_constainer"> */}
-
-//         <form onSubmit={handleSubmit}>
-//           <input
-//           type='text'
-//           value={spotName}
-//           onChange={updateName}>
-//           </input>
-//           <input
-//           type='number'
-//           value={spotPrice}
-//           onChange={updatePrice}>
-//           </input>
-//           {/* <select onChange={setMarinaId}>
-//             {
-//               spots.map(spot => (
-//                 <option key={spot.id}>{spot.Marina.id}</option>
-//               ))
-//             }
-//           </select> */}
-//           <button type="submit">Create</button>
-
-//         </form>
-//     </div>
-//   )
-// }
+return (
+  <section className="spot-form-container">
+    <form className="create-spot-form" onSubmit={handleSubmit}>
+      <input
+        type="test"
+        placeholder="Spot Name"
+        required
+        value={spotName}
+        onChange={(e) => setSpotName(e.target.value)} />
+      <input
+        type="number"
+        placeholder="Price"
+        min="0"
+        required
+        value={spotPrice}
+        onChange={(e) => setSpotPrice(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Owner"
+        value={user.username}
+        onChange={setUser} />
+      {/* <select onChange={(e) => setMarinas(e.target.value)} value={marinas}>
+        {marinas.map(marina =>
+          <option key={marina.id}>{marina.name}</option>
+        )}
+      </select> */}
+      <button type="submit">Create new Spot</button>
+      <p>{typeof marinaSelector}</p>
+    </form>
+  </section>
+);
+};

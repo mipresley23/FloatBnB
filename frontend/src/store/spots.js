@@ -60,20 +60,16 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 }
 
 export const thunkCreateSpot = (spot) => async (dispatch) => {
-  const {name, price, userId, marinaId} = spot;
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {'Content-Type': "application/json"},
-    body: JSON.stringify({
-      name,
-      price,
-      userId,
-      marinaId
-    }),
+    body: JSON.stringify(spot)
   });
-  const newSpot = await response.json();
-  dispatch(actionCreateSpot(newSpot));
-  return newSpot;
+  if (response.ok){
+    const newSpot = await response.json();
+    dispatch(actionCreateSpot(newSpot));
+    return newSpot;
+  }
 };
 
 export const thunkEditSpot = (spot, spotId) => async (dispatch) => {
@@ -114,9 +110,20 @@ const spotReducer = (state = {}, action) => {
     return newState;
 
     case CREATE_SPOT:
-      newState = Object.assign({}, state);
-      newState.spot = action.payload;
-      return newState;
+      if (!state[action.spot.id]) {
+        newState = {
+          ...state,
+          [action.spot.id]: action.spot
+        };
+        return newState;
+      }
+      return {
+        ...state,
+        [action.spot.id]: {
+          ...state[action.spot.id],
+          ...action.spot
+        }
+      };
 
     case DELETE_SPOT:
       delete newState[action.spot.id]

@@ -45,21 +45,6 @@ const handleDelete = async (e) => {
   return (
     <div>
       <h1>Spots</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            value={spotName}
-            onChange={(e) => setSpotName(e.target.value)}/>
-          <input
-            type='number'
-            value={spotPrice}
-            onChange={(e) => setSpotPrice(e.target.value)}/>
-          <input
-            type='number'
-            value={user}
-            onChange={(e) => setUser(e.target.value)}/>
-          <button type="submit">Submit</button>
-        </form>
         <table>
           <thead>
             <tr>

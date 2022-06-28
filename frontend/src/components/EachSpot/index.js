@@ -17,7 +17,7 @@ export default function EachSpot() {
 
   useEffect(() => {
     dispatch(thunkGetOneSpot(spotId))
-  }, [dispatch])
+  }, [spotId,dispatch])
 
 useEffect(() => {
   setSpots(Object.values(spotSelector))
