@@ -1,33 +1,40 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { thunkGetOneSpot } from "../../store/spots";
-import Spots from "../spots";
+import { useParams, useHistory } from "react-router-dom";
+import { thunkGetOneSpot, thunkDeleteSpot} from "../../store/spots";
 
 export default function EachSpot() {
   const dispatch = useDispatch()
+  const history = useHistory();
 
-  const [spots, setSpots] = useState([])
+  const {id} = useParams()
 
-  const spotSelector = useSelector(state => state.spots);
+  const [spot, setSpot] = useState({})
 
-  const {spotId} = useParams()
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    await dispatch(thunkDeleteSpot(id))
+    history.push('/api/spots')
+  }
 
+//   //const selectorEachSpot = useSelector(state => state.spot);
+
+// //const [spot, setSpot] = useState(id);
 
 
   useEffect(() => {
-    dispatch(thunkGetOneSpot(spotId))
-  }, [spotId,dispatch])
+    setSpot(dispatch(thunkGetOneSpot(id)))
+  }, [dispatch])
 
-useEffect(() => {
-  setSpots(Object.values(spotSelector))
-}, [spotSelector])
-
-const spot = spots.find(spot => spot.id === spotId);
+// useEffect(() => {
+//   setSpot(Object.values(spot))
+// }, [spot])
 
 return(
   <div>
-    <h1>{spot.id}</h1>
+    <h1>Spot</h1>
+    <button type="button" onClick={handleDelete}>Delete Spot</button>
+    <p></p>
   </div>
 )
 

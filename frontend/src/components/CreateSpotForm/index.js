@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 import {thunkGetAllSpots, thunkCreateSpot} from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
 
@@ -8,7 +8,7 @@ import { thunkGetMarinas } from "../../store/marinas";
 export default function CreateSpot() {
 
   const dispatch = useDispatch();
-
+  const history = useHistory()
   const spotSelector = useSelector(state => state.spots);
   const marinaSelector = useSelector(state => state.marinas);
 
@@ -16,15 +16,16 @@ export default function CreateSpot() {
   const [spotName, setSpotName] = useState('');
   const [spotPrice, setSpotPrice] = useState(0);
   const [user, setUser] = useState('')
-  const [marinas, setMarinas] = useState('');
+  const [marinaId, setMarinaId] = useState();
 
   useEffect(() => {
     dispatch(thunkGetMarinas())
   }, [dispatch])
 
   useEffect(() => {
-    setMarinas(Object.values(marinaSelector))
+    setMarinaId(Object.values(marinaSelector))
   }, [marinaSelector])
+
 
   useEffect(() => {
     dispatch(thunkGetAllSpots())
@@ -36,13 +37,14 @@ export default function CreateSpot() {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const payload = {
-    spotName,
-    spotPrice,
-    user,
-    marinas
+  const newSpot = {
+    name: spotName,
+    price: spotPrice,
+    userId: user,
+    marinaId: user
   }
- await dispatch(thunkCreateSpot(payload))
+ await dispatch(thunkCreateSpot(newSpot))
+ history.replace('/api/spots')
 }
 
 
@@ -65,15 +67,17 @@ return (
       <input
         type="text"
         placeholder="Owner"
-        value={user.username}
-        onChange={setUser} />
-      {/* <select onChange={(e) => setMarinas(e.target.value)} value={marinas}>
-        {marinas.map(marina =>
+        value={user}
+        onChange={(e) => setUser(e.target.value)} />
+      {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
+        {marinaId.map(marina => (
           <option key={marina.id}>{marina.name}</option>
-        )}
+          ))}
       </select> */}
+
+      <h3>{}</h3>
       <button type="submit">Create new Spot</button>
-      <p>{typeof marinaSelector}</p>
+
     </form>
   </section>
 );

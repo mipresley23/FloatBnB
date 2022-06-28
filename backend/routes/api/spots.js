@@ -15,12 +15,7 @@ router.get('/', asyncHandler(async(req, res) => {
 }))
 
 router.get('/:id', asyncHandler(async(req, res) => {
-  const spot = await Spot.findByPk(req.params.id, {
-    include: [
-      'Marina',
-      'Spot'
-    ]
-  });
+  const spot = await Spot.findByPk(req.params.id);
   return res.json(spot);
 }))
 
@@ -48,10 +43,8 @@ router.put('/:id', asyncHandler(async(req, res) => {
   return res.json(spot)
 }))
 
-router.delete('/', asyncHandler(async(req, res) => {
-  const spot = await Spot.findOne({
-    where: {id}
-  });
+router.delete('/:id', asyncHandler(async(req, res) => {
+  const spot = await Spot.findByPk(req.params.id)
   await spot.destroy();
   return res.json('deletion success')
 }))
