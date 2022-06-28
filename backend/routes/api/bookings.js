@@ -19,9 +19,27 @@ router.get('/', asyncHandler(async(req, res) => {
 
 //Create Booking
 
+router.post('/', asyncHandler(async (req, res, next) => {
+  const { startDate, endDate, spotId, userId } = req.body;
+  const booking = await Booking.create({
+     startDate,
+     endDate,
+     spotId,
+     userId
+   });
+  return res.json(booking);
+})
+);
+
 
 
 //Delete Booking
+
+router.delete('/:id', asyncHandler(async(req, res) => {
+  const booking = await Booking.findByPk(req.params.id)
+  await booking.destroy();
+  return res.json('deletion success')
+}))
 
 
 

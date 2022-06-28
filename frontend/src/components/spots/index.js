@@ -49,8 +49,10 @@ const handleSubmit = async (e) => {
     userId: user,
     marinaId: user
   }
- await dispatch(thunkCreateSpot(newSpot))
- history.push('/api/spots')
+ let createdSpot = await dispatch(thunkCreateSpot(newSpot))
+ if(createdSpot) {
+   history.push(`/api/spots/${createdSpot.id}`)
+ }
 }
 
 
