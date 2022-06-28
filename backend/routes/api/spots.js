@@ -25,9 +25,8 @@ router.get('/:id', asyncHandler(async(req, res) => {
 }))
 
 
-router.post('/new', asyncHandler(async (req, res, next) => {
+router.post('/', asyncHandler(async (req, res, next) => {
     const { name, price, userId, marinaId } = req.body;
-
     const spot = await Spot.create({
        name,
        price,
@@ -47,5 +46,13 @@ router.put('/:id', asyncHandler(async(req, res) => {
     marinaId
   })
   return res.json(spot)
+}))
+
+router.delete('/', asyncHandler(async(req, res) => {
+  const spot = await Spot.findOne({
+    where: {id}
+  });
+  await spot.destroy();
+  return res.json('deletion success')
 }))
 module.exports = router;
