@@ -1,0 +1,18 @@
+#createSpotModal{
+  background-color: gray;
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 49%;
+}
+
+.spot-form-container{
+  background-color: brown;
+}
+
+.create-spot-form{
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 200px;
+}

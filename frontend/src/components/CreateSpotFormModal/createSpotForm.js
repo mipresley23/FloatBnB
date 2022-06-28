@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {thunkGetAllSpots, thunkCreateSpot} from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
+import '../spots/spots.css';
 
 
-export default function CreateSpot() {
+export default function CreateSpotForm() {
 
   const dispatch = useDispatch();
   const history = useHistory()
