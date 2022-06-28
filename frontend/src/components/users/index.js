@@ -12,7 +12,6 @@ export default function Users() {
 
   useEffect(() => {
     dispatch(thunkGetAllUsers())
-    console.log('sent dispatch');
   }, [dispatch])
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function Users() {
     <div>
       <h1>Users</h1>
       {
-        <p>{typeof users}</p>
+        <p>{users.username}</p>
       }
     </div>
   )
