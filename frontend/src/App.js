@@ -9,8 +9,8 @@ import Spots from "./components/spots";
 import Bookings from "./components/bookings";
 import Splash from "./components/splash";
 import EachSpot from "./components/EachSpot";
-import NewSpot from './components/CreateSpotForm';
 import Marinas from "./components/marinas";
+import CreateSpot from "./components/CreateSpotForm";
 
 
 
@@ -39,7 +39,7 @@ function App() {
             <Spots />
           </Route>
           <Route path='/api/spots/new'>
-            <NewSpot />
+            <CreateSpot />
           </Route>
           <Route path='/api/spots/:id'>
             <EachSpot />

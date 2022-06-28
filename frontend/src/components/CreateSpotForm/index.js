@@ -1,57 +1,84 @@
-// import { useEffect, useState } from "react"
-// import { useDispatch } from "react-redux";
-// import {useHistory} from 'react-router-dom'
-// import { thunkCreateSpot } from "../../store/spots"
-
-// export default function NewSpot() {
-//   const history = useHistory();
-//   const dispatch = useDispatch();
-
-//   const [spotName, setSpotName] = useState('');
-//   const [spotPrice, setSpotPrice] = useState(0);
+import { useState,useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {thunkGetAllSpots, thunkCreateSpot} from "../../store/spots";
+import { thunkGetMarinas } from "../../store/marinas";
 
 
-//   const updateName = (e) => setSpotName(e.target.value);
-//   const updatePrice = (e) => setSpotPrice(e.target.value);
+export default function CreateSpot() {
 
-//   const handleSubmit = async() => {
-//     const payload = {
-//       spotName,
-//       spotPrice,
-//       userId,
-//       marinaId
-//     }
-//     history.redirect('/api/spots')
-//     return await dispatch(thunkCreateSpot(payload));
-//   }
+  const dispatch = useDispatch();
+  const history = useHistory()
+  const spotSelector = useSelector(state => state.spots);
+  const marinaSelector = useSelector(state => state.marinas);
+
+  const [spots, setSpots] = useState([]);
+  const [spotName, setSpotName] = useState('');
+  const [spotPrice, setSpotPrice] = useState(0);
+  const [user, setUser] = useState('')
+  const [marinaId, setMarinaId] = useState();
+
+  useEffect(() => {
+    dispatch(thunkGetMarinas())
+  }, [dispatch])
+
+  useEffect(() => {
+    setMarinaId(Object.values(marinaSelector))
+  }, [marinaSelector])
 
 
-//   return(
-//     <div>
-//         <h1>Create New Spot</h1>
-//         {/* <div className="create_spot_constainer"> */}
+  useEffect(() => {
+    dispatch(thunkGetAllSpots())
+  }, [dispatch])
 
-//         <form onSubmit={handleSubmit}>
-//           <input
-//           type='text'
-//           value={spotName}
-//           onChange={updateName}>
-//           </input>
-//           <input
-//           type='number'
-//           value={spotPrice}
-//           onChange={updatePrice}>
-//           </input>
-//           {/* <select onChange={setMarinaId}>
-//             {
-//               spots.map(spot => (
-//                 <option key={spot.id}>{spot.Marina.id}</option>
-//               ))
-//             }
-//           </select> */}
-//           <button type="submit">Create</button>
+  useEffect(() => {
+    setSpots(Object.values(spotSelector))
+  }, [spotSelector])
 
-//         </form>
-//     </div>
-//   )
-// }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const newSpot = {
+    name: spotName,
+    price: spotPrice,
+    userId: user,
+    marinaId: user
+  }
+ await dispatch(thunkCreateSpot(newSpot))
+ history.replace('/api/spots')
+}
+
+
+return (
+  <section className="spot-form-container">
+    <form className="create-spot-form" onSubmit={handleSubmit}>
+      <input
+        type="test"
+        placeholder="Spot Name"
+        required
+        value={spotName}
+        onChange={(e) => setSpotName(e.target.value)} />
+      <input
+        type="number"
+        placeholder="Price"
+        min="0"
+        required
+        value={spotPrice}
+        onChange={(e) => setSpotPrice(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Owner"
+        value={user}
+        onChange={(e) => setUser(e.target.value)} />
+      {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
+        {marinaId.map(marina => (
+          <option key={marina.id}>{marina.name}</option>
+          ))}
+      </select> */}
+
+      <h3>{}</h3>
+      <button type="submit">Create new Spot</button>
+
+    </form>
+  </section>
+);
+};
