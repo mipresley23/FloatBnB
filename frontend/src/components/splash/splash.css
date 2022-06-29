@@ -8,6 +8,7 @@ img{
 
 .images-container{
   display: inline-flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 96%;
   margin-left: 2%;

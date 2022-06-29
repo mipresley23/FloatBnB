@@ -105,25 +105,26 @@ const spotReducer = (state = {}, action) => {
   switch(action.type){
     case GET_SPOTS:
       action.spots.forEach(spot => {
-      newState[spot.id] = spot
-    })
-    return newState;
-
-    case GET_ONE_SPOT:
-      newState[action.spot.id] = action.spot
+        newState[spot.id] = spot
+      })
       return newState;
 
-    case CREATE_SPOT:
-      newState[action.spot.id] = action.spot
-      return newState
+      case GET_ONE_SPOT:
+        newState[action.spot.id] = action.spot
+        return newState;
 
-    case UPDATE_SPOT:
-      newState[action.spot.id] = action.spot
-      return newState
+        case CREATE_SPOT:
+          newState[action.spot.id] = action.spot
+          return newState
 
-    case DELETE_SPOT:
-      delete newState[action.spot.id]
-      return newState;
+          case UPDATE_SPOT:
+            console.log('action:', action, newState)
+            newState[action.spot.id] = action.spot
+            return newState
+
+            case DELETE_SPOT:
+              delete newState[action.spot.id]
+              return newState;
 
     default:
       return state;

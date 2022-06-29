@@ -12,11 +12,10 @@ export default function CreateSpotForm() {
   const history = useHistory()
   const spotSelector = useSelector(state => state.spots);
   const marinaSelector = useSelector(state => state.marinas);
-
+  const sessionUser = useSelector((state) => state.session.user);
   const [spots, setSpots] = useState([]);
   const [spotName, setSpotName] = useState('');
   const [spotPrice, setSpotPrice] = useState(0);
-  const [user, setUser] = useState('')
   const [marinaId, setMarinaId] = useState();
 
   useEffect(() => {
@@ -33,8 +32,8 @@ export default function CreateSpotForm() {
     const newSpot = {
       name: spotName,
       price: spotPrice,
-      userId: user,
-      marinaId: user
+      userId: sessionUser.id,
+      marinaId: 3
     }
     await dispatch(thunkCreateSpot(newSpot))
     history.push('/api/spots')
@@ -57,11 +56,11 @@ return (
         required
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
-      <input
+      {/* <input
         type="text"
         placeholder="Owner"
         value={user}
-        onChange={(e) => setUser(e.target.value)} />
+        onChange={(e) => setUser(e.target.value)} /> */}
       {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
         {marinaId.map(marina => (
           <option key={marina.id}>{marina.name}</option>

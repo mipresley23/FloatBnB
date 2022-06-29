@@ -9,7 +9,7 @@ import './spots.css';
 export default function Spots() {
 
   const dispatch = useDispatch();
-
+  const sessionUser = useSelector((state) => state.session.user);
   const spotSelector = useSelector(state => state.spots);
 
   const [spots, setSpots] = useState([]);
@@ -25,6 +25,7 @@ export default function Spots() {
     setSpots(Object.values(spotSelector))
   }, [spotSelector])
 
+  if(!spotSelector) return null;
   return (
     <div>
       <h1>Spots</h1>
@@ -38,15 +39,15 @@ export default function Spots() {
             </tr>
           </thead>
       {
-        spots.map(spot => (
+          spots.map(spot => (
           <tbody key={spot.name}>
             <tr>
               <td>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
               <td>{`$${spot.price}/night`}</td>
-              <td>{spot.User.username}</td>
-              <td>{spot.Marina.name}</td>
+              <td>{spot.User && spot.User.username}</td>
+              <td>{spot.Marina && spot.Marina.name}</td>
             </tr>
 
           </tbody>
