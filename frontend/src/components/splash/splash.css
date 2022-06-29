@@ -11,3 +11,7 @@ img{
   margin-left: 10%;
   margin-right:10%;
 }
+
+img:hover{
+  filter: drop-shadow(0 0 0.75rem #46e8db);
+}
