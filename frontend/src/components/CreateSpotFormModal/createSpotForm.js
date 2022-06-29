@@ -33,7 +33,7 @@ export default function CreateSpotForm() {
       name: spotName,
       price: spotPrice,
       userId: sessionUser.id,
-      marinaId: 3
+      marinaId
     }
     await dispatch(thunkCreateSpot(newSpot))
     history.push('/api/spots')
