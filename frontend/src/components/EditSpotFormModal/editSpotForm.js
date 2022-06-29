@@ -13,12 +13,14 @@ export default function EditSpotForm() {
   const history = useHistory()
   const spotSelector = useSelector(state => state.spots);
   const marinaSelector = useSelector(state => state.marinas);
+  const sessionUser = useSelector(state => state)
 
   const [spots, setSpots] = useState([]);
-  const [spotName, setSpotName] = useState('');
-  const [spotPrice, setSpotPrice] = useState(0);
+  const [spotName, setSpotName] = useState();
+  const [spotPrice, setSpotPrice] = useState(null);
   const [user, setUser] = useState('')
   const [marinaId, setMarinaId] = useState();
+  const [showForm, setShowForm] = useState(true);
 
   useEffect(() => {
     dispatch(thunkGetMarinas())
@@ -43,17 +45,18 @@ export default function EditSpotForm() {
       id: id,
       name: spotName,
       price: spotPrice,
-      userId: user,
-      marinaId: user
+      userId: 1,
+      marinaId: 3
     }
     await dispatch(thunkEditSpot(newSpot))
-    history.replace('/api/spots')
+    history.push(`/api/spots/${+id}`)
+    setShowForm(false);
   }
 
 
 return (
   <section className="edit-spot-form-container">
-    <form className="edit-spot-form" onSubmit={handleSubmit}>
+    {showForm && <form className="edit-spot-form" onSubmit={handleSubmit}>
       <input
         type="test"
         placeholder={spotName}
@@ -67,21 +70,15 @@ return (
         required
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
-      <input
-        type="text"
-        placeholder={user}
-        value={user}
-        onChange={(e) => setUser(e.target.value)} />
+
       {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
         {marinaId.map(marina => (
           <option key={marina.id}>{marina.name}</option>
           ))}
       </select> */}
-
-      <h3>{}</h3>
       <button type="submit">Edit this Spot</button>
 
-    </form>
+    </form>}
   </section>
 );
 };

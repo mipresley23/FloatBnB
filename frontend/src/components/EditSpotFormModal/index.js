@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditSpotForm from './editSpotForm';
 import '../spots/spots.css'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 function EditSpotFormModal() {
   const [showModal, setShowModal] = useState(false);
+  const sessionUser = useSelector(state => state.session.user);
+
 
   return (
     <>
-      <button id='editSpotModal' onClick={() => setShowModal(true)}>Edit this Spot</button>
-      {showModal && (
+      {sessionUser && <button id='createSpotModal' onClick={() => setShowModal(true)}>Edit Spot</button>}
+       {sessionUser && showModal && (
       <Modal  onClose={() => setShowModal(false)}>
           <EditSpotForm />
         </Modal>
