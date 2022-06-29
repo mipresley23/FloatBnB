@@ -31,15 +31,15 @@ const selectorEachSpot = useSelector(state => state.spot);
 
 // //const [spot, setSpot] = useState(id);
 
+useEffect(() => {
+  dispatch(thunkGetOneSpot(id))
+}, [dispatch, id])
 
-  useEffect(() => {
-    dispatch(thunkGetOneSpot(id))
-  }, [dispatch])
+  // useEffect(() => {
+  //   setSpot(Object.values(selectorEachSpot))
+  // }, [selectorEachSpot])
 
-  console.log(spot)
-// useEffect(() => {
-//   setSpot(Object.values(selectorEachSpot))
-// }, [selectorEachSpot])
+
 
 return(
   <div>
