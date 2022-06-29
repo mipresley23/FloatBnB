@@ -62,10 +62,10 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 export const thunkCreateSpot = (spot) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
     method: "POST",
-    headers: {'Content-Type': "application/json"},
+    headers: { 'Content-Type': "application/json" },
     body: JSON.stringify(spot)
   });
-  if (response.ok){
+  if (response.ok) {
     const newSpot = await response.json();
     dispatch(actionCreateSpot(newSpot));
     return response;
@@ -73,7 +73,7 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 };
 
 export const thunkEditSpot = (spot, spotId) => async (dispatch) => {
-  const {name, price, userId, marinaId} = spot;
+  const { name, price, userId, marinaId } = spot;
   const res = await csrfFetch(`/api/spots/${spot.id}`, {
     method: "PUT",
     body: JSON.stringify({
@@ -88,7 +88,7 @@ export const thunkEditSpot = (spot, spotId) => async (dispatch) => {
   return res;
 }
 
-export const thunkDeleteSpot = (spotId) => async(dispatch) => {
+export const thunkDeleteSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE"
   })
@@ -101,30 +101,30 @@ export const thunkDeleteSpot = (spotId) => async(dispatch) => {
 
 
 const spotReducer = (state = {}, action) => {
-  let newState = {...state}
-  switch(action.type){
+  let newState = { ...state }
+  switch (action.type) {
     case GET_SPOTS:
       action.spots.forEach(spot => {
         newState[spot.id] = spot
       })
       return newState;
 
-      case GET_ONE_SPOT:
-        newState[action.spot.id] = action.spot
-        return newState;
+    case GET_ONE_SPOT:
+      newState[action.spot.id] = action.spot
+      return newState;
 
-        case CREATE_SPOT:
-          newState[action.spot.id] = action.spot
-          return newState
+    case CREATE_SPOT:
+      newState[action.spot.id] = action.spot
+      return newState
 
-          case UPDATE_SPOT:
-            console.log('action:', action, newState)
-            newState[action.spot.id] = action.spot
-            return newState
+    case UPDATE_SPOT:
+      newState[action.spot.id] = action.spot
+      return newState
 
-            case DELETE_SPOT:
-              delete newState[action.spot.id]
-              return newState;
+      case DELETE_SPOT:
+      console.log('action:', action, newState)
+      delete newState[action.spot.id]
+      return newState;
 
     default:
       return state;

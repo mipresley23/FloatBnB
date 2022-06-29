@@ -1,14 +1,17 @@
+body{
+  width:100%;
+}
 img{
-  width:250px;
+  width:350px;
   height: 250px;
   margin: 10px;
-  border: 1px solid beige;
+  border: 1px transparent;
   border-radius: 5%;
 }
 
 .images-container{
   display: inline-flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   width: 96%;
   margin-left: 2%;
@@ -17,4 +20,25 @@ img{
 
 img:hover{
   filter: drop-shadow(0 0 0.75rem #46e8db);
+}
+
+.splash-image-containers{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: bisque;
+  border: 1px solid black;
+  border-radius: 5%;
+  margin: 5px;
+}
+
+.splash-image-title{
+  margin-bottom: 5px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.splash-image-price{
+  margin-top: 5px;
+  font-family: monospace;
 }
