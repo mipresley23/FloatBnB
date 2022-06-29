@@ -1,15 +1,17 @@
 img{
-  width:200px;
-  height: 200px;
+  width:250px;
+  height: 250px;
   margin: 10px;
+  border: 1px solid beige;
+  border-radius: 5%;
 }
 
 .images-container{
   display: inline-flex;
   flex-wrap: wrap;
-  width: 80%;
-  margin-left: 10%;
-  margin-right:10%;
+  width: 96%;
+  margin-left: 2%;
+  margin-right:2%;
 }
 
 img:hover{

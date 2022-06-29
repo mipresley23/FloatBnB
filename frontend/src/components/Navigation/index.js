@@ -26,7 +26,9 @@ function Navigation({ isLoaded }){
     <div>
       <ul id='navwrapper'>
         <li className='navbarLinks'>
+        <NavLink id='logo-home-link' to='/'>
         <h2 id='logo'>FloatBnB</h2>
+        </NavLink>
           <NavLink id="homelink" exact to="/">Home</NavLink>
           {isLoaded && sessionLinks}
         </li>
