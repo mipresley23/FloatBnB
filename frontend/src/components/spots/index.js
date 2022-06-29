@@ -19,6 +19,8 @@ export default function Spots() {
     dispatch(thunkGetAllSpots())
   }, [dispatch])
 
+
+
   useEffect(() => {
     setSpots(Object.values(spotSelector))
   }, [spotSelector])
