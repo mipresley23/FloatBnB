@@ -52,9 +52,9 @@ export default function Spots() {
   if (!spotSelector) return null;
   return (
     <div>
-      <div>
+      <div className="spots-page-container">
         <h1>Spots</h1>
-        <table>
+        <table className="spots-table">
           <thead>
             <tr>
               <th>Spot Name</th>
@@ -95,6 +95,9 @@ export default function Spots() {
               required
               value={spotPrice}
               onChange={(e) => setSpotPrice(e.target.value)} />
+            <input
+              type=''
+              />
             </form>
           </section>
           </div>
