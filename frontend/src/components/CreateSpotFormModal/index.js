@@ -10,7 +10,7 @@ function CreateSpotFormModal() {
 
   return (
     <>
-      {sessionUser && <button id='createSpotModal' onClick={() => setShowModal(true)}>Create Spot</button>}
+      {/* {sessionUser && <button id='createSpotModal' onClick={() => setShowModal(true)}>Create Spot</button>} */}
        {sessionUser && showModal && (
       <Modal  onClose={() => setShowModal(false)}>
           <CreateSpotForm />

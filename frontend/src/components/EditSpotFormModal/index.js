@@ -3,7 +3,7 @@ import { Modal } from '../../context/Modal';
 import EditSpotForm from './editSpotForm';
 import '../spots/spots.css'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
 
 function EditSpotFormModal() {
   const [showModal, setShowModal] = useState(false);

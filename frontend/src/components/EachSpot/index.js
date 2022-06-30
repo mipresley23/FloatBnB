@@ -1,10 +1,8 @@
 import React, { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, NavLink} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
-import EditSpotFormModal from "../EditSpotFormModal";
-import EditSpotForm from "../EditSpotFormModal/editSpotForm";
-import { Modal } from "../../context/Modal";
+
 import { thunkGetImages } from "../../store/images";
 
 export default function EachSpot() {
@@ -67,12 +65,6 @@ export default function EachSpot() {
     dispatch(thunkGetOneSpot(id))
   }, [dispatch, id])
 
-    // useEffect(() => {
-    //   setSpot(Object.values(selectorEachSpot))
-    // }, [selectorEachSpot])
-
-const selectorEachSpot = useSelector(state => state.spot);
-
 const handleSubmit = async (e) => {
   e.preventDefault();
   const newSpot = {
@@ -94,7 +86,7 @@ return(
   <div>
     <div className="each-spot-card">
       <h1>{spot.name}</h1>
-      <img src={image && image.url} alt="spot image"></img>
+      <img src={image && image.url} alt="spot"></img>
       <p>{`$${spot.price}/night`}</p>
     </div>
     <button type="button" onClick={handleReloadSpots}>Back to Spots</button>
@@ -103,24 +95,16 @@ return(
     <section className="edit-spot-form-container">
     {showForm && <form className="edit-spot-form" onSubmit={handleSubmit}>
       <input
-        type="test"
-        placeholder={spotName}
-        required
+        type="text"
+        placeholder={spot.name}
         value={spotName}
         onChange={(e) => setSpotName(e.target.value)} />
       <input
         type="number"
-        placeholder={spotPrice}
+        placeholder={spot.price}
         min="0"
-        required
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
-
-      {/* <select onChange={(e) => setMarinaId(e.target.value)} value={marinaId}>
-        {marinaId.map(marina => (
-          <option key={marina.id}>{marina.name}</option>
-          ))}
-      </select> */}
       <button type="submit">Edit this Spot</button>
       <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
 
@@ -130,10 +114,3 @@ return(
 )
 
 }
-
-{/* <button id='editSpotModal' onClick={() => setShowModal(true)}>Edit this Spot</button>
-  {showModal && (
-  <Modal  onClose={() => setShowModal(false)}>
-      <EditSpotForm />
-    </Modal>)}
- */}

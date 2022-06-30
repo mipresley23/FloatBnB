@@ -11,6 +11,7 @@ import Splash from "./components/splash";
 import EachSpot from "./components/EachSpot";
 import Marinas from "./components/marinas";
 import CreateSpotForm from "./components/CreateSpotFormModal";
+import UserProfile from "./components/userProfile";
 
 
 
@@ -32,8 +33,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/api/users'>
+          <Route exact path='/api/users'>
             <Users />
+          </Route>
+          <Route path='/api/users/:id'>
+            <UserProfile />
           </Route>
           <Route exact path='/api/spots'>
             <Spots />

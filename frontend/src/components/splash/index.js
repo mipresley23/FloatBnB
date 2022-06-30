@@ -7,7 +7,6 @@ import './splash.css';
 export default function Splash() {
 
   const dispatch = useDispatch()
-  const sessionUser = useSelector((state) => state.session.user);
   const imageSelector = useSelector(state => state.images)
   const [images, setImages] = useState([])
 

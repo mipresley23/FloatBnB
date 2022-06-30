@@ -2,15 +2,19 @@ import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkGetBookings, thunkCreateBooking} from "../../store/bookings";
+import { thunkGetAllSpots } from "../../store/spots";
 
 export default function Bookings() {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const bookingSelector = useSelector(state => state.bookings);
+  const sessionUser = useSelector(state => state.session.user);
+
   const [bookings, setBookings] = useState([]);
   const [bookingStartDate, setBookingStartDate] = useState('');
   const [bookingEndDate, setBookingEndDate] = useState('');
+  const [spots, setSpots] = useState([]);
   const [user, setUser] = useState(0)
 
 
@@ -28,19 +32,17 @@ const handleSubmit = async (e) => {
     startDate: bookingStartDate,
     endDate: bookingEndDate,
     spotId: 1,
-    userId: user
+    userId: sessionUser.id
   }
- let createdBooking = await dispatch(thunkCreateBooking(newBooking))
- if(createdBooking) {
-   history.push(`/api/bookings/`)
- }
+  await dispatch(thunkCreateBooking(newBooking))
+  history.push(`/api/bookings/`)
 }
-
+if(!bookingSelector) return null;
   return (
     <div>
       <h1>Bookings</h1>
         <section className="booking-form-container">
-          <form className="create-booking-form" onSubmit={handleSubmit}>
+          {sessionUser && <form className="create-booking-form" onSubmit={handleSubmit}>
           <input
             type="date"
             placeholder="Booking Start Date"
@@ -56,10 +58,10 @@ const handleSubmit = async (e) => {
           <input
             type="number"
             placeholder="Booked by"
-            value={user}
+            value={spot}
             onChange={(e) => setUser(e.target.value)} />
           <button type="submit">Create new Booking</button>
-        </form>
+        </form>}
       </section>
         <table>
           <thead>
