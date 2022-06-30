@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import {NavLink} from 'react-router-dom'
 import {thunkGetAllUsers} from "../../store/users";
 
 export default function Users() {
@@ -15,16 +16,23 @@ export default function Users() {
   }, [dispatch])
 
   useEffect(() => {
-    console.log(userSelector)
     setUsers(Object.values(userSelector))
   }, [userSelector])
 
   return (
     <div>
       <h1>Users</h1>
+      <ul className="user-list">
+
       {
-        <p>{users.username}</p>
-      }
+        users && users.map(user => (
+          <li key={user.id}>
+            <NavLink to={`/api/users/${user.id}`}>{user.username}</NavLink>
+          </li>
+          ))
+        }
+        </ul>
+
     </div>
   )
 }

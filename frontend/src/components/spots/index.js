@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory} from "react-router-dom";
-import { thunkGetAllSpots, thunkDeleteSpot, thunkCreateSpot } from "../../store/spots";
+import { thunkGetAllSpots, thunkCreateSpot } from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
 
 import './spots.css';
@@ -66,7 +66,7 @@ export default function Spots() {
           </thead>
           {
             spots.map(spot => (
-              <tbody key={spot && spot.name}>
+              <tbody key={spot.name}>
                 <tr>
                   <td>
                     <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
@@ -96,12 +96,16 @@ export default function Spots() {
               value={spotPrice}
               onChange={(e) => setSpotPrice(e.target.value)} />
             <input
-              type=''
+              type='number'
+              placeholder="Marina Id"
+              required
+              value={marinaId}
+              onChange={(e) => setMarinaId(e.target.value)}
               />
+            <button type="submit">Create</button>
             </form>
           </section>
           </div>
       </div>
   )
 }
-// {sessionUser && <button key={spot.id} type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}>Delete</button>}
