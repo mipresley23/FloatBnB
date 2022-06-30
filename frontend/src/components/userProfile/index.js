@@ -60,27 +60,39 @@ export default function UserProfile() {
         <ul>
           {
             spotArray.map(spot => (
-              <li key={spot.id}>{spot.name}</li>
+              <li key={spot.id}>
+                <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
+                {sessionUser && correctUser() && <button type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}>Delete Spot</button>}
+              </li>
               ))
             }
         </ul>
       </div>
       <div className="users-bookings-container">
         <h3>{`${user && user.username}'s bookings`}</h3>
-        <ul>
-          {
-            bookingArray && bookingArray.map(booking => (
-              <div>
-                <li>{booking.Spot && booking.Spot.name}</li>
-                <li>{booking.startDate}</li>
-                <li>{booking.endDate}</li>
-                <li>
-                  {sessionUser && correctUser() && <button onClick={() => dispatch(thunkDeleteBooking(booking.id))}>Delete Booking</button>}
-                </li>
-              </div>
-            ))
+        {bookingArray && <table className="users-bookings-table">
+          <thead>
+            <tr>
+              <th>Spot</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+            {bookingArray && bookingArray.map(booking => (
+              <tbody>
+                <tr>
+
+                  <td>{booking.Spot && booking.Spot.name}</td>
+                  <td>{booking.startDate}</td>
+                  <td>{booking.endDate}</td>
+                  <td>
+                    {sessionUser && correctUser() && <button onClick={() => dispatch(thunkDeleteBooking(booking.id))}>Delete Booking</button>}
+                  </td>
+                </tr>
+              </tbody>
+            ))}
+        </table>
           }
-        </ul>
       </div>
     </div>
   )

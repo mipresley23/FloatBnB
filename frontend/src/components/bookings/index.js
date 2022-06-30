@@ -60,7 +60,6 @@ export default function Bookings() {
               <th>Start Date</th>
               <th>End Date</th>
             </tr>
-
           </thead>
           {
             bookings.map(booking => (
