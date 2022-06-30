@@ -2,7 +2,6 @@
 .spot-form-container{
   display: flex;
   flex-direction: column;
-  background-color: grey;
   width: 100%;
   height: 50px;
   align-items: center;

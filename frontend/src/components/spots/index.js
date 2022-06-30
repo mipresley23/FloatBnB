@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory} from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { thunkGetAllSpots, thunkCreateSpot } from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
 
@@ -18,15 +18,17 @@ export default function Spots() {
 
   const [spots, setSpots] = useState([]);
   const [spotName, setSpotName] = useState('');
-  const [spotPrice, setSpotPrice] = useState(null);
-  const [marinaId, setMarinaId] = useState();
+  const [spotPrice, setSpotPrice] = useState('');
+  const [marinas, setMarinas] = useState([]);
+  const [marinaId, setMarinaId] = useState(0);
+  console.log(marinas)
 
   useEffect(() => {
     dispatch(thunkGetMarinas())
   }, [dispatch])
 
   useEffect(() => {
-    setMarinaId(Object.values(marinaSelector))
+    setMarinas(Object.values(marinaSelector))
   }, [marinaSelector])
 
   useEffect(() => {
@@ -46,7 +48,8 @@ export default function Spots() {
       marinaId
     }
     await dispatch(thunkCreateSpot(newSpot))
-    history.push('/api/spots')
+    console.log(newSpot)
+    // history.push(`/api/spots/${newSpot.id}`)
   }
 
   if (!spotSelector) return null;
@@ -66,7 +69,7 @@ export default function Spots() {
           </thead>
           {
             spots.map(spot => (
-              <tbody key={spot.name}>
+              <tbody key={spot.User && spot.name}>
                 <tr>
                   <td>
                     <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
@@ -81,7 +84,7 @@ export default function Spots() {
           }
         </table>
         <section className="spot-form-container">
-          <form className="create-spot-form" onSubmit={handleSubmit}>
+          {sessionUser && <form className="create-spot-form" onSubmit={handleSubmit}>
             <input
               type="test"
               placeholder="Spot Name"
@@ -95,17 +98,27 @@ export default function Spots() {
               required
               value={spotPrice}
               onChange={(e) => setSpotPrice(e.target.value)} />
-            <input
-              type='number'
-              placeholder="Marina Id"
-              required
-              value={marinaId}
-              onChange={(e) => setMarinaId(e.target.value)}
-              />
+            <select placeholder="Choose a Marina" onChange={(e) => setMarinaId(e.target.value)}>
+              {
+                marinas && marinas.map(marina => (
+                  <option value={marina.id}>
+                    {marina.name}
+                  </option>
+                ))
+              }
+            </select>
             <button type="submit">Create</button>
-            </form>
-          </section>
-          </div>
+          </form>}
+        </section>
       </div>
+    </div>
   )
 }
+
+//   <input
+//   type='number'
+//   placeholder="Marina Id"
+//   required
+//   value={marinaId.id}
+//   onChange={(e) => setMarinaId(e.target.value)}
+// />

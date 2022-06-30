@@ -24,6 +24,7 @@ export default function Splash() {
       <NavLink to='/api/spots'>Spots</NavLink>
       <NavLink to='/api/bookings'>Bookings</NavLink>
       <NavLink to='/api/marinas'>Marinas</NavLink>
+      <NavLink to='/api/users'>Users</NavLink>
       <div className='images-container'>
       {
         Object.values(images).map(image => (
