@@ -44,3 +44,7 @@ img:hover{
   margin-top: 5px;
   font-family: monospace;
 }
+
+#main-title{
+  text-align: center;
+}

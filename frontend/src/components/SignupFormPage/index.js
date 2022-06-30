@@ -29,25 +29,26 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id='signup-form' onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
+      <h2 id='signup-form-header'>Welcome to FloatBnb</h2>
       <label>
         Username
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Email
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
@@ -69,7 +70,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button id='signup-button' type="submit">Continue</button>
     </form>
   );
 }
