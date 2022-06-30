@@ -28,10 +28,12 @@ export default function Splash() {
       <div className='images-container'>
       {
         Object.values(images).map(image => (
-          <div>
+          <div className="splash-image-containers">
+            <h2 className="splash-image-title">{image.Spot && image.Spot.name}</h2>
             <NavLink to={`/api/spots/${image.spotId}`}>
               <img id={`spot-image-${image.id}`} src={image.url} alt={``}/>
             </NavLink>
+            <h3 className="splash-image-price">{image.Spot && `$${image.Spot.price}/night`}</h3>
           </div>
           ))
       }

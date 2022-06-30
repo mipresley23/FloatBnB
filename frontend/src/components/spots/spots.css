@@ -1,18 +1,30 @@
-#createSpotModal{
-  background-color: gray;
-  display: flex;
-  position: absolute;
-  top: 20px;
-  left: 49%;
-}
 
 .spot-form-container{
-  background-color: brown;
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
 }
 
 .create-spot-form{
   display: flex;
-  flex-direction: column;
-  height: 100px;
+  flex-direction:row;
+  height: 20px;
   width: 200px;
+  justify-content: center;
+}
+
+.spots-table{
+  display: block;
+  width:50%;
+  margin-left: 25%;
+  text-align: justify;
+
+}
+
+.spots-page-container{
+  text-align: center;
 }
