@@ -47,4 +47,15 @@ img:hover{
 
 #main-title{
   text-align: center;
+  margin-top: 10px;
+}
+
+#navbar-links-container{
+  display: inline-flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom: 10px;
+  font-size: large;
 }

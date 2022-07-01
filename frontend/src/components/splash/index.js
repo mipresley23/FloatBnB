@@ -21,11 +21,13 @@ export default function Splash() {
 
   return(
     <div>
+      <div id="navbar-links-container">
+        <NavLink to='/api/spots'>Spots</NavLink>
+        <NavLink to='/api/bookings'>Bookings</NavLink>
+        <NavLink to='/api/marinas'>Marinas</NavLink>
+        <NavLink to='/api/users'>Users</NavLink>
+      </div>
       <h1 id="main-title">Welcome to FloatBnB</h1>
-      <NavLink to='/api/spots'>Spots</NavLink>
-      <NavLink to='/api/bookings'>Bookings</NavLink>
-      <NavLink to='/api/marinas'>Marinas</NavLink>
-      <NavLink to='/api/users'>Users</NavLink>
       <div className='images-container'>
       {
         Object.values(images).map(image => (

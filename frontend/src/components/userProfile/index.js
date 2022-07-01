@@ -21,7 +21,7 @@ export default function UserProfile() {
   const user = users && users.find(user => user.id === +id)
   const spotArray = spots && spots.filter(spot => spot.userId === +id)
   const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
-  console.log(spotArray)
+
 
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function UserProfile() {
       <h1>{`${user && user.username}'s Profile`}</h1>
       <div className="users-spots-container">
         <h3>{`${user && user.username}'s spots`}</h3>
-        <img src="img.jpg" onError={'this.src = "nophoto.jpeg"'} alt='profile picture'/>
+        <img src="img.jpg" alt='profile picture'/>
         <ul>
           {
             spotArray.map(spot => (
