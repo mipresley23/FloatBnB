@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     Spot.belongsTo(models.User, { foreignKey: 'userId' });
     Spot.belongsTo(models.Marina,  { foreignKey: 'marinaId' });
     Spot.hasMany(models.Image, { foreignKey: 'spotId' });
+    Spot.hasMany(models.Booking, {foreignKey: 'spotId' })
   };
   return Spot;
 };

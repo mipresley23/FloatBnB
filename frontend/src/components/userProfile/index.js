@@ -95,13 +95,10 @@ export default function UserProfile() {
             {bookingArray && bookingArray.map(booking => (
               <tbody>
                 <tr>
-
                   <td>{booking.Spot && booking.Spot.name}</td>
                   <td>{booking.startDate}</td>
                   <td>{booking.endDate}</td>
-                  <td>
-                    {sessionUser && correctUser() && <button onClick={() => dispatch(thunkDeleteBooking(booking.id))}>Delete Booking</button>}
-                  </td>
+                  {sessionUser && correctUser() && <button id='users-booking-delete-button' onClick={() => dispatch(thunkDeleteBooking(booking.id))}>Delete</button>}
                 </tr>
               </tbody>
             ))}
