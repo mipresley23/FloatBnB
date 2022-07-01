@@ -128,7 +128,7 @@ module.exports = {
           {
             url: 'https://photo-assets.superyachttimes.com/photo/215750/image/large-cd8d3b3591d0050cb90e0f307df1ce8e.jpeg',
             spotId: 30
-          },
+          }
       ], {});
   },
 

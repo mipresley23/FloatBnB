@@ -30,7 +30,7 @@ function SignupFormPage() {
 
   return (
     <form id='signup-form' onSubmit={handleSubmit}>
-      <ul>
+      <ul id="errors-list">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <h2 id='signup-form-header'>Welcome to FloatBnb</h2>

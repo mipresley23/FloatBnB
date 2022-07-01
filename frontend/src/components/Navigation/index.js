@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
       <>
         <LoginFormModal />
         <NavLink id='signuplink' to="/signup">
-          <img id='signup-link-image' src='add-user.png' alt='signup'/>
+          Sign Up
         </NavLink>
       </>
     );
@@ -32,9 +32,7 @@ function Navigation({ isLoaded }){
             <h2 id='logo'>FloatBnB</h2>
           </NavLink>
         <li className='navbarLinks'>
-            <NavLink id="homelink" exact to="/">
-              <img id='home-link-image' src='home.png' alt='Home'/>
-            </NavLink>
+            <NavLink id="homelink" exact to="/">Home</NavLink>
             {isLoaded && sessionLinks}
         </li>
       </ul>
