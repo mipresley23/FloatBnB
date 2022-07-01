@@ -12,6 +12,7 @@ import EachSpot from "./components/EachSpot";
 import Marinas from "./components/marinas";
 import CreateSpotForm from "./components/CreateSpotFormModal";
 import UserProfile from "./components/userProfile";
+import Footer from "./components/footer";
 
 
 
@@ -51,6 +52,9 @@ function App() {
           </Route>
           <Route path='/api/marinas'>
             <Marinas />
+          </Route>
+          <Route path='/'>
+            <Footer />
           </Route>
         </Switch>
       )}

@@ -5,6 +5,7 @@ import {thunkGetAllUsers} from "../../store/users";
 import { thunkGetAllSpots, thunkDeleteSpot } from "../../store/spots";
 import { thunkGetBookings, thunkDeleteBooking } from "../../store/bookings";
 import '../../index.css';
+import './userProfile.css';
 
 export default function UserProfile() {
   const {id} = useParams();
@@ -58,17 +59,28 @@ export default function UserProfile() {
       <h1>{`${user && user.username}'s Profile`}</h1>
       <div className="users-spots-container">
         <h3>{`${user && user.username}'s spots`}</h3>
-        <img src="img.jpg" alt='profile picture'/>
-        <ul>
+        {/* <img src="img.jpg" alt='profile picture'/> */}
+        <table>
+          <thead>
+            <tr>
+              <th>Spot</th>
+              <th></th>
+            </tr>
+          </thead>
           {
             spotArray.map(spot => (
-              <li key={spot.id}>
+          <tbody>
+            <tr>
+
+              <td key={spot.id}>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
-                {sessionUser && correctUser() && <button type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}>Delete Spot</button>}
-              </li>
+              </td>
+                {sessionUser && correctUser() && <button id='profile-delete-spot-button' type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}>Delete Spot</button>}
+            </tr>
+          </tbody>
               ))
             }
-        </ul>
+        </table>
       </div>
       <div className="users-bookings-container">
         <h3>{`${user && user.username}'s bookings`}</h3>
