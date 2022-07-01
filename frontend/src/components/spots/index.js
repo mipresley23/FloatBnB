@@ -25,6 +25,7 @@ export default function Spots() {
   const [marinas, setMarinas] = useState([]);
   const [marinaId, setMarinaId] = useState(0);
   const [images, setImages] = useState([]);
+  const [showCreateSpotForm, setShowCreateSpotForm] = useState(false);
 
   useEffect(() => {
     dispatch(thunkGetImages())
@@ -61,6 +62,7 @@ export default function Spots() {
       marinaId
     }
     await dispatch(thunkCreateSpot(newSpot))
+    setShowCreateSpotForm(false)
   }
 
   if (!spotSelector) return null;
@@ -81,15 +83,17 @@ export default function Spots() {
           }
         </div>
         <section className="spot-form-container">
-          {sessionUser && <form className="create-spot-form" onSubmit={handleSubmit}>
-            <input
+          {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>Create a New Spot</button>}
+          {sessionUser && showCreateSpotForm && <form className="create-spot-form" onSubmit={handleSubmit}>
+            <h3 id='create-spot-header'>Create a New Spot</h3>
+            <input id="spot-name-input"
               type="text"
               placeholder="Spot Name"
               defaultValue=''
               required
               value={spotName}
               onChange={(e) => setSpotName(e.target.value)} />
-            <input
+            <input id="spot-price-input"
               type="number"
               placeholder="Price"
               min="0"
@@ -97,7 +101,7 @@ export default function Spots() {
               required
               value={spotPrice}
               onChange={(e) => setSpotPrice(e.target.value)} />
-            <select placeholder="Choose a Marina" onChange={(e) => setMarinaId(e.target.value)}>
+            <select id='spot-marina-input' placeholder="Choose a Marina" onChange={(e) => setMarinaId(e.target.value)}>
               <option value=''>Select a Marina</option>
               {
                 marinas && marinas.map(marina => (
@@ -107,7 +111,8 @@ export default function Spots() {
                 ))
               }
             </select>
-            <button type="submit">Create</button>
+            <button id='create-spot-button' type="submit">Create</button>
+            <button id='cancel-spot-form-button' type="button" onClick={() => setShowCreateSpotForm(false)}>Cancel</button>
           </form>}
         </section>
       </div>

@@ -1,0 +1,61 @@
+.each-spot-buttons{
+  height:50px;
+  width: 100px;
+  border-radius: 12px;
+  display: block;
+  background-color: azure;
+  transition-duration: .2s;
+}
+
+.edit-spot-form{
+  height:200px;
+  width: 300px;
+  position: absolute;
+  left: 150px;
+  bottom: 300px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 12px;
+  background-color: lightcyan;
+}
+
+
+#edit-spot-submit-button:hover{
+  background-color: lightgreen;
+}
+
+
+#edit-spot-cancel-button:hover{
+  background-color: rgb(247, 110, 110);
+}
+
+
+.each-spot-buttons:hover{
+  background-color: antiquewhite;
+}
+
+.create-booking-form{
+  height:200px;
+  width: 300px;
+  position: absolute;
+  left: 150px;
+  bottom: 300px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 12px;
+  background-color: lightcyan;
+}
+
+#book-spot-submit-button:hover{
+  background-color: lightgreen;
+}
+
+#book-spot-cancel-button:hover{
+  background-color: rgb(247, 110, 110);
+}

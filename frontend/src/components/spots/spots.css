@@ -2,16 +2,27 @@
 .spot-form-container{
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 100px;
+  width: 400px;
+  height: 400px;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  bottom: 30px;
+  left: 20px
 }
 
 .create-spot-form{
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  background-color: coral;
   margin-bottom: 50px;
+  height: 400px;
+  width: 300px;
+  border: 3px solid black;
+  padding-top: 100px;
+  align-items: center;
+  border-radius: 12px;
 }
 
 .spot-card-containers{
@@ -19,6 +30,12 @@
   margin: 10px;
   border-radius: 5%;
   width: 200px;
+  background-color: lightseagreen;
+  color: blue;
+}
+
+.spot-card-containers:hover{
+  background-color: seagreen;
 }
 
 .spots-page-container{
@@ -29,4 +46,62 @@
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+#create-spot-header{
+  position:absolute;
+  top: 10px;
+  text-align: center;
+  left: 30%;
+}
+
+#spot-name-input{
+  width: 200px;
+  border-radius: 5px;
+}
+
+#spot-price-input{
+  width: 200px;
+  border-radius: 5px;
+}
+
+#spot-marina-input{
+  width: 200px;
+  border-radius: 5px;
+}
+
+#create-spot-button{
+  width: 100px;
+  border-radius: 5px;
+  transition-duration: .3s;
+}
+
+#show-create-spot-button{
+  position: absolute;
+  bottom: 100px;
+  left: 6%;
+  height: 100px;
+  width: 200px;
+  border-radius: 12px;
+  background-color: lightcoral;
+}
+
+#cancel-spot-form-button{
+  width: 100px;
+  border-radius: 5px;
+  transition-duration: .3s;
+}
+
+#create-spot-button:hover{
+  background-color: green;
+  color: white;
+}
+
+#cancel-spot-form-button:hover{
+  background-color: darkred;
+  color: white;
+}
+
+#show-create-spot-button:hover{
+  background-color: coral;
 }

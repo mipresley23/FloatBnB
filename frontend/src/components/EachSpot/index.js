@@ -5,6 +5,7 @@ import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from
 import { thunkCreateBooking } from "../../store/bookings";
 import { thunkGetImages } from "../../store/images";
 import '../../index.css';
+import './eachSpot.css';
 
 export default function EachSpot() {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ export default function EachSpot() {
   const {id} = useParams()
 
   // const [showModal, setShowModal] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [spotName, setSpotName] = useState();
   const [spotPrice, setSpotPrice] = useState(null);
   const [spots, setSpots] = useState([]);
@@ -82,6 +83,17 @@ export default function EachSpot() {
     window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
   }
 
+  const handleEditSpotButton = () => {
+    setShowEditForm(true);
+    setShowBookingForm(false);
+  }
+
+  const handleBookingSpotButton = () => {
+    setShowEditForm(false);
+    setShowBookingForm(true);
+  }
+
+
 const handleEditSubmit = async (e) => {
   e.preventDefault();
   const newSpot = {
@@ -93,7 +105,7 @@ const handleEditSubmit = async (e) => {
   }
   await dispatch(thunkEditSpot(newSpot))
   // history.push(`/api/spots/${+id}`)
-  setShowForm(false);
+  setShowEditForm(false);
 }
 
 if(!spot) return null;
@@ -103,14 +115,14 @@ return(
   <div>
     <div className="each-spot-card">
       <h1>{spot.name}</h1>
-      <img src={image && image.url} alt="spot"></img>
+      <img id='each-spot-image' src={image && image.url} alt="spot"></img>
       <p>{`$${spot.price}/night`}</p>
     </div>
-    <button type="button" onClick={handleReloadSpots}>Back to Spots</button>
-    {sessionUser && correctUser() && <div><button type="button" onClick={() => setShowForm(true)}>Edit this Spot</button>
-    <button type="button" onClick={handleDelete}>Delete Spot</button></div>}
+    <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button>
+    {sessionUser && correctUser() && <div><button class='each-spot-buttons' type="button" onClick={handleEditSpotButton}>Edit this Spot</button>
+    <button class='each-spot-buttons' type="button" onClick={handleDelete}>Delete Spot</button></div>}
     <section className="edit-spot-form-container">
-    {showForm && <form className="edit-spot-form" onSubmit={handleEditSubmit}>
+    {!ShowBookingForm && showEditForm && <form className="edit-spot-form" onSubmit={handleEditSubmit}>
       <input
         type="text"
         placeholder={spot.name}
@@ -123,12 +135,12 @@ return(
         min="0"
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
-      <button type="submit">Edit this Spot</button>
-      <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+      <button class='each-spot-buttons' id='edit-spot-submit-button' type="submit">Submit Edit</button>
+      <button class='each-spot-buttons' id='edit-spot-cancel-button' type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
     </form>}
     <section className="booking-form-container">
-          {sessionUser && <button type="button" onClick={() => setShowBookingForm(true)}>Book this Spot</button>}
-          {ShowBookingForm && <form className="create-booking-form" onSubmit={handleBookingSubmit}>
+          {sessionUser && <button class='each-spot-buttons' type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
+          {!showEditForm && ShowBookingForm && <form className="create-booking-form" onSubmit={handleBookingSubmit}>
             <input
               type="date"
               required
@@ -139,7 +151,8 @@ return(
               required
               value={bookingEndDate}
               onChange={(e) => setBookingEndDate(e.target.value)} />
-            <button type="submit">Create</button>
+            <button class='each-spot-buttons' id='book-spot-submit-button' type="submit">Create</button>
+            <button className="each-spot-buttons" id="book-spot-cancel-button" type="button" onClick={() => setShowBookingForm(false)}>Cancel</button>
           </form>}
         </section>
     </section>

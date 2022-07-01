@@ -2,9 +2,9 @@
 
 ## Index
 
-[Feature list documentation]
+[Feature list documentation](https://github.com/mipresley23/FloatBnB/wiki/MVP-Feature-List)
 
-[Database Schema]
+[Database Schema](https://github.com/mipresley23/FloatBnB/wiki/DB-Schema-V2)
 
 [Frontend Routes Documentation]
 

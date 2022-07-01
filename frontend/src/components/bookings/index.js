@@ -78,7 +78,7 @@ export default function Bookings() {
             ))
           }
         </table>
-        <section className="booking-form-container">
+        {/* <section className="booking-form-container">
           {sessionUser && <form className="create-booking-form" onSubmit={handleSubmit}>
             <input
               type="date"
@@ -101,7 +101,7 @@ export default function Bookings() {
             </select>
             <button type="submit">Create</button>
           </form>}
-        </section>
+        </section> */}
       </div>
       <div className='footer'>
         <a href='https://expressjs.com/'>
