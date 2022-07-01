@@ -9,14 +9,23 @@ export default function Splash() {
 
   const dispatch = useDispatch()
   const imageSelector = useSelector(state => state.images)
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState('')
+
+  const newImages = []
+  for(let i = 0; i < images.length - 1; i++){
+    newImages.push(images[i]);
+  }
+
+
+  console.log(images)
+  console.log("newImages: ", newImages);
 
   useEffect(() => {
     dispatch(thunkGetImages())
   }, [dispatch])
 
   useEffect(() => {
-    setImages(imageSelector)
+    setImages(Object.values(imageSelector))
   }, [imageSelector])
 
   return(
@@ -30,8 +39,8 @@ export default function Splash() {
       <h1 id="main-title">Welcome to FloatBnB</h1>
       <div className='images-container'>
       {
-        Object.values(images).map(image => (
-          <div className="splash-image-containers">
+        newImages.map(image => (
+          <div key={image.id} className="splash-image-containers">
             <h2 className="splash-image-title">{image.Spot && image.Spot.name}</h2>
             <NavLink to={`/api/spots/${image.spotId}`}>
               <img id={`spot-image-${image.id}`} src={image.url} alt={``}/>
