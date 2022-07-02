@@ -16,10 +16,6 @@ export default function Splash() {
     newImages.push(images[i]);
   }
 
-
-  console.log(images)
-  console.log("newImages: ", newImages);
-
   useEffect(() => {
     dispatch(thunkGetImages())
   }, [dispatch])

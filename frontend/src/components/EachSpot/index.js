@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
-import { thunkCreateBooking } from "../../store/bookings";
+import { thunkCreateBooking, thunkGetBookings } from "../../store/bookings";
 import { thunkGetImages } from "../../store/images";
 import '../../index.css';
 import './eachSpot.css';
@@ -21,11 +21,13 @@ export default function EachSpot() {
   const [bookingStartDate, setBookingStartDate] = useState('');
   const [bookingEndDate, setBookingEndDate] = useState('');
   const [ShowBookingForm, setShowBookingForm] = useState(false);
+  const [bookings, setBookings] = useState([])
 
 
   const spotSelector = useSelector(state => state.spots);
   const imageSelector = useSelector(state => state.images);
   const sessionUser =  useSelector(state => state.session.user);
+  const bookingSelector = useSelector(state => state.bookings);
 
   const spot = spots.find(spot => spot.id === +id);
   const image = images.find(image => image.id === +id);
@@ -55,9 +57,18 @@ export default function EachSpot() {
     setImages(Object.values(imageSelector))
   }, [imageSelector])
 
+  useEffect(() => {
+    dispatch(thunkGetBookings())
+  }, [dispatch])
+
+  useEffect(() => {
+    setBookings(Object.values(bookingSelector))
+  }, [bookingSelector])
+
   const handleDelete = async (e) => {
     e.preventDefault()
     await dispatch(thunkDeleteSpot(id))
+    setBookings(Object.values(bookingSelector))
     history.push('/api/spots')
   }
 
@@ -109,7 +120,7 @@ const handleEditSubmit = async (e) => {
 }
 
 if(!spot) return null;
-if(!images) return null;
+// if(!images) return null;
 
 return(
   <div>

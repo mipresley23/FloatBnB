@@ -50,10 +50,15 @@ export default function UserProfile() {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
 
+  const handleDelete = async(e) => {
+    await dispatch(thunkDeleteSpot())
+    setBookings(Object.values(bookingSelector))
+  }
+
   const correctUser = () => {
     return sessionUser && sessionUser.id === +id;
   }
-
+if(!bookingArray) return null;
   return (
     <div className="main">
       <h1>{`${user && user.username}'s Profile`}</h1>
@@ -75,7 +80,7 @@ export default function UserProfile() {
               <td key={spot.id}>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
-                {sessionUser && correctUser() && <button id='profile-delete-spot-button' type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}>Delete Spot</button>}
+                {bookings && sessionUser && correctUser() && <button id='profile-delete-spot-button' type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}{() => setBookings(Object.values(bookingSelector))}>Delete Spot</button>}
             </tr>
           </tbody>
               ))

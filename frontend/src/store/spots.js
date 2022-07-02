@@ -11,6 +11,7 @@ const GET_ONE_SPOT = 'spots/getOneSpot'
 const UPDATE_SPOT = 'spots/updateSpot'
 //DELETE
 const DELETE_SPOT = 'spots/deleteSpot'
+const DELETE_BOOKING = 'bookings/deleteBooking'
 //action creators
 const actionCreateSpot = (spot) => {
   return {
@@ -37,10 +38,17 @@ const actionUpdateSpot = (spot) => {
     spot
   }
 }
-const actionDeleteSpot = (spot) => {
+const actionDeleteSpot = (spot, booking) => {
   return {
     type: DELETE_SPOT,
     spot
+  }
+}
+
+const actionDeleteBooking = (booking) => {
+  return {
+    type: DELETE_BOOKING,
+    booking
   }
 }
 
@@ -93,6 +101,7 @@ export const thunkDeleteSpot = (spotId) => async (dispatch) => {
     method: "DELETE"
   })
   const data = await res.json();
+  console.log('fetch delete data: ', data)
   dispatch(actionDeleteSpot(data))
   return res;
 }
@@ -122,8 +131,10 @@ const spotReducer = (state = {}, action) => {
       return newState
 
       case DELETE_SPOT:
-      console.log('action:', action, newState)
-      delete newState[action.spot.id]
+        console.log('newState: ', newState);
+      const deleteSpotId = action.spot.id;
+      delete newState[deleteSpotId]
+      // delete newState[bookings.id[Spot.deleteSpotId]]
       return newState;
 
     default:
