@@ -13,6 +13,8 @@ export default function UserProfile() {
   const [users, setUsers] = useState();
   const [spots, setSpots] = useState([])
   const [bookings, setBookings] = useState([])
+  const [bookingArray, setBookingArray] = useState([])
+  const [bookingMatches, setBookingMatches] = useState([])
 
   const userSelector = useSelector(state => state.users);
   const spotSelector = useSelector(state => state.spots);
@@ -21,7 +23,6 @@ export default function UserProfile() {
 
   const user = users && users.find(user => user.id === +id)
   const spotArray = spots && spots.filter(spot => spot.userId === +id)
-  const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
 
 
 
@@ -50,9 +51,33 @@ export default function UserProfile() {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
 
+
+
+
+
+const usersBookings = bookings && bookings.filter(booking => booking.userId === +id)
+console.log('users bookings" ', usersBookings)
+
+  const matchingBookings = []
+
+
+  bookingArray.map(booking => {
+    for(let i = 0; i < spotArray.length; i++){
+      if(booking.spotId === spotArray[i].id) {
+        matchingBookings.push(booking)
+      }
+    }
+    return matchingBookings
+  })
+console.log('bookingArray: ', bookingArray);
+console.log('matchingBooks: ', matchingBookings)
+console.log('bookings: ', bookings);
+
+
   const handleDelete = async(e) => {
-    await dispatch(thunkDeleteSpot())
-    setBookings(Object.values(bookingSelector))
+    await dispatch(thunkDeleteSpot(e.target.value))
+
+    console.log(e.target.value)
   }
 
   const correctUser = () => {
@@ -80,8 +105,8 @@ if(!bookingArray) return null;
               <td key={spot.id}>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
-                {bookings && sessionUser && correctUser() && <button id='profile-delete-spot-button' type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}{() => setBookings(Object.values(bookingSelector))}>Delete Spot</button>}
             </tr>
+                {bookings && sessionUser && correctUser() && <button value={spot.id} id='profile-delete-spot-button' type="button" onClick={handleDelete}>Delete Spot</button>}
           </tbody>
               ))
             }
@@ -110,7 +135,7 @@ if(!bookingArray) return null;
         </table>
           }
       </div>
-      <div className='footer'>
+      {/* <div className='footer'>
         <a href='https://expressjs.com/'>
           <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
         </a>
@@ -132,7 +157,7 @@ if(!bookingArray) return null;
         <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
           <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }
