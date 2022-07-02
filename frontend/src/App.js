@@ -30,9 +30,11 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Splash />
+            <Footer />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+            <Footer />
           </Route>
           <Route exact path='/api/users'>
             <Users />
@@ -52,9 +54,6 @@ function App() {
           </Route>
           <Route path='/api/marinas'>
             <Marinas />
-          </Route>
-          <Route path='/'>
-            <Footer />
           </Route>
         </Switch>
       )}

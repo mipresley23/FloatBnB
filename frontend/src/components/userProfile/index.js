@@ -21,7 +21,6 @@ export default function UserProfile() {
 
   const user = users && users.find(user => user.id === +id)
   const spotArray = spots && spots.filter(spot => spot.userId === +id)
-  const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
 
 
 
@@ -50,10 +49,25 @@ export default function UserProfile() {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
 
+  const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
+
+
+
   const handleDelete = async(e) => {
-    await dispatch(thunkDeleteSpot())
-    setBookings(Object.values(bookingSelector))
+    const matchingBookings = bookings && bookings.map(booking => booking.spotId === +e.target.value)
+    console.log('match: ', matchingBookings)
+    matchingBookings && matchingBookings.forEach((booking) => dispatch(thunkDeleteBooking(booking.id)))
+    //matchingBooking && await dispatch(thunkDeleteBooking(matchingBooking.id))
+    await dispatch(thunkDeleteSpot(e.target.value))
+    await dispatch(thunkGetBookings)
+    await dispatch(thunkGetAllSpots)
+
+    console.log(e.target.value)
   }
+console.log('bookings: ', bookings);
+console.log('bookingArray', bookingArray);
+
+
 
   const correctUser = () => {
     return sessionUser && sessionUser.id === +id;
@@ -80,8 +94,8 @@ if(!bookingArray) return null;
               <td key={spot.id}>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
-                {bookings && sessionUser && correctUser() && <button id='profile-delete-spot-button' type="button" onClick={() => dispatch(thunkDeleteSpot(spot.id))}{() => setBookings(Object.values(bookingSelector))}>Delete Spot</button>}
             </tr>
+                {bookings && sessionUser && correctUser() && <button value={spot.id} id='profile-delete-spot-button' type="button" onClick={handleDelete}>Delete Spot</button>}
           </tbody>
               ))
             }
@@ -110,7 +124,7 @@ if(!bookingArray) return null;
         </table>
           }
       </div>
-      <div className='footer'>
+      {/* <div className='footer'>
         <a href='https://expressjs.com/'>
           <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
         </a>
@@ -132,7 +146,7 @@ if(!bookingArray) return null;
         <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
           <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }

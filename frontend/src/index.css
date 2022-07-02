@@ -1,13 +1,17 @@
 /* TODO Add site wide styles */
-
+body{
+  min-height: 1080px;
+  justify-content: center;
+}
 .footer{
   background-color: bisque;
-  position: absolute;
+  position: sticky;
   bottom: 10px;
   display: inline-flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 50px;
+
 }
 
 .footer-images{
