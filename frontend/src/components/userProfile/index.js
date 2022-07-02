@@ -13,8 +13,6 @@ export default function UserProfile() {
   const [users, setUsers] = useState();
   const [spots, setSpots] = useState([])
   const [bookings, setBookings] = useState([])
-  const [bookingArray, setBookingArray] = useState([])
-  const [bookingMatches, setBookingMatches] = useState([])
 
   const userSelector = useSelector(state => state.users);
   const spotSelector = useSelector(state => state.spots);
@@ -51,34 +49,25 @@ export default function UserProfile() {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
 
+  const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
 
-
-
-
-const usersBookings = bookings && bookings.filter(booking => booking.userId === +id)
-console.log('users bookings" ', usersBookings)
-
-  const matchingBookings = []
-
-
-  bookingArray.map(booking => {
-    for(let i = 0; i < spotArray.length; i++){
-      if(booking.spotId === spotArray[i].id) {
-        matchingBookings.push(booking)
-      }
-    }
-    return matchingBookings
-  })
-console.log('bookingArray: ', bookingArray);
-console.log('matchingBooks: ', matchingBookings)
-console.log('bookings: ', bookings);
 
 
   const handleDelete = async(e) => {
+    const matchingBookings = bookings && bookings.map(booking => booking.spotId === +e.target.value)
+    console.log('match: ', matchingBookings)
+    matchingBookings && matchingBookings.forEach((booking) => dispatch(thunkDeleteBooking(booking.id)))
+    //matchingBooking && await dispatch(thunkDeleteBooking(matchingBooking.id))
     await dispatch(thunkDeleteSpot(e.target.value))
+    await dispatch(thunkGetBookings)
+    await dispatch(thunkGetAllSpots)
 
     console.log(e.target.value)
   }
+console.log('bookings: ', bookings);
+console.log('bookingArray', bookingArray);
+
+
 
   const correctUser = () => {
     return sessionUser && sessionUser.id === +id;

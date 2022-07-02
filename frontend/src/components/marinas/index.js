@@ -27,7 +27,7 @@ export default function Marinas() {
           <h3>{marina.name}</h3>
         ))
       }
-      <div className='footer'>
+      {/* <div className='footer'>
         <a href='https://expressjs.com/'>
           <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
         </a>
@@ -49,7 +49,7 @@ export default function Marinas() {
         <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
           <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
         </a>
-      </div>
+      </div> */}
     </div>
   )
 
