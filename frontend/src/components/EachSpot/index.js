@@ -14,8 +14,8 @@ export default function EachSpot() {
 
   // const [showModal, setShowModal] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [spotName, setSpotName] = useState();
-  const [spotPrice, setSpotPrice] = useState(null);
+  const [spotName, setSpotName] = useState('');
+  const [spotPrice, setSpotPrice] = useState();
   const [spots, setSpots] = useState([]);
   const [images, setImages] = useState([]);
   const [bookingStartDate, setBookingStartDate] = useState('');
@@ -127,11 +127,13 @@ return(
         type="text"
         placeholder={spot.name}
         value={spotName}
+        defaultValue={spot.name}
+        required
         onChange={(e) => setSpotName(e.target.value)} />
       <input
         type="number"
         placeholder={spot.price}
-        defaultValue={spot.price}
+        // defaultValue={spot.price}
         min="0"
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
