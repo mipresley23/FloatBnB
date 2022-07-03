@@ -38,6 +38,10 @@ export default function EachSpot() {
 
   console.log(correctUser())
 
+  const todaysFullDate = new Date()
+  const todaysDate = (todaysFullDate.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+  const todaysMonth = (todaysFullDate.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+  const currentYear = todaysFullDate.getFullYear()
 
 
   useEffect(() => {
@@ -163,11 +167,13 @@ return(
               type="date"
               required
               value={bookingStartDate}
+              min={`${currentYear}-${todaysMonth}-${todaysDate}`}
               onChange={(e) => setBookingStartDate(e.target.value)} />
             <input
               type="date"
               required
               value={bookingEndDate}
+              min={bookingStartDate}
               onChange={(e) => setBookingEndDate(e.target.value)} />
             <button class='each-spot-buttons' id='book-spot-submit-button' type="submit">Create</button>
             <button className="each-spot-buttons" id="book-spot-cancel-button" type="button" onClick={() => setShowBookingForm(false)}>Cancel</button>

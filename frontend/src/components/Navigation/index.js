@@ -29,10 +29,12 @@ function Navigation({ isLoaded }){
     <div id='navdiv'>
       <ul id='navwrapper'>
           <NavLink id='logo-home-link' to='/'>
-            <h2 id='logo'>FloatBnB</h2>
+            <img id='logo-image' src={require('./FloatBnBLogo.png')} alt='FloatBnB Logo' />
           </NavLink>
         <li className='navbarLinks'>
-            <NavLink id="homelink" exact to="/">Home</NavLink>
+            <NavLink id="homelink" exact to="/">
+              <img id='homelink-image' src={require('./home.png')} alt='Home Link' />
+            </NavLink>
             {isLoaded && sessionLinks}
         </li>
       </ul>
