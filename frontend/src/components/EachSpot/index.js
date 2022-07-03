@@ -123,11 +123,12 @@ if(!spot) return null;
 // if(!images) return null;
 
 return(
-  <div>
+  <div id="each-spot-main-container">
     <div className="each-spot-card">
-      <h1>{spot.name}</h1>
+      <h1 id="spot-name-title">{spot.name}</h1>
       <img id='each-spot-image' src={image && image.url} alt="spot"></img>
       <p>{`$${spot.price}/night`}</p>
+      {sessionUser && <button class='each-spot-buttons' id="book-spot-button" type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
     </div>
     <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button>
     {sessionUser && correctUser() && <div><button class='each-spot-buttons' type="button" onClick={handleEditSpotButton}>Edit this Spot</button>
@@ -152,7 +153,7 @@ return(
       <button class='each-spot-buttons' id='edit-spot-cancel-button' type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
     </form>}
     <section className="booking-form-container">
-          {sessionUser && <button class='each-spot-buttons' type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
+
           {!showEditForm && ShowBookingForm && <form className="create-booking-form" onSubmit={handleBookingSubmit}>
             <input
               type="date"
@@ -169,29 +170,6 @@ return(
           </form>}
         </section>
     </section>
-    {/* <div className='footer'>
-        <a href='https://expressjs.com/'>
-          <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
-        </a>
-        <a href='https://www.sequelize.org/'>
-          <img className='footer-images' id='sequelize-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" />
-        </a>
-        <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
-          <img className='footer-images' id='javascript-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
-        </a>
-        <a href='https://www.reactjs.org/'>
-          <img className='footer-images' id='react-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
-        </a>
-        <a href='https://www.redux.js.org/'>
-          <img className='footer-images' id='redux-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" />
-        </a>
-        <a href='https://github.com/mipresley23'>
-          <img className='footer-images' id='github-img' src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg'/>
-        </a>
-        <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
-          <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
-        </a>
-      </div> */}
   </div>
 )
 
