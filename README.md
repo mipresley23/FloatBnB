@@ -20,12 +20,31 @@
 
 [FloatBnB Repo](https://github.com/mipresley23/FloatBnB)
 
-## Technologies used - list (move to top of file)
+## Technologies used
 > ### [React](https://reactjs.org/)
 > ### [Redux](https://redux.js.org/)
 > ### [Express](https://expressjs.com/)
 > ### [Sequelize](https://sequelize.org/)
 > ### [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+## Getting started locally
+> * Clone the repo from [https://github.com/mipresley23/FloatBnB](https://github.com/mipresley23/FloatBnB)
+> * In the /backend file directory you'll find a .env.example file.
+> * Create a database with an owner based off this example file. Be sure to give your user CREATEDB privileges and a strong password.
+> * Create a .env based on this example file filling in the password based on the user you created and the JWT secret which can be any string of characters. 
+> > * Recommended to use the command  openssl rand -base64 10  in your terminal to create a random secret.
+> * To run this application correctly you'll need to run two local servers.
+> * To get these servers to run correctly, first navigate to the /backend directory and run npm install to install all dependencies.
+> * In a separate terminal, naviagate to the /frontend directory and again run npm install.
+> * Next create and seed the database tables by running the following commands in order in your /backend directory:
+> > * npx dotenv sequelize db:migrate
+> > * npx dotenv sequelize db:seed:all
+> * If done correctly you should not see any errors and your database should be completely migrated and all tables filled with seeder data.
+> * Now navigate one terminal to /backend and run the npm start command to start your backend server.
+> * Next navigate a separate terminal to /frontend and again run npm start to start your frontend server.
+> * If all steps are followed correctly you should see confirmation of both servers running successfully in your terminal.
+> * You may now navigate to http://localhost:3000 in your browser of choice to navigate the application.
+
 
 ## Project Summary
 Welcome to FloatBnB, a clone of Airbnb but specifically for yachts of various shapes and sizes. Here at FloatBnB, users can view the wide assortment of luxury boats available to be booked for the vacation of your dreams! Come join the FloatBnB community and you'll get so much more!
