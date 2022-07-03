@@ -33,7 +33,7 @@ function SignupFormPage() {
       <ul id="errors-list">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <h2 id='signup-form-header'>Welcome to FloatBnb</h2>
+      <h2 id='signup-form-header'>Welcome to FloatBnB</h2>
       <label>
         Username
         <input
