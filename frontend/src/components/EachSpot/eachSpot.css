@@ -59,3 +59,20 @@
 #book-spot-cancel-button:hover{
   background-color: rgb(247, 110, 110);
 }
+
+#each-spot-main-container{
+  text-align: center;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#each-spot-main-container button{
+  position:absolute;
+}
+
+#spot-name-title{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

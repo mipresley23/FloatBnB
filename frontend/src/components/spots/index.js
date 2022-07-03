@@ -83,7 +83,7 @@ export default function Spots() {
           }
         </div>
         <section className="spot-form-container">
-          {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>Create a New Spot</button>}
+          {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>+</button>}
           {sessionUser && showCreateSpotForm && <form className="create-spot-form" onSubmit={handleSubmit}>
             <h3 id='create-spot-header'>Create a New Spot</h3>
             <input id="spot-name-input"
@@ -116,29 +116,6 @@ export default function Spots() {
           </form>}
         </section>
       </div>
-      {/* <div className='footer'>
-        <a href='https://expressjs.com/'>
-          <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
-        </a>
-        <a href='https://www.sequelize.org/'>
-          <img className='footer-images' id='sequelize-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" />
-        </a>
-        <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
-          <img className='footer-images' id='javascript-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
-        </a>
-        <a href='https://www.reactjs.org/'>
-          <img className='footer-images' id='react-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
-        </a>
-        <a href='https://www.redux.js.org/'>
-          <img className='footer-images' id='redux-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" />
-        </a>
-        <a href='https://github.com/mipresley23'>
-          <img className='footer-images' id='github-img' src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg'/>
-        </a>
-        <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
-          <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
-        </a>
-      </div> */}
     </div>
   )
 }

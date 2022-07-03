@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 body{
   min-height: 1080px;
-  justify-content: center;
+  margin-bottom: 30px;
 }
 .footer{
   background-color: bisque;
@@ -9,14 +9,21 @@ body{
   bottom: 10px;
   display: inline-flex;
   justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   margin-top: 50px;
-
+  box-sizing: border-box;
 }
 
 .footer-images{
   height:25px;
   width: 25px;
+  background-color: none;
+}
+
+.tech-links{
+  background-color: bisque;
+  border: none;
 }
 
 .footer-images:hover{
@@ -25,4 +32,38 @@ body{
 
 button{
   cursor: pointer;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+input{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: beige;
+  border-radius: 5px;
+}
+
+a{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: lightblue;
+  color: #cc3c29;
+  transition-duration: .2s;
+}
+
+a:hover{
+  background-color: lightskyblue;
+}
+
+
+
+#footer-container{
+  position:fixed;
+  bottom: 1px;
+  width: 100%;
+}
+
+select{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: beige;
+  border: 1px solid black;
 }
