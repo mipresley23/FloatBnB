@@ -2,25 +2,24 @@
 .spot-form-container{
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 10px;
-  left: 50%;
+  left: 54%;
 }
 
 .create-spot-form{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  background-color: coral;
+  justify-content: flex-end;
+  background-color: lightgreen;
   margin-bottom: 50px;
-  height: 200px;
-  width: 200px;
+  height: 140px;
+  width: 100%;
   border: 3px solid black;
-  padding-top: 100px;
   align-items: center;
   border-radius: 12px;
 }
@@ -88,7 +87,7 @@
 #show-create-spot-button{
   position: absolute;
   top: 80px;
-  left: 50px;
+  left:0px;
   height: 40px;
   width: 40px;
   border-radius: 50%;
