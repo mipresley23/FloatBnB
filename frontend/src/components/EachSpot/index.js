@@ -127,12 +127,14 @@ return(
     <div className="each-spot-card">
       <h1 id="spot-name-title">{spot.name}</h1>
       <img id='each-spot-image' src={image && image.url} alt="spot"></img>
-      <p>{`$${spot.price}/night`}</p>
-      {sessionUser && <button class='each-spot-buttons' id="book-spot-button" type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
+      <p id="spot-price-label">{`$${spot.price}/night`}</p>
+      <div id="each-spot-button-container">
+        <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button>
+        {sessionUser && <button class='each-spot-buttons' id="book-spot-button" type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
+        {sessionUser && correctUser() && <div id="edit-delete-button-container"><button class='each-spot-buttons' type="button" onClick={handleEditSpotButton}>Edit this Spot</button>
+        <button class='each-spot-buttons' type="button" onClick={handleDelete}>Delete Spot</button></div>}
+      </div>
     </div>
-    <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button>
-    {sessionUser && correctUser() && <div><button class='each-spot-buttons' type="button" onClick={handleEditSpotButton}>Edit this Spot</button>
-    <button class='each-spot-buttons' type="button" onClick={handleDelete}>Delete Spot</button></div>}
     <section className="edit-spot-form-container">
     {!ShowBookingForm && showEditForm && <form className="edit-spot-form" onSubmit={handleEditSubmit}>
       <input
