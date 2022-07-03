@@ -65,3 +65,12 @@
   height: 25px;
   width: auto;
 }
+
+#profile-email{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: azure;
+}
+
+.profile-dropdown{
+  list-style: none;
+}
