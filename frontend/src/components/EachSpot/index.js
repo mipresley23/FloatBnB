@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
-import { thunkCreateBooking, thunkGetBookings } from "../../store/bookings";
+import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../store/bookings";
 import { thunkGetImages } from "../../store/images";
 import '../../index.css';
 import './eachSpot.css';
@@ -67,7 +67,9 @@ export default function EachSpot() {
 
   const handleDelete = async (e) => {
     e.preventDefault()
-    await dispatch(thunkDeleteSpot(id))
+    const matchBooks = bookings.filter(booking => booking.spotId === +id)
+    matchBooks && matchBooks.forEach((booking) => dispatch(thunkDeleteBooking(booking.id)))
+    dispatch(thunkDeleteSpot(id))
     setBookings(Object.values(bookingSelector))
     history.push('/api/spots')
   }
