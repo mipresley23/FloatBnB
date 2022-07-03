@@ -85,17 +85,16 @@ export default function Spots() {
         <section className="spot-form-container">
           {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>+</button>}
           {sessionUser && showCreateSpotForm && <form className="create-spot-form" onSubmit={handleSubmit}>
-            <h3 id='create-spot-header'>Create a New Spot</h3>
             <input id="spot-name-input"
               type="text"
-              placeholder="Spot Name"
+              placeholder="New Spot Name"
               defaultValue=''
               required
               value={spotName}
               onChange={(e) => setSpotName(e.target.value)} />
             <input id="spot-price-input"
               type="number"
-              placeholder="Price"
+              placeholder="Spot Price"
               min="0"
               defaultValue=''
               required
