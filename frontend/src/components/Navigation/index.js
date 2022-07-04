@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
       <>
         <LoginFormModal />
         <NavLink id='signuplink' to="/signup">
-          Sign Up
+          <img id='sign-up-image' src={require('./add-user.png')}></img>
         </NavLink>
       </>
     );

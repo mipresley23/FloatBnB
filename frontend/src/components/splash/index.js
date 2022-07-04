@@ -27,10 +27,15 @@ export default function Splash() {
   return(
     <div>
       <div id="navbar-links-container">
-        <NavLink to='/api/spots'>Spots</NavLink>
-        <NavLink to='/api/bookings'>Bookings</NavLink>
-        <NavLink to='/api/marinas'>Marinas</NavLink>
-        <NavLink to='/api/users'>Users</NavLink>
+        <NavLink className='nav-images' id='boat-nav-image-container' to='/api/spots'>
+          <img id="spots-nav-image" src={require('./boat_image_forNav.png')} alt='view all spots'></img>
+        </NavLink>
+        <NavLink className='nav-images' to='/api/bookings'>
+          <img id="bookings-nav-image" src={require('./booking_image_forNav.jpg')} alt='view all bookings'></img>
+        </NavLink>
+        <NavLink className='nav-images' to='/api/users'>
+          <img id="users-nav-image" src={require('./users_image_forNav.jpg')} alt='all users'></img>
+        </NavLink>
       </div>
       <h1 id="main-title">Welcome to FloatBnB</h1>
       <div className='images-container'>

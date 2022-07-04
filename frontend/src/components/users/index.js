@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {NavLink} from 'react-router-dom'
 import {thunkGetAllUsers} from "../../store/users";
 import '../../index.css';
+import './users.css';
 
 export default function Users() {
 
@@ -21,9 +22,9 @@ export default function Users() {
   }, [userSelector])
 
   return (
-    <div>
+    <div id="users-page-container">
       <h1>Users</h1>
-      <ul className="user-list">
+      <ol className="user-list">
 
       {
         users && users.map(user => (
@@ -32,7 +33,7 @@ export default function Users() {
           </li>
           ))
         }
-        </ul>
+        </ol>
     </div>
   )
 }
