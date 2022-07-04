@@ -75,7 +75,8 @@ console.log('bookingArray', bookingArray);
 if(!bookingArray) return null;
   return (
     <div className="main">
-      <h1>{`${user && user.username}'s Profile`}</h1>
+      <h1>{`${user && user.username}`}</h1>
+      <img id="profile-img" src={require('./nophoto.jpeg')} alt='profile picture'/>
       <div className="users-spots-container">
         <h3>{`${user && user.username}'s spots`}</h3>
         {/* <img src="img.jpg" alt='profile picture'/> */}
@@ -91,7 +92,7 @@ if(!bookingArray) return null;
           <tbody>
             <tr>
 
-              <td key={spot.id}>
+              <td className='spot-table-data' key={spot.id}>
                 <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
             </tr>
