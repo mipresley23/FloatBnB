@@ -22,6 +22,7 @@ export default function EachSpot() {
   const [bookingEndDate, setBookingEndDate] = useState('');
   const [ShowBookingForm, setShowBookingForm] = useState(false);
   const [bookings, setBookings] = useState([])
+  const [errors, setErrors] = useState([]);
 
 
 
@@ -129,6 +130,7 @@ console.log('real date range: ', realRange);
     dispatch(thunkGetOneSpot(id))
   }, [dispatch, id])
 
+
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     const newBooking = {
@@ -139,10 +141,13 @@ console.log('real date range: ', realRange);
     }
     if(realRange && realRange.includes(bookingStartDate)){
       window.alert('Sorry, this date is already booked.\n Please choose a different date.')
+      setErrors(['Date already booked.','Please pick a new date.'])
+      console.log('errors: ', errors);
      throw new Error('Please choose a different date.');
     }
 
     await dispatch(thunkCreateBooking(newBooking))
+    setErrors([]);
     setShowBookingForm(false)
     window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
   }
@@ -217,6 +222,9 @@ return(
     <section className="booking-form-container">
 
           {!showEditForm && ShowBookingForm && <form className="create-booking-form" onSubmit={handleBookingSubmit}>
+            <ul id="booking-errors-list">
+              {errors && errors.map(err => <li>{`${err}`}</li>)}
+            </ul>
             <input
               type="date"
               required

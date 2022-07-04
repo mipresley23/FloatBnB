@@ -96,3 +96,9 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
+
+#booking-errors-list{
+  list-style: none;
+  color: red;
+  padding: 0 0 0 0;
+}
