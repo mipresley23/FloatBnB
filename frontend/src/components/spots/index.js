@@ -70,7 +70,7 @@ export default function Spots() {
     <div>
       <div className="spots-page-container">
         <div id="title-and-add-button">
-        <h1>Spots</h1>
+        <h1 id="spots-page-title">Spots</h1>
         {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>+</button>}
         </div>
         <div className="spot-containers-container">
