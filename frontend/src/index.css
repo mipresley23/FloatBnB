@@ -1,5 +1,6 @@
 /* TODO Add site wide styles */
 body{
+  height: auto;
   min-height: 1080px;
   margin-bottom: 30px;
 }
