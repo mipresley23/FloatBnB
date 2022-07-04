@@ -4,6 +4,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { thunkGetBookings, thunkCreateBooking } from "../../store/bookings";
 import { thunkGetAllSpots } from "../../store/spots";
 import '../../index.css';
+import './bookings.css';
 
 export default function Bookings() {
   const dispatch = useDispatch();
@@ -69,7 +70,9 @@ export default function Bookings() {
                   <td>
                     <NavLink to={`/api/users/${booking.User && booking.User.id}`}>{booking.User && booking.User.username}</NavLink>
                   </td>
-                  <td>{booking.Spot && booking.Spot.name}</td>
+                  <td>
+                    <NavLink to={`/api/spots/${booking.spotId}`}>{booking.Spot && booking.Spot.name}</NavLink>
+                  </td>
                   <td>{booking.startDate}</td>
                   <td>{booking.endDate}</td>
                 </tr>

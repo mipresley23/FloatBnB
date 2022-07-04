@@ -39,7 +39,7 @@ export default function EachSpot() {
 
 
   const todaysFullDate = new Date()
-  const todaysDate = (todaysFullDate.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+  const todaysDate = (todaysFullDate.getDate() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const todaysMonth = (todaysFullDate.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const currentYear = todaysFullDate.getFullYear()
 
@@ -138,8 +138,8 @@ console.log('real date range: ', realRange);
       userId: sessionUser.id
     }
     if(realRange && realRange.includes(bookingStartDate)){
-      window.alert('Sorry, this date is already booked.')
-     throw new Error;
+      window.alert('Sorry, this date is already booked.\n Please choose a different date.')
+     throw new Error('Please choose a different date.');
     }
 
     await dispatch(thunkCreateBooking(newBooking))
@@ -171,6 +171,13 @@ const handleEditSubmit = async (e) => {
   // history.push(`/api/spots/${+id}`)
   setShowEditForm(false);
 }
+
+const handleStartDateSelect = (e) => {
+  setBookingStartDate(e.target.value)
+  setBookingEndDate(e.target.value);
+}
+
+
 
 if(!spot) return null;
 // if(!images) return null;
@@ -216,6 +223,7 @@ return(
               value={bookingStartDate}
               min={`${currentYear}-${todaysMonth}-${todaysDate}`}
               onChange={(e) => setBookingStartDate(e.target.value)} />
+
             <input
               type="date"
               required

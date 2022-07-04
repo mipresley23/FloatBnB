@@ -20,7 +20,7 @@ img{
   margin-right:2%;
 }
 
-img:hover{
+.images-container img:hover{
   filter: drop-shadow(0 0 0.75rem #46e8db);
 }
 
@@ -55,9 +55,26 @@ img:hover{
 #navbar-links-container{
   display: inline-flex;
   width: 80%;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-left:10%;
   margin-right:10%;
-  margin-bottom: 10px;
-  font-size: large;
+  margin-bottom: 50px;
+
+}
+
+#spots-nav-image{
+  height: 40px;
+  width: auto;
+  box-sizing: border-box;
+}
+
+
+#bookings-nav-image{
+  height: 41px;
+  width: 30px;
+}
+
+#users-nav-image{
+  height: 40px;
+  width: auto;
 }

@@ -1,0 +1,9 @@
+#users-page-container{
+  width: 20%;
+  margin-left: 40%;
+  margin-right: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

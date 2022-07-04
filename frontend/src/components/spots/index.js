@@ -69,7 +69,10 @@ export default function Spots() {
   return (
     <div>
       <div className="spots-page-container">
+        <div id="title-and-add-button">
         <h1>Spots</h1>
+        {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>+</button>}
+        </div>
         <div className="spot-containers-container">
           {
             spots.map(spot => (
@@ -83,7 +86,7 @@ export default function Spots() {
           }
         </div>
         <section className="spot-form-container">
-          {sessionUser && !showCreateSpotForm && <button id='show-create-spot-button' type="button" onClick={() => setShowCreateSpotForm(true)}>+</button>}
+
           {sessionUser && showCreateSpotForm && <form className="create-spot-form" onSubmit={handleSubmit}>
             <input id="spot-name-input"
               type="text"
