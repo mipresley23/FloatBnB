@@ -13,7 +13,7 @@ router.get('/', asyncHandler(async(req, res) => {
   return res.json(spots);
 }))
 
-router.get('/:id', asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
   const spot = await Spot.findByPk(req.params.id);
   return res.json(spot);
 }))
@@ -31,7 +31,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
   })
 );
 
-router.put('/:id', asyncHandler(async(req, res) => {
+router.put('/:id(\\d+)', asyncHandler(async(req, res) => {
   const spotEdit = await Spot.findByPk(req.params.id);
   const {name, price, userId, marinaId} = req.body;
   const spot = await spotEdit.update({
@@ -43,7 +43,7 @@ router.put('/:id', asyncHandler(async(req, res) => {
   return res.json(spot)
 }))
 
-router.delete('/:id', asyncHandler(async(req, res) => {
+router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
   const spot = await Spot.findByPk(req.params.id)
   await spot.destroy()
   return res.json(spot)

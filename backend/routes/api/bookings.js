@@ -35,7 +35,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
 //Delete Booking
 
-router.delete('/:id', asyncHandler(async(req, res) => {
+router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
   const booking = await Booking.findByPk(req.params.id)
   await booking.destroy();
   return res.json(booking)

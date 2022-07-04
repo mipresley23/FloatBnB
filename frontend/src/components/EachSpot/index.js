@@ -14,7 +14,7 @@ export default function EachSpot() {
 
   // const [showModal, setShowModal] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [spotName, setSpotName] = useState('');
+  const [spotName, setSpotName] = useState();
   const [spotPrice, setSpotPrice] = useState();
   const [spots, setSpots] = useState([]);
   const [images, setImages] = useState([]);
@@ -22,6 +22,7 @@ export default function EachSpot() {
   const [bookingEndDate, setBookingEndDate] = useState('');
   const [ShowBookingForm, setShowBookingForm] = useState(false);
   const [bookings, setBookings] = useState([])
+
 
 
   const spotSelector = useSelector(state => state.spots);
@@ -36,12 +37,53 @@ export default function EachSpot() {
     return sessionUser && spot && sessionUser.id === spot.userId;
   }
 
-  console.log(correctUser())
 
   const todaysFullDate = new Date()
   const todaysDate = (todaysFullDate.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const todaysMonth = (todaysFullDate.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const currentYear = todaysFullDate.getFullYear()
+
+
+  const spotsWithBookings = bookings && bookings.map(booking => {
+    return [booking.spotId, booking.startDate, booking.endDate];
+  })
+  console.log('spotsWithBookings', spotsWithBookings)
+  console.log('id:', id, 'type', typeof id);
+
+const thisSpotsBookings = []
+spotsWithBookings && spotsWithBookings.forEach(ele => {
+  if(ele[0] === +id) thisSpotsBookings.push(ele)
+})
+console.log('bookingsforthisspot: ', thisSpotsBookings)
+
+const findDateRange = (d1, d2) => {
+  const date = new Date(d1);
+  const dates = [];
+  while(date <= new Date(d2)) {
+    dates.push(new Date(date).toISOString().slice(0, 10));
+    date.setDate(date.getDate() + 1);
+  }
+  console.log('dates: ', dates)
+  return dates
+}
+console.log('date check:', new Date('2022-07-06') < new Date('2022-07-09'))
+
+const bookRanges = thisSpotsBookings && thisSpotsBookings.map(el => {
+  return findDateRange(el[1], el[2])
+})
+console.log('range: ', bookRanges)
+const realRange = [];
+for(let i = 0; i< bookRanges.length; i++){
+  let el = bookRanges[i]
+  for(let j = 0; j < el.length; j++){
+    let ele = el[j]
+    realRange.push(ele)
+  }
+}
+
+console.log('real date range: ', realRange);
+
+
 
 
   useEffect(() => {
@@ -95,6 +137,11 @@ export default function EachSpot() {
       spotId: +id,
       userId: sessionUser.id
     }
+    if(realRange && realRange.includes(bookingStartDate)){
+      window.alert('Sorry, this date is already booked.')
+     throw new Error;
+    }
+
     await dispatch(thunkCreateBooking(newBooking))
     setShowBookingForm(false)
     window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
@@ -153,7 +200,7 @@ return(
       <input
         type="number"
         placeholder={spot.price}
-        // defaultValue={spot.price}
+         defaultValue={spot.price}
         min="0"
         value={spotPrice}
         onChange={(e) => setSpotPrice(e.target.value)} />
