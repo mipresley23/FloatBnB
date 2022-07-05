@@ -57,23 +57,31 @@ As a registered user, you'll get premium features such as:
 
 ## App Screenshots
 ### Signup Page
-![floatbnbsignup](https://user-images.githubusercontent.com/59783664/176969726-219108c4-157f-4a4c-a4a7-6da477826af6.png)
+![image](https://user-images.githubusercontent.com/59783664/177337864-24c2b804-8ec6-4246-9ae6-686a45d441a9.png)
 
-### Spots Page and Create Spot form
+### Log in Modal
+![image](https://user-images.githubusercontent.com/59783664/177339507-27cdec94-436f-47d2-bbe7-10c164d89591.png)
 
-![AllSpotswithCreateForm](https://user-images.githubusercontent.com/59783664/176969926-da70c0df-aa45-4458-af57-6201fd8545bd.png)
 
-### Spot detail page with Edit Spot form
-![Screenshot (181)](https://user-images.githubusercontent.com/59783664/176970101-0fc8c1f1-d63f-4079-b775-147877a510cc.png)
+### Splash Page
 
-### Profile page showing edited spot
-![Screenshot (182)](https://user-images.githubusercontent.com/59783664/176970228-4b0a49a6-53c4-4a98-9e45-1065c750b3b4.png)
+![image](https://user-images.githubusercontent.com/59783664/177337612-c3797a40-e3e1-4011-ab2a-6a9df55e26e0.png)
 
-### Spot Detail page showing create booking form
-![Screenshot (183)](https://user-images.githubusercontent.com/59783664/176970336-1bd705c8-53d2-4cdd-98a1-f7c4c757b9a4.png)
+### Spots Page with Create Spot Form
 
-### Profile page showing user's booking(s)
-![Screenshot (184)](https://user-images.githubusercontent.com/59783664/176970427-d087dbc7-6ced-4be4-b5d1-7f6066c9f69d.png)
+![image](https://user-images.githubusercontent.com/59783664/177338221-aa6e27d0-9730-4eb7-8760-09f2268cbdb0.png)
+
+
+### Spot detail page
+![image](https://user-images.githubusercontent.com/59783664/177338599-41cbf63b-8ce7-419e-b0e0-18e7ea522a49.png)
+
+### Profile page
+![image](https://user-images.githubusercontent.com/59783664/177338979-ef54027d-d429-4eaf-b018-5c6fc3dd663b.png)
+
+### All bookings Page
+![image](https://user-images.githubusercontent.com/59783664/177339243-a56f7519-b55a-4d72-83f9-233ab6689aea.png)
+
+
 
 ## Instructions for navigating FloatBnB
 Upon navigating to site, users can view the spots with pictures on the home screen. Each picture is a navlink navigating to that spot's details. If the user is not logged in they may only view the spot and its details. Logging in will display the option to book that spot. If the user is logged in as the creator of that spot, they may also have the option to edit or delete that spot. The user may then navigate to their profile page by clicking their name in the profile menu in the upper righthand corner. Anyone can view anyone else's profile, but on the user's own profile, they'll be given the option to delete any spots or bookings they may have.
