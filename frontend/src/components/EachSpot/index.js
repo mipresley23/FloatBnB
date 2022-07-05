@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
 import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../store/bookings";
 import { thunkGetImages } from "../../store/images";
+import { thunkGetMarinas } from "../../store/marinas";
 import '../../index.css';
 import './eachSpot.css';
 
@@ -22,6 +23,7 @@ export default function EachSpot() {
   const [bookingEndDate, setBookingEndDate] = useState('');
   const [ShowBookingForm, setShowBookingForm] = useState(false);
   const [bookings, setBookings] = useState([])
+  const [marinas, setMarinas] = useState([]);
   const [errors, setErrors] = useState([]);
 
 
@@ -30,9 +32,13 @@ export default function EachSpot() {
   const imageSelector = useSelector(state => state.images);
   const sessionUser =  useSelector(state => state.session.user);
   const bookingSelector = useSelector(state => state.bookings);
+  const marinaSelector = useSelector(state => state.marinas);
 
   const spot = spots.find(spot => spot.id === +id);
   const image = images.find(image => image.id === +id);
+  const marina = marinas.find(marina => marina.id === spot.marinaId)
+  console.log('marina: ', marina)
+
 
   const correctUser = () => {
     return sessionUser && spot && sessionUser.id === spot.userId;
@@ -111,6 +117,14 @@ console.log('real date range: ', realRange);
   useEffect(() => {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
+
+  useEffect(() => {
+    dispatch(thunkGetMarinas())
+  }, [dispatch])
+
+  useEffect(() => {
+    setMarinas(Object.values(marinaSelector))
+  }, [marinaSelector])
 
   const handleDelete = async (e) => {
     e.preventDefault()
@@ -192,7 +206,24 @@ return(
     <div className="each-spot-card">
       <h1 id="spot-name-title">{spot.name}</h1>
       <img id='each-spot-image' src={image && image.url} alt="spot"></img>
-      <p id="spot-price-label">{`$${spot.price}/night`}</p>
+      <table id="spot-info-table">
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{`$${spot.price}/night`}</td>
+            <td>{marina.address}</td>
+            <td>{marina.city}</td>
+            <td>{marina.state}</td>
+          </tr>
+        </tbody>
+      </table>
       <div id="each-spot-button-container">
         <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button>
         {sessionUser && <button class='each-spot-buttons' id="book-spot-button" type="button" onClick={handleBookingSpotButton}>Book this Spot</button>}
