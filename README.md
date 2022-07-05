@@ -81,7 +81,7 @@ Upon navigating to site, users can view the spots with pictures on the home scre
 ## Future features
 In the future I have plans to implement a full CRUD reviews feature.
 I plan to add the ability to add an image upon spot creation.
-I would also like to add geolocation features, a more fleshed out profile/buddy system, and more details within my current features. I.e. displaying total price for each booking, number of people in each group being booked etc. I also like the idea of having my forms all implemented as modals. I couldn't quite get them to work the way I wanted so I commented the code out so I could come back to them later and implemented regular forms for the time being.
+I would also like to add geolocation features, a more fleshed out profile/buddy system, and more details within my current features. I.e. displaying total price for each booking, number of people in each group being booked etc. I also like the idea of having my forms all implemented as modals. I couldn't quite get them to work the way I wanted so I commented the code out so I could come back to them later and implemented regular forms for the time being. I would like to improve the date picking experience. Currently, users aren't able to pick a date in the past or overlapping dates for the start date and end date on bookings and that works great within the calendar. Users aren't able to book an already booked date, but there's no indication which dates are booked dates. From what has been learned via online research is there really is no good way to make the dates unselectable like the min/max attributes do so this will be something I'll need to work more with and learn more about to find alternatives.
 
 ## Technical implementation details
 
