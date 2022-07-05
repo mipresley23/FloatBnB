@@ -99,3 +99,17 @@ One particular challenge was my images being grabbed from my backend with an ext
 
 ![image](https://user-images.githubusercontent.com/59783664/176972865-2b8e9b25-c721-4009-bc33-6f599f43bbcc.png)
 
+Another issue that I had that I'm particularly proud of the solution is the way I was able to solve the problem of attempting to book an already booked date. I think this issue was by far the hardest issue I had to deal with in the entire project, because coming in I didn't know much about the date input type. Through much google research I found out there really is no easy way to disable particular dates in a date picker calendar so I had to be creative and key into the bookings to find all the spots with bookings, then key into that list and find all the bookings for the specific spot then use new Date and some loops to find the range of dates. Finally I threw an error and alerted the user that their dates were already booked. I'm certain it's far from a conventional approach to the issue, but I'm particular proud of it because I was able to work out the solution on my own and it works.
+
+![image](https://user-images.githubusercontent.com/59783664/177344407-45e72a03-707f-4b4d-8fe5-7494b663dc05.png)
+
+
+![image](https://user-images.githubusercontent.com/59783664/177344301-48bcc71c-f290-4be8-bb0a-b4a9a090f9a0.png)
+
+![image](https://user-images.githubusercontent.com/59783664/177344556-eb03a2e5-7f4f-4e15-ad71-6aefbc90b1f5.png)
+
+![image](https://user-images.githubusercontent.com/59783664/177344709-a1bd637e-ee46-4c87-abc5-e486ef25d77e.png)
+
+![image](https://user-images.githubusercontent.com/59783664/177344764-51260e86-4d5f-4a08-94fa-941337c9951d.png)
+
+
