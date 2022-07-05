@@ -199,6 +199,7 @@ const handleStartDateSelect = (e) => {
 
 
 if(!spot) return null;
+if(!marina) return null;
 // if(!images) return null;
 
 return(
