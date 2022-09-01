@@ -1,5 +1,5 @@
 .each-spot-buttons{
-  height:50px;
+  height:40px;
   width: 100px;
   border-radius: 12px;
   display: block;
@@ -34,15 +34,15 @@
 
 
 .each-spot-buttons:hover{
-  background-color: antiquewhite;
+  background-color: rgb(22, 157, 190);
 }
 
 .create-booking-form{
-  height:200px;
-  width: 300px;
+  height:550px;
+  width: 370px;
   position: absolute;
-  left: 150px;
-  bottom: 300px;
+  right: 15%;
+  top: 700px;
   border: 2px solid black;
   display: flex;
   flex-direction: column;
@@ -60,13 +60,27 @@
   background-color: rgb(247, 110, 110);
 }
 
-#each-spot-main-container{
-  text-align: center;
-  margin-top: 100px;
+#each-spot-main-content{
+  margin-top: 20px;
+  width: 80%;
+  margin-left: 14%;
+  height: 100vh;
+  padding-bottom: 50px;
+}
+
+#spot-header-labels{
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+}
+
+#spot-header-hosted-by, #spot-header-location{
+  margin-top: 0;
+  font-size: 16px;
+  margin-left: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#spot-header-location{
+  font-weight: bold;
 }
 
 
@@ -74,19 +88,64 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#each-spot-button-container{
+#spot-images-container{
   display: flex;
-  width: 100%;
-  justify-content: space-around;
-  position: absolute;
-  top: 100px;
+  width:60%;
+  height: 375px;
+  border-radius: 15px;
 }
 
-.each-spot-card{
+.each-spot-images{
+  border-radius: 0;
+}
+
+#each-spot-image-one{
+  height: 100%;
+  width: 50%;
+  margin: 0;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#each-spot-image-four{
+  border-top-right-radius: 12px;
+}
+
+#each-spot-image-five{
+  border-bottom-right-radius: 12px;
+}
+
+#each-spot-image-two, #each-spot-image-three, #each-spot-image-four, #each-spot-image-five{
+  height: 48.5%;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#each-spot-image-two, #each-spot-image-four{
+  margin-bottom: 10px;
+}
+
+#spot-images-column-two, #spot-images-column-three{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 375px;
+}
+
+.each-spot-header-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width:100%;
+}
+
+#each-spot-button-container{
+  width: 30%;
+  position: absolute;
+  right: 7%;
+  top: 150px;
+  display: flex;
+  justify-content: space-around;
 }
 
 #edit-delete-button-container{
@@ -104,13 +163,4 @@
   list-style: none;
   color: red;
   padding: 0 0 0 0;
-}
-
-#spot-info-table th{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-#spot-info-table td{
-  border: none;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
