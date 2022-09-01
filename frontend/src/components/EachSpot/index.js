@@ -42,31 +42,30 @@ export default function EachSpot() {
   console.log('marina: ', marina)
   console.log('spot', spot)
 
-
-  const correctUser = () => {
-    return sessionUser && spot && sessionUser.id === spot.userId;
-  }
-
-
   const todaysFullDate = new Date()
   const todaysDate = (todaysFullDate.getDate() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const todaysMonth = (todaysFullDate.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
   const currentYear = todaysFullDate.getFullYear()
 
-  const thisSpotsUser = users && users.find(user => user.id === spot.userId)
-  console.log('this user: ', thisSpotsUser)
+  const correctUser = () => {
+    return sessionUser && spot && sessionUser.id === spot.userId;
+  }
+
+  const thisSpotsUser = spot && users && users.find(user => user.id === spot.userId)
 
   const spotsWithBookings = bookings && bookings.map(booking => {
     return [booking.spotId, booking.startDate, booking.endDate];
   })
-
-
 
   const thisSpotsBookings = []
   spotsWithBookings && spotsWithBookings.forEach(ele => {
     if(ele[0] === +id) thisSpotsBookings.push(ele)
   })
 
+  const formatStartEndDate = (bookingDate) => {
+    const dateArr = bookingDate.split('-')
+    return `${dateArr[1]}-${dateArr[2]}-${dateArr[0]}`
+  }
 
   const findDateRange = (d1, d2) => {
     const date = new Date(d1);
@@ -141,18 +140,14 @@ export default function EachSpot() {
     history.push('/api/spots')
   }
 
-  const handleReloadSpots = (e) => {
-    e.preventDefault();
-    history.push('/api/spots');;
-  }
 
   useEffect(() => {
     dispatch(thunkGetOneSpot(id))
   }, [dispatch, id])
 
-
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
+    if(sessionUser){
     const newBooking = {
       startDate: bookingStartDate,
       endDate: bookingEndDate,
@@ -165,11 +160,12 @@ export default function EachSpot() {
       console.log('errors: ', errors);
      throw new Error('Please choose a different date.');
     }
-
-    await dispatch(thunkCreateBooking(newBooking))
-    setErrors([]);
-    setShowBookingForm(false)
-    window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
+      await dispatch(thunkCreateBooking(newBooking))
+      setErrors([]);
+      window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
+    }else{
+      history.push('/login')
+    }
   }
 
   const handleEditSpotButton = () => {
@@ -177,10 +173,6 @@ export default function EachSpot() {
     setShowBookingForm(false);
   }
 
-  const handleBookingSpotButton = () => {
-    setShowEditForm(false);
-    setShowBookingForm(true);
-  }
 
 
 const handleEditSubmit = async (e) => {
@@ -197,11 +189,18 @@ const handleEditSubmit = async (e) => {
   setShowEditForm(false);
 }
 
-const handleStartDateSelect = (e) => {
-  setBookingStartDate(e.target.value)
-  setBookingEndDate(e.target.value);
+let start;
+if(bookingStartDate){
+  start = new Date(bookingStartDate)
 }
 
+let end;
+if(bookingEndDate){
+  end = new Date(bookingEndDate)
+}
+
+const startEnd = findDateRange(start, end)
+const bookingLength = startEnd.length - 1;
 
 
 if(!spot) return null;
@@ -214,7 +213,7 @@ return(
       <div className="each-spot-header-info">
         <h2 id="spot-name-title">{spot.name}</h2>
         <div id="spot-header-labels">
-          <p id="spot-header-hosted-by">Hosted by: {thisSpotsUser.username}</p>
+          <p id="spot-header-hosted-by">Hosted by: {thisSpotsUser && thisSpotsUser.username}</p>
           <p id="spot-header-location">{marina.city}, {marina.state}, {marina.country}</p>
         </div>
       </div>
@@ -254,28 +253,62 @@ return(
         <button class='each-spot-buttons' id='edit-spot-cancel-button' type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
       </form>}
       <section className="booking-form-container">
-
-            <form className="create-booking-form" onSubmit={handleBookingSubmit}>
-              <ul id="booking-errors-list">
-                {errors && errors.map(err => <li>{`${err}`}</li>)}
-              </ul>
-              <input
-                type="date"
-                required
-                value={bookingStartDate}
-                min={`${currentYear}-${todaysMonth}-${todaysDate}`}
-                onChange={(e) => setBookingStartDate(e.target.value)} />
-
-              <input
-                type="date"
-                required
-                value={bookingEndDate}
-                min={bookingStartDate}
-                onChange={(e) => setBookingEndDate(e.target.value)} />
-              <button class='each-spot-buttons' id='book-spot-submit-button' type="submit">Create</button>
-              <button className="each-spot-buttons" id="book-spot-cancel-button" type="button" onClick={() => setShowBookingForm(false)}>Cancel</button>
-            </form>
-          </section>
+          <form className="create-booking-form" onSubmit={handleBookingSubmit}>
+            <ul id="booking-errors-list">
+              {errors && errors.map(err => <li>{`${err}`}</li>)}
+            </ul>
+            <h4 id="booking-form-price-per-night">${spot.price}/night</h4>
+            <div id="booking-form-label-inputs">
+              <div id="booking-form-check-in">
+                <label id="check-in-label">Check In</label>
+                <input
+                  type="date"
+                  required
+                  value={bookingStartDate}
+                  min={`${currentYear}-${todaysMonth}-${todaysDate}`}
+                  onChange={(e) => setBookingStartDate(e.target.value)} />
+              </div>
+              <div id="booking-form-check-out">
+                <label id="check-out-label">Check Out</label>
+                <input
+                  type="date"
+                  required
+                  value={bookingEndDate}
+                  min={bookingStartDate}
+                  onChange={(e) => setBookingEndDate(e.target.value)} />
+                </div>
+              </div>
+            <button class='each-spot-buttons' id='book-spot-submit-button' type="submit">Reserve</button>
+            <div id="booking-pricing-info">
+              <div id="current-checkin-checkout">
+                {bookingStartDate && <p id="current-checkin-date">{formatStartEndDate(bookingStartDate)}</p>}
+                {bookingStartDate && <p id="current-date-splitter">to</p>}
+                {bookingEndDate && <p id="current-checkout-date">{formatStartEndDate(bookingEndDate)}</p>}
+              </div>
+              <div id="chosen-nights-price">
+                {bookingStartDate && bookingEndDate && <p className='booking-pricing-labels'>${spot.price} x {bookingLength} nights</p>}
+                {bookingLength > 0 ? <p className='booking-pricing-amounts'>${spot.price * bookingLength}</p> :
+                <p className='booking-pricing-amounts'>$0</p>}
+              </div>
+              <div id="booking-cleaning-fee">
+                <p className='booking-pricing-labels'>Cleaning Fee</p>
+                <p className="booking-pricing-amounts">$0</p>
+              </div>
+              <div id="booking-service-fee">
+                <p className="booking-pricing-labels">Service Fee</p>
+                <p className="booking-pricing-amounts">$0</p>
+              </div>
+              {correctUser() && <div id='booking-owner-discount'>
+                  <p className="booking-pricing-labels">Owner Discount</p>
+                  <p className="booking-pricing-amounts">-{spot.price * bookingLength}</p>
+                </div>}
+              <div id="total-price">
+                <p className='booking-pricing-labels' id="booking-total-label">Total</p>
+                {bookingLength && !correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">${spot.price * bookingLength}</p> : bookingLength && correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">0</p> : <p className='booking-pricing-amounts' id="final-total-amount">0</p>}
+              </div>
+            </div>
+          </form>
+        </section>
       </section>
     </div>
   </>

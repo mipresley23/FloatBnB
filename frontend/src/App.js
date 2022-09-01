@@ -30,37 +30,30 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Splash />
-            <Footer />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-            <Footer />
           </Route>
           <Route exact path='/api/users'>
             <Users />
-            <Footer />
           </Route>
           <Route path='/api/users/:id'>
             <UserProfile />
-            <Footer />
           </Route>
           <Route exact path='/api/spots'>
             <Spots />
-            <Footer />
             <CreateSpotForm />
           </Route>
           <Route path='/api/spots/:id'>
             <EachSpot />
-            <Footer />
           </Route>
           <Route path='/api/bookings'>
             <Bookings />
-            <Footer />
           </Route>
           <Route path='/api/marinas'>
             <Marinas />
-            <Footer />
           </Route>
+          <Footer />
         </Switch>
       )}
     </>

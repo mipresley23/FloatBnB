@@ -54,18 +54,161 @@
 
 #book-spot-submit-button:hover{
   background-color: lightgreen;
+  color: white;
 }
 
 #book-spot-cancel-button:hover{
   background-color: rgb(247, 110, 110);
 }
 
+#booking-form-price-per-night{
+  position: absolute;
+  top:10px;
+  left: 5%;
+}
+
+#booking-form-label-inputs{
+  display: flex;
+  height: 80px;
+  position: absolute;
+  top: 100px;
+}
+
+#booking-form-check-in, #booking-form-check-out{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid black;
+}
+
+#booking-form-check-in{
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#booking-form-check-out{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+#booking-form-check-in input, #booking-form-check-out input{
+  border: none;
+  background-color: transparent;
+  width: 85%;
+}
+
+#booking-form-check-in input, #booking-form-check-out input:hover{
+  cursor: pointer;
+}
+
+#check-in-label, #check-out-label{
+  font-weight: bold;
+}
+
+#book-spot-submit-button{
+  width: 70%;
+  position: absolute;
+  top: 200px;
+}
+
+#booking-pricing-info{
+  width: 100%;
+}
+
+#current-checkin-checkout{
+  display: flex;
+  position: absolute;
+  top: 240px;
+  align-items: flex-start;
+  left: 25%;
+  width: 70%;
+  justify-content: flex-start;
+}
+
+#current-checkin-date, #current-checkout-date{
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#current-date-splitter{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#chosen-nights-price{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 300px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#booking-cleaning-fee{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 340px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#booking-service-fee{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 380px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#booking-owner-discount{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 420px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#total-price{
+  border-top: 1px solid black;
+  position: absolute;
+  bottom: 10px;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  font-size: large;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-pricing-labels{
+  margin-left: 3%;
+}
+
+.booking-pricing-amounts{
+  position:absolute;
+  right: 3%;
+}
+
+#booking-total-label, #final-total-amount{
+  font-weight: bold;
+}
+
+
 #each-spot-main-content{
   margin-top: 20px;
   width: 80%;
   margin-left: 14%;
-  height: 100vh;
-  padding-bottom: 50px;
+  height: fit-content;
+  padding-bottom: 200px;
+  min-height: 1500px;
 }
 
 #spot-header-labels{

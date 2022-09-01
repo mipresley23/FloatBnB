@@ -1,6 +1,6 @@
 /* TODO Add site wide styles */
 body{
-  height: auto;
+  height: 125vh;
   min-height: 1080px;
   margin-bottom: 30px;
 }
@@ -12,7 +12,6 @@ body{
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  margin-top: 50px;
   box-sizing: border-box;
 }
 
@@ -61,6 +60,8 @@ a:hover{
   position:fixed;
   bottom: 1px;
   width: 100%;
+  height: fit-content;
+  padding-top: 25px;
 }
 
 select{
