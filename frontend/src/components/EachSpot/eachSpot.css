@@ -233,7 +233,7 @@
 
 #spot-images-container{
   display: flex;
-  width:60%;
+  width:50%;
   height: 375px;
   margin-top: 50px;
 }
@@ -244,7 +244,7 @@
 
 #each-spot-image-one{
   height: 100%;
-  width: 100%;
+  width: 60%;
   margin: 0;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
