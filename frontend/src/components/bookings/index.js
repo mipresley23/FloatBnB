@@ -47,7 +47,7 @@ export default function Bookings() {
     }
     await dispatch(thunkCreateBooking(newBooking))
     window.alert('Congratulations on your upcoming Vacation!')
-    history.push(`/api/users/${sessionUser.id}`)
+    history.push(`/users/${sessionUser.id}`)
   }
   if (!bookingSelector) return null;
   return (
@@ -68,10 +68,10 @@ export default function Bookings() {
               <tbody key={booking.User && booking.id}>
                 <tr>
                   <td>
-                    <NavLink to={`/api/users/${booking.User && booking.User.id}`}>{booking.User && booking.User.username}</NavLink>
+                    <NavLink to={`/users/${booking.User && booking.User.id}`}>{booking.User && booking.User.username}</NavLink>
                   </td>
                   <td>
-                    <NavLink to={`/api/spots/${booking.spotId}`}>{booking.Spot && booking.Spot.name}</NavLink>
+                    <NavLink to={`/spots/${booking.spotId}`}>{booking.Spot && booking.Spot.name}</NavLink>
                   </td>
                   <td>{booking.startDate}</td>
                   <td>{booking.endDate}</td>

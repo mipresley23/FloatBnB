@@ -36,7 +36,7 @@
 //       marinaId
 //     }
 //     await dispatch(thunkCreateSpot(newSpot))
-//     history.push('/api/spots')
+//     history.push('/spots')
 //   }
 
 

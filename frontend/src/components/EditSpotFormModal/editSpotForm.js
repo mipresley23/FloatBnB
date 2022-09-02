@@ -49,7 +49,7 @@
 //       marinaId: 3
 //     }
 //     await dispatch(thunkEditSpot(newSpot))
-//     history.push(`/api/spots/${+id}`)
+//     history.push(`/spots/${+id}`)
 //     setShowForm(false);
 //   }
 
