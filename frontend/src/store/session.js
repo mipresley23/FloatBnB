@@ -30,8 +30,17 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-export const loginDemo = () => async(dispatch) => {
-  dispatch(setUser({id: 1, username: 'Leonardo', email: 'theblueone@turtles.com', createdAt: '2022-06-27T02:40:28.535Z', updatedAt: '2022-06-27T02:40:28.535Z'}))
+export const loginDemo = (email='theblueone@turtles.com', password='ImTheLeader') => async(dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'POST',
+    body: JSON.stringify({
+      credential: email,
+      password,
+    }),
+  });
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
 }
 
 
