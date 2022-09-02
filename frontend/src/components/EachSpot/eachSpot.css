@@ -208,7 +208,7 @@
   margin-left: 14%;
   height: fit-content;
   padding-bottom: 200px;
-  min-height: 1500px;
+  min-height: 1080px;
 }
 
 #spot-header-labels{
@@ -235,7 +235,7 @@
   display: flex;
   width:60%;
   height: 375px;
-  border-radius: 15px;
+  margin-top: 50px;
 }
 
 .each-spot-images{
@@ -244,7 +244,7 @@
 
 #each-spot-image-one{
   height: 100%;
-  width: 50%;
+  width: 100%;
   margin: 0;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -306,4 +306,69 @@
   list-style: none;
   color: red;
   padding: 0 0 0 0;
+}
+
+#spot-desc-section-container{
+  width: 50%;
+  margin-top: 125px;
+  height: 550px;
+  border: 1px solid black;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: lightcyan;
+}
+
+#spot-description-container{
+  width: 80%;
+  height: 50%;
+  margin-top: 20px;
+  border-bottom: 1px solid darkgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#spot-desc-header-container{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#spot-description-content{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 5px;
+}
+
+#spot-description-header, #spot-desc-host{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#spot-cover-container{
+  height: 25%;
+  width: 80%;
+  border-bottom: 1px solid darkgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#spot-cover-headers{
+  display: flex;
+  padding-top: 3%;
+}
+
+#spot-cover-header-one{
+  color: rgb(255, 186, 102);
+}
+
+#spot-cover-header-one, #spot-cover-header-two{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#spot-cover-description{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 2%;
 }

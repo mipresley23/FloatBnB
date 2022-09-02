@@ -6,6 +6,7 @@ import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../
 import { thunkGetImages } from "../../store/images";
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
+import ComingSoonImg from '../userProfile/nophoto.jpeg';
 import '../../index.css';
 import './eachSpot.css';
 
@@ -38,7 +39,7 @@ export default function EachSpot() {
 
   const spot = spots.find(spot => spot.id === +id);
   const image = images.find(image => image.id === +id);
-  const marina = marinas.find(marina => marina.id === spot.marinaId)
+  const marina = spot && marinas && marinas.find(marina => marina.id === spot.marinaId)
   console.log('marina: ', marina)
   console.log('spot', spot)
 
@@ -203,7 +204,7 @@ const startEnd = findDateRange(start, end)
 const bookingLength = startEnd.length - 1;
 
 
-if(!spot) return null;
+if(!spots) return null;
 if(!marina) return null;
 // if(!images) return null;
 
@@ -218,14 +219,14 @@ return(
         </div>
       </div>
       <div id="spot-images-container">
-        <img className='each-spot-images' id='each-spot-image-one' src={image && image.url} alt="spot"></img>
+        <img className='each-spot-images' id='each-spot-image-one' src={image ? image.url : ComingSoonImg} alt="spot"></img>
         <div id="spot-images-column-two">
-          <img className='each-spot-images' id='each-spot-image-two' src={image && image.url} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-three' src={image && image.url} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-two' src={image ? image.url : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-three' src={image ? image.url : ComingSoonImg} alt="spot"></img>
         </div>
         <div id="spot-images-column-three">
-          <img className='each-spot-images' id='each-spot-image-four' src={image && image.url} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-five' src={image && image.url} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-four' src={image ? image.url : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-five' src={image ? image.url : ComingSoonImg} alt="spot"></img>
         </div>
       </div>
       <div id="each-spot-button-container">
@@ -252,12 +253,15 @@ return(
         <button class='each-spot-buttons' id='edit-spot-submit-button' type="submit">Submit Edit</button>
         <button class='each-spot-buttons' id='edit-spot-cancel-button' type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
       </form>}
+      </section>
       <section className="booking-form-container">
           <form className="create-booking-form" onSubmit={handleBookingSubmit}>
             <ul id="booking-errors-list">
               {errors && errors.map(err => <li>{`${err}`}</li>)}
             </ul>
-            <h4 id="booking-form-price-per-night">${spot.price}/night</h4>
+            <div id="booking-form-price-headers">
+            <h3 id="booking-form-price-per-night">${spot.price}</h3>
+            </div>
             <div id="booking-form-label-inputs">
               <div id="booking-form-check-in">
                 <label id="check-in-label">Check In</label>
@@ -287,8 +291,7 @@ return(
               </div>
               <div id="chosen-nights-price">
                 {bookingStartDate && bookingEndDate && <p className='booking-pricing-labels'>${spot.price} x {bookingLength} nights</p>}
-                {bookingLength > 0 ? <p className='booking-pricing-amounts'>${spot.price * bookingLength}</p> :
-                <p className='booking-pricing-amounts'>$0</p>}
+                {bookingLength > 0 ? <p className='booking-pricing-amounts'>${spot.price * bookingLength}</p> : null}
               </div>
               <div id="booking-cleaning-fee">
                 <p className='booking-pricing-labels'>Cleaning Fee</p>
@@ -298,18 +301,36 @@ return(
                 <p className="booking-pricing-labels">Service Fee</p>
                 <p className="booking-pricing-amounts">$0</p>
               </div>
-              {correctUser() && <div id='booking-owner-discount'>
+              {bookingLength > 0 && correctUser() && <div id='booking-owner-discount'>
                   <p className="booking-pricing-labels">Owner Discount</p>
                   <p className="booking-pricing-amounts">-{spot.price * bookingLength}</p>
                 </div>}
               <div id="total-price">
                 <p className='booking-pricing-labels' id="booking-total-label">Total</p>
-                {bookingLength && !correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">${spot.price * bookingLength}</p> : bookingLength && correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">0</p> : <p className='booking-pricing-amounts' id="final-total-amount">0</p>}
+                {bookingLength > 0 && sessionUser && !correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">${spot.price * bookingLength}</p> : bookingLength > 0 && sessionUser && correctUser() ? <p className='booking-pricing-amounts' id="final-total-amount">0</p> : <p className='booking-pricing-amounts' id="final-total-amount">0</p>}
               </div>
             </div>
           </form>
         </section>
-      </section>
+        <div id="spot-desc-section-container">
+          <div id="spot-description-container">
+            <div id="spot-desc-header-container">
+            <h3 id="spot-description-header">{spot.name}</h3>
+            <h3 id='spot-desc-host'>Hosted by: {thisSpotsUser && thisSpotsUser.username}</h3>
+            </div>
+            <p id="spot-description-content">
+              Eventually, each spot will have its own description. For now, we've created this
+              generic description to fill in the space and make FloatBnB look good. Keep in mind FloatBnB is not a real rental site and none of these spots actually exist.
+            </p>
+          </div>
+          <div id="spot-cover-container">
+            <div id="spot-cover-headers">
+              <h3 id="spot-cover-header-one">Float</h3>
+              <h3 id="spot-cover-header-two">Cover</h3>
+            </div>
+              <p id="spot-cover-description">Every booking would include free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in if you could actually book any of these spots.</p>
+          </div>
+        </div>
     </div>
   </>
 )
