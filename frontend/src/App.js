@@ -18,10 +18,10 @@ import Footer from "./components/footer";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  const [isLoaded, setIsLoaded] = useState(true);
+  // useEffect(() => {
+  //   dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+  // }, [dispatch]);
 
   return (
     <BrowserRouter>
