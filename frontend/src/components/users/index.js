@@ -29,7 +29,7 @@ export default function Users() {
       {
         users && users.map(user => (
           <li key={user.id}>
-            <NavLink to={`/api/users/${user.id}`}>{user.username}</NavLink>
+            <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
           </li>
           ))
         }

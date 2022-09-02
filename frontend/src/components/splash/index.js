@@ -28,13 +28,13 @@ export default function Splash() {
     <>
       <div id="splash-main-content">
         <div id="navbar-links-container">
-          <NavLink className='nav-images' id='boat-nav-image-container' to='/api/spots'>
+          <NavLink className='nav-images' id='boat-nav-image-container' to='/spots'>
             <img id="spots-nav-image" src={require('./boat_image_forNav.png')} alt='view all spots'></img>
           </NavLink>
-          <NavLink className='nav-images' to='/api/bookings'>
+          <NavLink className='nav-images' to='/bookings'>
             <img id="bookings-nav-image" src={require('./booking_image_forNav.jpg')} alt='view all bookings'></img>
           </NavLink>
-          <NavLink className='nav-images' to='/api/users'>
+          <NavLink className='nav-images' to='/users'>
             <img id="users-nav-image" src={require('./users_image_forNav.jpg')} alt='all users'></img>
           </NavLink>
         </div>
@@ -44,7 +44,7 @@ export default function Splash() {
           newImages.map(image => (
             <div key={image.id} className="splash-image-containers">
               <h2 className="splash-image-title">{image.Spot && image.Spot.name}</h2>
-              <NavLink to={`/api/spots/${image.spotId}`}>
+              <NavLink to={`/spots/${image.spotId}`}>
                 <img id={`spot-image-${image.id}`} src={image.url} alt={``}/>
               </NavLink>
               <h3 className="splash-image-price">{image.Spot && `$${image.Spot.price}/night`}</h3>

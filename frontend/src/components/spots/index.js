@@ -76,7 +76,7 @@ export default function Spots() {
         <div className="spot-containers-container">
           {
             spots.map(spot => (
-              <NavLink to={`/api/spots/${spot.id}`}>
+              <NavLink to={`/spots/${spot.id}`}>
                 <div className="spot-card-containers">
                     <h2>{spot.name}</h2>
                     <h4>{`$${spot.price}/night`}</h4>

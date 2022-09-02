@@ -36,23 +36,23 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path='/api/users'>
+          <Route exact path='/users'>
             <Users />
           </Route>
-          <Route path='/api/users/:id'>
+          <Route path='/users/:id'>
             <UserProfile />
           </Route>
-          <Route exact path='/api/spots'>
+          <Route exact path='/spots'>
             <Spots />
             <CreateSpotForm />
           </Route>
-          <Route path='/api/spots/:id'>
+          <Route path='/spots/:id'>
             <EachSpot />
           </Route>
-          <Route path='/api/bookings'>
+          <Route path='/bookings'>
             <Bookings />
           </Route>
-          <Route path='/api/marinas'>
+          <Route path='/marinas'>
             <Marinas />
           </Route>
         </Switch>

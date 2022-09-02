@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
       {showMenu && (
         <ul className="profile-dropdown">
           <li>
-            <NavLink to={`/api/users/${user.id}`}>{user.username}</NavLink>
+            <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
           </li>
           <li id="profile-email">{user.email}</li>
           <li>

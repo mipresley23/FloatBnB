@@ -138,7 +138,7 @@ export default function EachSpot() {
     matchBooks && matchBooks.forEach((booking) => dispatch(thunkDeleteBooking(booking.id)))
     dispatch(thunkDeleteSpot(id))
     setBookings(Object.values(bookingSelector))
-    history.push('/api/spots')
+    history.push('/spots')
   }
 
 
@@ -186,7 +186,6 @@ const handleEditSubmit = async (e) => {
     marinaId: spot.marinaId
   }
   await dispatch(thunkEditSpot(newSpot))
-  // history.push(`/api/spots/${+id}`)
   setShowEditForm(false);
 }
 

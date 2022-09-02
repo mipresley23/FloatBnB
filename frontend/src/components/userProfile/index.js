@@ -93,7 +93,7 @@ if(!bookingArray) return null;
             <tr>
 
               <td className='spot-table-data' key={spot.id}>
-                <NavLink to={`/api/spots/${spot.id}`}>{spot.name}</NavLink>
+                <NavLink to={`/spots/${spot.id}`}>{spot.name}</NavLink>
               </td>
             </tr>
                 {bookings && sessionUser && correctUser() && <button value={spot.id} id='profile-delete-spot-button' type="button" onClick={handleDelete}>Delete Spot</button>}
