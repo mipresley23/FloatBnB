@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { thunkGetImages } from "../../store/images";
+import { thunkGetAllSpots } from "../../store/spots";
 import './splash.css';
 import '../../index.css';
 
 export default function Splash() {
 
   const dispatch = useDispatch()
-  const imageSelector = useSelector(state => state.images)
-  const [images, setImages] = useState('')
 
-  const newImages = []
-  for(let i = 0; i < images.length - 1; i++){
-    newImages.push(images[i]);
-  }
+  const [spots, setSpots] = useState([])
+
+  const spotSelector = useSelector(state => state.spots)
 
   useEffect(() => {
-    dispatch(thunkGetImages())
+    dispatch(thunkGetAllSpots())
   }, [dispatch])
 
   useEffect(() => {
-    setImages(Object.values(imageSelector))
-  }, [imageSelector])
+    setSpots(Object.values(spotSelector))
+  }, [spotSelector])
 
   return(
     <>
@@ -41,13 +38,13 @@ export default function Splash() {
         <h1 id="main-title">Welcome to FloatBnB</h1>
         <div className='images-container'>
         {
-          newImages.map(image => (
-            <div key={image.id} className="splash-image-containers">
-              <h2 className="splash-image-title">{image.Spot && image.Spot.name}</h2>
-              <NavLink to={`/spots/${image.spotId}`}>
-                <img id={`spot-image-${image.id}`} src={image.url} alt={``}/>
+          spots && spots.map(spot => (
+            <div key={spot.id} className="splash-image-containers">
+              <h2 className="splash-image-title">{spot.name}</h2>
+              <NavLink to={`/spots/${spot.id}`}>
+                <img id={`spot-image-${spot.id}`} src={spot.image} alt={``}/>
               </NavLink>
-              <h3 className="splash-image-price">{image.Spot && `$${image.Spot.price}/night`}</h3>
+              <h3 className="splash-image-price">{`$${spot.price}/night`}</h3>
             </div>
             ))
           }

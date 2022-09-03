@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { thunkGetAllSpots, thunkCreateSpot } from "../../store/spots";
 import { thunkGetMarinas } from "../../store/marinas";
-import { thunkGetImages } from "../../store/images";
 
 import './spots.css';
 import '../../index.css';
@@ -26,16 +25,6 @@ export default function Spots() {
   const [marinaId, setMarinaId] = useState(0);
   const [images, setImages] = useState([]);
   const [showCreateSpotForm, setShowCreateSpotForm] = useState(false);
-
-  useEffect(() => {
-    dispatch(thunkGetImages())
-  }, [dispatch])
-
-  useEffect(() => {
-    setImages(Object.values(imageSelector))
-  }, [imageSelector])
-
-
 
   useEffect(() => {
     dispatch(thunkGetMarinas())

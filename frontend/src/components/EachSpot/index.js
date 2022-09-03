@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
 import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../store/bookings";
-import { thunkGetImages } from "../../store/images";
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
+import { thunkGetReviews } from "../../store/reviews";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
 import '../../index.css';
 import './eachSpot.css';
@@ -27,18 +27,17 @@ export default function EachSpot() {
   const [bookings, setBookings] = useState([])
   const [marinas, setMarinas] = useState([]);
   const [users, setUsers] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [errors, setErrors] = useState([]);
 
-
+  const reviewSelector = useSelector(state => state.reviews);
   const userSelector = useSelector(state => state.users)
   const spotSelector = useSelector(state => state.spots);
-  const imageSelector = useSelector(state => state.images);
   const sessionUser =  useSelector(state => state.session.user);
   const bookingSelector = useSelector(state => state.bookings);
   const marinaSelector = useSelector(state => state.marinas);
 
   const spot = spots.find(spot => spot.id === +id);
-  const image = images.find(image => image.id === +id);
   const marina = spot && marinas && marinas.find(marina => marina.id === spot.marinaId)
   console.log('marina: ', marina)
   console.log('spot', spot)
@@ -91,6 +90,16 @@ export default function EachSpot() {
     }
   }
 
+  console.log('reviews: ', reviews)
+
+  useEffect(() => {
+    dispatch(thunkGetReviews())
+  }, [dispatch])
+
+  useEffect(() => {
+    setReviews(Object.values(reviewSelector))
+  }, [reviewSelector])
+
   useEffect(() => {
     dispatch(thunkGetAllUsers())
   },[dispatch])
@@ -106,15 +115,6 @@ export default function EachSpot() {
   useEffect(() => {
     setSpots(Object.values(spotSelector))
   }, [spotSelector])
-
-
-  useEffect(() => {
-    dispatch(thunkGetImages())
-  }, [dispatch])
-
-  useEffect(() => {
-    setImages(Object.values(imageSelector))
-  }, [imageSelector])
 
   useEffect(() => {
     dispatch(thunkGetBookings())
@@ -218,14 +218,14 @@ return(
         </div>
       </div>
       <div id="spot-images-container">
-        <img className='each-spot-images' id='each-spot-image-one' src={image ? image.url : ComingSoonImg} alt="spot"></img>
+        <img className='each-spot-images' id='each-spot-image-one' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
         <div id="spot-images-column-two">
-          <img className='each-spot-images' id='each-spot-image-two' src={image ? image.url : ComingSoonImg} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-three' src={image ? image.url : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-two' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-three' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
         </div>
         <div id="spot-images-column-three">
-          <img className='each-spot-images' id='each-spot-image-four' src={image ? image.url : ComingSoonImg} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-five' src={image ? image.url : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-four' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-five' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
         </div>
       </div>
       <div id="each-spot-button-container">
@@ -317,10 +317,7 @@ return(
             <h3 id="spot-description-header">{spot.name}</h3>
             <h3 id='spot-desc-host'>Hosted by: {thisSpotsUser && thisSpotsUser.username}</h3>
             </div>
-            <p id="spot-description-content">
-              Eventually, each spot will have its own description. For now, we've created this
-              generic description to fill in the space and make FloatBnB look good. Keep in mind FloatBnB is not a real rental site and none of these spots actually exist.
-            </p>
+            <p id="spot-description-content">{spot.description}</p>
           </div>
           <div id="spot-cover-container">
             <div id="spot-cover-headers">
@@ -329,6 +326,19 @@ return(
             </div>
               <p id="spot-cover-description">Every booking would include free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in if you could actually book any of these spots.</p>
           </div>
+        </div>
+        <div id="all-reviews-container">
+          {
+            reviews && reviews.length > 0 ? reviews.map(review => (
+              <div id="each-review-container">
+                <div id="each-review-header">
+                  <h3>{review.user.username}</h3>
+                  <h4>{review.rating}</h4>
+                </div>
+                <p>{review.content}</p>
+              </div>
+            )) : <h3>Uh Oh. This Listing doesn't have any reviews yet.</h3>
+          }
         </div>
     </div>
   </>
