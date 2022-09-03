@@ -26,6 +26,17 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 256]
       }
     },
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 500]
+      }
+    },
+    profileImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
@@ -53,6 +64,9 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     User.hasMany(models.Booking, { foreignKey: 'userId' });
     User.hasMany(models.Spot, { foreignKey: 'userId' });
+    User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'CASCADE', hooks:true })
+    const columnMapping = { through: 'Favorites', otherKey: 'spotId', foreignKey: 'userId' }
+    User.belongsToMany(models.Spot, columnMapping)
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
@@ -83,11 +97,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, bio, profileImage, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
+      bio,
+      profileImage,
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);

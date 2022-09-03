@@ -20,10 +20,12 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
 
 
 router.post('/', asyncHandler(async (req, res, next) => {
-    const { name, price, userId, marinaId } = req.body;
+    const { name, price, image, description, userId, marinaId } = req.body;
     const spot = await Spot.create({
        name,
        price,
+       image,
+       description,
        userId,
        marinaId
      });
@@ -33,10 +35,12 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
 router.put('/:id(\\d+)', asyncHandler(async(req, res) => {
   const spotEdit = await Spot.findByPk(req.params.id);
-  const {name, price, userId, marinaId} = req.body;
+  const {name, price, image, description, userId, marinaId} = req.body;
   const spot = await spotEdit.update({
     name,
     price,
+    image,
+    description,
     userId,
     marinaId
   })
