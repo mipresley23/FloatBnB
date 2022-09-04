@@ -5,9 +5,11 @@ import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from
 import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../store/bookings";
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
-import { thunkGetReviews } from "../../store/reviews";
+import { thunkGetReviews, thunkDeleteReview } from "../../store/reviews";
 import SpotReviewModal from "../spotReviewModal/spotReviewModal";
+import EditReviewModal from "../editReviewModal/editReviewModal";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
+import FilledStar from '../assets/star_filled.png'
 import '../../index.css';
 import './eachSpot.css';
 
@@ -65,11 +67,14 @@ export default function EachSpot() {
 
   const thisSpotsReviews = reviews && reviews.filter(review => review.spotId === +id)
 
-  const reviewsUsers = []
+  let ratingSum = 0;
   for(let i = 0; i < thisSpotsReviews.length; i++){
     const review = thisSpotsReviews[i]
-    reviewsUsers.push(review.User)
+    const rating = review.rating
+    ratingSum += rating
   }
+
+  const averageRating = (ratingSum / thisSpotsReviews.length).toFixed(2)
 
 
   const formatStartEndDate = (bookingDate) => {
@@ -99,8 +104,6 @@ export default function EachSpot() {
       realRange.push(ele)
     }
   }
-
-  console.log('reviews: ', reviews)
 
   useEffect(() => {
     dispatch(thunkGetReviews())
@@ -211,6 +214,11 @@ if(bookingEndDate){
 
 const startEnd = findDateRange(start, end)
 const bookingLength = startEnd.length - 1;
+
+const handleDeleteReview = async(e) => {
+  e.preventDefault()
+  await dispatch(thunkDeleteReview(e.target.value))
+}
 
 
 if(!spots) return null;
@@ -340,7 +348,11 @@ return(
         </div>
         <div id="all-reviews-container">
           {sessionUser && <SpotReviewModal spot={spot} />}
+          <div id="review-rating-total">
+            <img id='total-rating-star' src={FilledStar} alt='average rating'/>
+            <h3 id="total-rating-score">{averageRating}</h3>
           <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3>
+          </div>
           {
             thisSpotsReviews && thisSpotsReviews.length > 0 ? thisSpotsReviews.map(review => (
               <div id="each-review-container">
@@ -348,6 +360,10 @@ return(
                   {review.User && <h3 id="each-review-user">{review.User.username}</h3>}
                   <h4 id="each-review-rating">{review.rating}/5</h4>
                 </div>
+                {sessionUser && sessionUser.id === review.userId ? <div id="each-review-edit-delete-buttons">
+                  <button id="each-review-delete-button" value={review.id} onClick={handleDeleteReview}>Delete</button>
+                  <EditReviewModal review={review}/>
+                </div> : null}
                 <p>{review.content}</p>
               </div>
             )) : <h3>Uh Oh. This Listing doesn't have any reviews yet.</h3>

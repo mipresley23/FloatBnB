@@ -55,7 +55,8 @@ export const thunkCreateReview = (review) => async(dispatch) => {
 }
 
 export const thunkEditReview = (review) => async(dispatch) => {
-  const { constent, rating, userId, spotId } = review;
+  console.log('thunk edit review: ', review)
+  // const { constent, rating, userId, spotId } = review;
   const res = await csrfFetch(`/api/reviews/${review.id}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json" },
@@ -74,7 +75,7 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
   })
   const data = await res.json();
   dispatch(actionDeleteReview(data))
-  return res;
+  return data;
 }
 
 
@@ -96,7 +97,8 @@ const reviewReducer = (state = {}, action) => {
       return newState
 
     case DELETE_REVIEW:
-      const deleteReviewId = action.review.id
+      console.log('delete reducer action: ', action)
+      const deleteReviewId = action.reviewId.id
       delete newState[deleteReviewId]
       return newState
 
