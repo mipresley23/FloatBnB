@@ -20,6 +20,7 @@ export default function UserProfile() {
   const sessionUser = useSelector(state => state.session.user);
 
   const user = users && users.find(user => user.id === +id)
+  console.log('user: ', user)
   const spotArray = spots && spots.filter(spot => spot.userId === +id)
 
 
@@ -74,80 +75,12 @@ console.log('bookingArray', bookingArray);
   }
 if(!bookingArray) return null;
   return (
-    <div className="main">
-      <h1>{`${user && user.username}`}</h1>
-      <img id="profile-img" src={require('./nophoto.jpeg')} alt='profile picture'/>
-      <div className="users-spots-container">
-        <h3>{`${user && user.username}'s spots`}</h3>
-        {/* <img src="img.jpg" alt='profile picture'/> */}
-        <table>
-          <thead>
-            <tr>
-              <th>Spot</th>
-              <th></th>
-            </tr>
-          </thead>
-          {
-            spotArray.map(spot => (
-          <tbody>
-            <tr>
-
-              <td className='spot-table-data' key={spot.id}>
-                <NavLink to={`/spots/${spot.id}`}>{spot.name}</NavLink>
-              </td>
-            </tr>
-                {bookings && sessionUser && correctUser() && <button value={spot.id} id='profile-delete-spot-button' type="button" onClick={handleDelete}>Delete Spot</button>}
-          </tbody>
-              ))
-            }
-        </table>
+    <>
+      <div id="profile-user-information">
+        <h2 id="profile-user-name">{user.username}</h2>
+        <img id="profile-user-image" src={user.profileImage} alt={user.username}/>
+        <p id="profile-user-bio">{user.bio}</p>
       </div>
-      <div className="users-bookings-container">
-        <h3>{`${user && user.username}'s bookings`}</h3>
-        {bookingArray && <table className="users-bookings-table">
-          <thead>
-            <tr>
-              <th>Spot</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-            </tr>
-          </thead>
-            {bookingArray && bookingArray.map(booking => (
-              <tbody>
-                <tr>
-                  <td>{booking.Spot && booking.Spot.name}</td>
-                  <td>{booking.startDate}</td>
-                  <td>{booking.endDate}</td>
-                  {sessionUser && correctUser() && <button id='users-booking-delete-button' onClick={() => dispatch(thunkDeleteBooking(booking.id))}>Delete</button>}
-                </tr>
-              </tbody>
-            ))}
-        </table>
-          }
-      </div>
-      {/* <div className='footer'>
-        <a href='https://expressjs.com/'>
-          <img className='footer-images' id='express-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
-        </a>
-        <a href='https://www.sequelize.org/'>
-          <img className='footer-images' id='sequelize-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" />
-        </a>
-        <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript'>
-          <img className='footer-images' id='javascript-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
-        </a>
-        <a href='https://www.reactjs.org/'>
-          <img className='footer-images' id='react-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
-        </a>
-        <a href='https://www.redux.js.org/'>
-          <img className='footer-images' id='redux-svg' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" />
-        </a>
-        <a href='https://github.com/mipresley23'>
-          <img className='footer-images' id='github-img' src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg'/>
-        </a>
-        <a href='https://www.linkedin.com/in/michael-presley-96729b235/'>
-          <img className='footer-images' id='linkedin-img' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" />
-        </a>
-      </div> */}
-    </div>
+    </>
   )
 }
