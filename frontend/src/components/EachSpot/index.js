@@ -9,7 +9,8 @@ import { thunkGetReviews, thunkDeleteReview } from "../../store/reviews";
 import SpotReviewModal from "../spotReviewModal/spotReviewModal";
 import EditReviewModal from "../editReviewModal/editReviewModal";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
-import FilledStar from '../assets/star_filled.png'
+import FilledStar from '../assets/star_filled.png';
+import DeleteIcon from '../assets/delete_icon.png';
 import '../../index.css';
 import './eachSpot.css';
 
@@ -18,7 +19,7 @@ export default function EachSpot() {
   const history = useHistory();
   const {id} = useParams()
 
-  // const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [spotName, setSpotName] = useState();
   const [spotPrice, setSpotPrice] = useState();
@@ -347,7 +348,8 @@ return(
           </div>
         </div>
         <div id="all-reviews-container">
-          {sessionUser && <SpotReviewModal spot={spot} />}
+        {!showModal && <button id="create-review-button" onClick={() => setShowModal(true)}>Leave Review</button>}
+          {sessionUser && showModal && <SpotReviewModal showModal={showModal} setShowModal={setShowModal} spot={spot} />}
           <div id="review-rating-total">
             <img id='total-rating-star' src={FilledStar} alt='average rating'/>
             <h3 id="total-rating-score">{averageRating}</h3>
@@ -361,8 +363,8 @@ return(
                   <h4 id="each-review-rating">{review.rating}/5</h4>
                 </div>
                 {sessionUser && sessionUser.id === review.userId ? <div id="each-review-edit-delete-buttons">
-                  <button id="each-review-delete-button" value={review.id} onClick={handleDeleteReview}>Delete</button>
-                  <EditReviewModal review={review}/>
+                    <input type='image' src={DeleteIcon} alt='' id="each-review-delete-button" value={review.id} onClick={handleDeleteReview}/>
+                    <EditReviewModal review={review}/>
                 </div> : null}
                 <p>{review.content}</p>
               </div>

@@ -4,6 +4,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { thunkCreateReview, thunkGetReviews } from "../../store/reviews";
 import FilledStar from '../assets/star_filled.png'
 import EmptyStar from '../assets/star_unfilled.png'
+import CloseButton from '../assets/close_x_icon.png';
+import '../../context/ReviewModal.css'
 
 export default function CreateReview({spot, setShowModal}){
 
@@ -42,6 +44,8 @@ export default function CreateReview({spot, setShowModal}){
     <>
       <div id="create-review-form-container">
         <form id="create-review-form" onSubmit={handleReviewSubmit}>
+        <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
+          <h3 id="review-spot-title">{spot.name}</h3>
           <div id="rating-input-container">
             <img className="review-form-rating-imgs" src={rating > 0 ? FilledStar : EmptyStar} onClick={() => setRating(1)}/>
             <img className="review-form-rating-imgs" src={rating > 1 ? FilledStar : EmptyStar} onClick={() => setRating(2)}/>
@@ -56,7 +60,7 @@ export default function CreateReview({spot, setShowModal}){
               value={content}
               onChange={updateContent}
               />
-          <button type="submit">Submit</button>
+          <button id='review-form-submit-button' type="submit">Submit</button>
         </form>
       </div>
     </>

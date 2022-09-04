@@ -4,10 +4,13 @@ import { useHistory, useParams } from "react-router-dom";
 import { thunkEditReview, thunkGetReviews } from "../../store/reviews";
 import FilledStar from '../assets/star_filled.png'
 import EmptyStar from '../assets/star_unfilled.png'
+import CloseButton from '../assets/close_x_icon.png';
 
 export default function EditReview({review, setShowModal}) {
   const history = useHistory()
   const dispatch = useDispatch();
+
+  const spot = review.Spot
 
   const [reviewId, setReviewId] = useState(review?.id)
   const [content, setContent] = useState(review?.content)
@@ -34,11 +37,13 @@ export default function EditReview({review, setShowModal}) {
     await dispatch(thunkGetReviews())
     setShowModal(false)
   }
-
+  if(!spot) return null;
   return(
     <>
       <div id="create-review-form-container">
         <form id="create-review-form" onSubmit={handleUpdateReview}>
+        <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
+        <h3 id="review-spot-title">{spot.name}</h3>
           <div id="rating-input-container">
             <img className="review-form-rating-imgs" src={rating > 0 ? FilledStar : EmptyStar} onClick={() => setRating(1)}/>
             <img className="review-form-rating-imgs" src={rating > 1 ? FilledStar : EmptyStar} onClick={() => setRating(2)}/>
@@ -52,7 +57,7 @@ export default function EditReview({review, setShowModal}) {
               value={content}
               onChange={updateContent}
               />
-          <button type="submit">Submit</button>
+          <button id='review-form-submit-button' type="submit">Submit</button>
         </form>
       </div>
     </>
