@@ -26,10 +26,10 @@ const actionUpdateReview = (review) => {
   }
 }
 
-const actionDeleteReview = (review) => {
+const actionDeleteReview = (reviewId) => {
   return {
     type: DELETE_REVIEW,
-    review
+    reviewId
   }
 }
 
@@ -37,6 +37,43 @@ export const thunkGetReviews = (reviews) => async(dispatch) => {
   const res = await csrfFetch('/api/reviews');
   const reviews = await res.json();
   dispatch(actionGetReviews(reviews));
+  return res;
+}
+
+export const thunkCreateReview = (review) => async(dispatch) => {
+  const {content, rating, userId, spotId} = review;
+  const res = await csrfFetch('/api/reviews/new', {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(review)
+  });
+  if(res.ok){
+    const review = await res.json()
+    dispatch(actionCreateReview(review))
+    return res;
+  }
+}
+
+export const thunkEditReview = (review) => async(dispatch) => {
+  const { constent, rating, userId, spotId } = review;
+  const res = await csrfFetch(`/api/reviews/${review.id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json" },
+    body: JSON.stringify(review)
+  });
+  if(res.ok){
+    const review = await res.json();
+    dispatch(actionUpdateReview(review));
+    return res;
+  }
+}
+
+export const thunkDeleteReview = (reviewId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE"
+  })
+  const data = await res.json();
+  dispatch(actionDeleteReview(data))
   return res;
 }
 
@@ -49,6 +86,19 @@ const reviewReducer = (state = {}, action) => {
         newState[review.id] = review;
       });
       return newState;
+
+    case CREATE_REVIEW:
+      newState[action.review.id] = action.review
+      return newState
+
+    case UPDATE_REVIEW:
+      newState[action.review.id] = action.review
+      return newState
+
+    case DELETE_REVIEW:
+      const deleteReviewId = action.review.id
+      delete newState[deleteReviewId]
+      return newState
 
     default:
       return state;

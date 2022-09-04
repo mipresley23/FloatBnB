@@ -6,6 +6,7 @@ import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
 import { thunkGetReviews } from "../../store/reviews";
+import SpotReviewModal from "../spotReviewModal/spotReviewModal";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
 import '../../index.css';
 import './eachSpot.css';
@@ -61,6 +62,15 @@ export default function EachSpot() {
   spotsWithBookings && spotsWithBookings.forEach(ele => {
     if(ele[0] === +id) thisSpotsBookings.push(ele)
   })
+
+  const thisSpotsReviews = reviews && reviews.filter(review => review.spotId === +id)
+
+  const reviewsUsers = []
+  for(let i = 0; i < thisSpotsReviews.length; i++){
+    const review = thisSpotsReviews[i]
+    reviewsUsers.push(review.User)
+  }
+
 
   const formatStartEndDate = (bookingDate) => {
     const dateArr = bookingDate.split('-')
@@ -205,6 +215,7 @@ const bookingLength = startEnd.length - 1;
 
 if(!spots) return null;
 if(!marina) return null;
+
 // if(!images) return null;
 
 return(
@@ -328,12 +339,14 @@ return(
           </div>
         </div>
         <div id="all-reviews-container">
+          {sessionUser && <SpotReviewModal spot={spot} />}
+          <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3>
           {
-            reviews && reviews.length > 0 ? reviews.map(review => (
+            thisSpotsReviews && thisSpotsReviews.length > 0 ? thisSpotsReviews.map(review => (
               <div id="each-review-container">
                 <div id="each-review-header">
-                  <h3>{review.user.username}</h3>
-                  <h4>{review.rating}</h4>
+                  {review.User && <h3 id="each-review-user">{review.User.username}</h3>}
+                  <h4 id="each-review-rating">{review.rating}/5</h4>
                 </div>
                 <p>{review.content}</p>
               </div>
