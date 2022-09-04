@@ -81,12 +81,14 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 };
 
 export const thunkEditSpot = (spot, spotId) => async (dispatch) => {
-  const { name, price, userId, marinaId } = spot;
+  const { name, price, image, description, userId, marinaId } = spot;
   const res = await csrfFetch(`/api/spots/${spot.id}`, {
     method: "PUT",
     body: JSON.stringify({
       name,
       price,
+      image,
+      description,
       userId,
       marinaId
     })
