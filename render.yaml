@@ -11,11 +11,11 @@ services:
     envVars:
       - key: JWT_EXPIRES_IN # Imported from Heroku app
         value: 604800
-      # - key: DATABASE_URL # Render PostgreSQL database
-      #   fromDatabase:
-      #     name: postgresql-lively-29671
-      #     property: connectionString
+      - key: DATABASE_URL # Render PostgreSQL database
+        fromDatabase:
+          name: postgresql-lively-29671
+          property: connectionString
 
 databases: # Render PostgreSQL database
-  # - name: postgresql-lively-29671
-  #   ipAllowList: [] # only allow internal connections
+  - name: postgresql-lively-29671
+    ipAllowList: [] # only allow internal connections
