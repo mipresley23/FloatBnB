@@ -348,12 +348,11 @@ return(
           </div>
         </div>
         <div id="all-reviews-container">
-        {!showModal && <button id="create-review-button" onClick={() => setShowModal(true)}>Leave Review</button>}
-          {sessionUser && showModal && <SpotReviewModal showModal={showModal} setShowModal={setShowModal} spot={spot} />}
           <div id="review-rating-total">
             <img id='total-rating-star' src={FilledStar} alt='average rating'/>
-            <h3 id="total-rating-score">{averageRating}</h3>
+            <h3 id="total-rating-score">{averageRating !== 'NaN' ? averageRating : 0}</h3>
           <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3>
+          {sessionUser && <SpotReviewModal spot={spot} />}
           </div>
           {
             thisSpotsReviews && thisSpotsReviews.length > 0 ? thisSpotsReviews.map(review => (
@@ -368,7 +367,7 @@ return(
                 </div> : null}
                 <p>{review.content}</p>
               </div>
-            )) : <h3>Uh Oh. This Listing doesn't have any reviews yet.</h3>
+            )) : <h3 id="review-no-reviews">This Listing doesn't have any reviews yet.</h3>
           }
         </div>
     </div>

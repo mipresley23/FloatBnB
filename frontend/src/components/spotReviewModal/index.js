@@ -60,7 +60,7 @@ export default function CreateReview({spot, setShowModal}){
               value={content}
               onChange={updateContent}
               />
-          <button id='review-form-submit-button' type="submit">Submit</button>
+          <button id='review-form-submit-button' type="submit">Submit Review</button>
         </form>
       </div>
     </>

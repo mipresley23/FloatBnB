@@ -15,6 +15,7 @@
   left: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, .25);
+  backdrop-filter: blur(2px);
 }
 
 #review-modal-content {
@@ -23,11 +24,22 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background-color:rgba(255, 255, 255, 1);
+  background-color:beige;
   padding: 20px;
   border-radius: 10px;
   height: 550px;
   width: 500px;
+}
+
+#create-review-button{
+  height: 40px;
+  margin: 2%;
+  width: 10%;
+  border-radius: 15px;
+}
+
+#create-review-button:hover{
+  background-color: rgb(255, 186, 102);
 }
 
 #rating-input-container{
@@ -45,6 +57,13 @@
   position: absolute;
   bottom: 20px;
   left: 20%;
+  border-radius: 12px;
+  background-color: lightcyan;
+}
+
+#review-form-submit-button:hover{
+  background-color: darkcyan;
+  color:white;
 }
 
 #create-review-content{

@@ -83,7 +83,7 @@ module.exports = {
           {
             username: 'Karma',
             email: 'karma_akabane@classe.com',
-            bio: "This is a sample bio. A better, more personalized bio is coming soon.",
+            bio: "Full Name: Karma Akabane\nBirthday: Dec. 25\nGender: Male\nHeight: 5'9\"\nBlood Type: AB\nWeight: 132 lbs\nOccupation: Student\nLikes: Being The Best, Vacations, Strawberry Milk\nDislikes: Not Being The Best/Losing",
             profileImage: 'https://i.pinimg.com/564x/b0/f0/b5/b0f0b5ae7d715d19345503fdbfd7fc4c.jpg',
             hashedPassword: bcrypt.hashSync('Demon8')
           },
