@@ -15,14 +15,15 @@ root{
 }
 .footer{
   background-color: bisque;
-  position: sticky;
-  bottom: 10px;
+  position: absolute;
+  bottom: 0;
   display: inline-flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   z-index: 1000;
+
 }
 
 .footer-images{
@@ -43,6 +44,7 @@ root{
 button{
   cursor: pointer;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 12px;
 }
 
 input{
@@ -62,6 +64,7 @@ a:not(.nav-images, .tech-links){
 
 a:hover{
   background-color: lightskyblue;
+  border-radius: 15px;
 }
 
 

@@ -233,7 +233,8 @@
 
 #spot-images-container{
   display: flex;
-  width:50%;
+  width:fit-content;
+  max-width: 70%;
   height: 375px;
   margin-top: 50px;
 }
