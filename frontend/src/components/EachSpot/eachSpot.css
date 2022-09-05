@@ -419,15 +419,6 @@
   margin-right: 20px;
 }
 
-#create-review-button{
-  height: 40px;
-  margin: 2%;
-}
-
-#create-review-button:hover{
-  background-color: rgb(255, 186, 102);
-}
-
 #each-review-delete-button{
   height:20px;
   width: 20px;
@@ -470,4 +461,9 @@
 
 .modal-cancel-buttons:hover{
   background-color: lightgray;
+}
+
+#review-no-reviews{
+  text-align: center;
+  padding-bottom: 10px;
 }

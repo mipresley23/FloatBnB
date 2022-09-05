@@ -74,12 +74,39 @@ console.log('bookingArray', bookingArray);
     return sessionUser && sessionUser.id === +id;
   }
 if(!bookingArray) return null;
+if(!user) return null;
   return (
     <>
       <div id="profile-user-information">
-        <h2 id="profile-user-name">{user.username}</h2>
-        <img id="profile-user-image" src={user.profileImage} alt={user.username}/>
+        <div id="profile-name-image-container">
+          <h2 id="profile-user-name">{user.username}</h2>
+          <img id="profile-user-image" src={user.profileImage} alt={user.username}/>
+        </div>
         <p id="profile-user-bio">{user.bio}</p>
+      </div>
+      {spotArray && spotArray.length > 0 ? <div id="user-spots-container">
+        <h3 id="user-spots-header">Check out {user.username}'s Listings!</h3>
+        {
+          spotArray.map(spot => (
+              <NavLink id="each-user-spot-container" to={`/spots/${spot.id}`}>
+                <h4 id="each-user-spot-name">{spot.name}</h4>
+                <img id="each-user-spot-image" src={spot.image} alt={spot.name}/>
+                <p id="each-user-spot-price">${spot.price}/night</p>
+              </NavLink>
+          ))
+        }
+      </div> : null}
+        <div id="user-bookings-container">
+        <h3 id="user-bookings-header">{user.username}'s booked listings</h3>
+        {
+          bookingArray && bookingArray.length > 0 ? bookingArray.map(booking => (
+            <div id="each-user-booking-container">
+              <h3 id="booking-spot">{booking.Spot.name}</h3>
+              <img id="booking-image" src={booking.Spot.image} alt=''/>
+              <p id='booking-dates'>{booking.startDate} - {booking.endDate}</p>
+            </div>
+          )) : <h3 id="no-bookings-message">{user.username} doesn't currently have any listings booked.</h3>
+        }
       </div>
     </>
   )

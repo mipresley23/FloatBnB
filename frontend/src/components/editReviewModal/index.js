@@ -57,7 +57,7 @@ export default function EditReview({review, setShowModal}) {
               value={content}
               onChange={updateContent}
               />
-          <button id='review-form-submit-button' type="submit">Submit</button>
+          <button id='review-form-submit-button' type="submit">Edit Review</button>
         </form>
       </div>
     </>
