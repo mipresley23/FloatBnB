@@ -101,8 +101,8 @@ if(!user) return null;
         {
           bookingArray && bookingArray.length > 0 ? bookingArray.map(booking => (
             <div id="each-user-booking-container">
-              <h3 id="booking-spot">{booking.Spot.name}</h3>
-              <img id="booking-image" src={booking.Spot.image} alt=''/>
+              <h3 id="booking-spot">{booking.Spot?.name}</h3>
+              <img id="booking-image" src={booking.Spot?.image} alt=''/>
               <p id='booking-dates'>{booking.startDate} - {booking.endDate}</p>
             </div>
           )) : <h3 id="no-bookings-message">{user.username} doesn't currently have any listings booked.</h3>
