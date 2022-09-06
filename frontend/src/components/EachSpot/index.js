@@ -13,6 +13,7 @@ import FilledStar from '../assets/star_filled.png';
 import DeleteIcon from '../assets/delete_icon.png';
 import '../../index.css';
 import './eachSpot.css';
+import EditSpotFormModal from "../EditSpotFormModal";
 
 export default function EachSpot() {
   const dispatch = useDispatch()
@@ -188,21 +189,6 @@ export default function EachSpot() {
     setShowBookingForm(false);
   }
 
-
-
-const handleEditSubmit = async (e) => {
-  e.preventDefault();
-  const newSpot = {
-    id: id,
-    name: spotName,
-    price: spotPrice,
-    userId: sessionUser.id,
-    marinaId: spot.marinaId
-  }
-  await dispatch(thunkEditSpot(newSpot))
-  setShowEditForm(false);
-}
-
 let start;
 if(bookingStartDate){
   start = new Date(bookingStartDate)
@@ -224,8 +210,6 @@ const handleDeleteReview = async(e) => {
 
 if(!spots) return null;
 if(!marina) return null;
-
-// if(!images) return null;
 
 return(
   <>
@@ -250,29 +234,10 @@ return(
       </div>
       <div id="each-spot-button-container">
         {/* <button class='each-spot-buttons' id='back-to-spots-button' type="button" onClick={handleReloadSpots}>Back to Spots</button> */}
-        {sessionUser && correctUser() && <div id="edit-delete-button-container"><button class='each-spot-buttons' type="button" onClick={handleEditSpotButton}>Edit this Spot</button>
+        {sessionUser && correctUser() && <div id="edit-delete-button-container">
+        <EditSpotFormModal spot={spot} />
         <button class='each-spot-buttons' type="button" onClick={handleDelete}>Delete Spot</button></div>}
       </div>
-      <section className="edit-spot-form-container">
-      {!ShowBookingForm && showEditForm && <form className="edit-spot-form" onSubmit={handleEditSubmit}>
-        <input
-          type="text"
-          placeholder={spot.name}
-          value={spotName}
-          defaultValue={spot.name}
-          required
-          onChange={(e) => setSpotName(e.target.value)} />
-        <input
-          type="number"
-          placeholder={spot.price}
-          defaultValue={spot.price}
-          min="0"
-          value={spotPrice}
-          onChange={(e) => setSpotPrice(e.target.value)} />
-        <button class='each-spot-buttons' id='edit-spot-submit-button' type="submit">Submit Edit</button>
-        <button class='each-spot-buttons' id='edit-spot-cancel-button' type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
-      </form>}
-      </section>
       <section className="booking-form-container">
           <form className="create-booking-form" onSubmit={handleBookingSubmit}>
             <ul id="booking-errors-list">
@@ -370,7 +335,7 @@ return(
             )) : <h3 id="review-no-reviews">This Listing doesn't have any reviews yet.</h3>
           }
         </div>
-    </div>
+      </div>
   </>
 )
 
