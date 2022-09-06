@@ -44,7 +44,6 @@ function App() {
           </Route>
           <Route exact path='/spots'>
             <Spots />
-            <CreateSpotForm />
           </Route>
           <Route path='/spots/:id'>
             <EachSpot />
