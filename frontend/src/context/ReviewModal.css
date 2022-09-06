@@ -91,3 +91,81 @@
   top: 30px;
   left: 10%;
 }
+
+#create-spot-modal-button{
+  position: absolute;
+  top:40px;
+  left: 47%;
+  height: 30px;
+  background-color: lightcyan;
+}
+
+#create-spot-modal-button:hover{
+  background-color: rgb(174, 254, 254);
+}
+
+#create-spot-form-container{
+  height: 80%;
+  width: 90%;
+}
+
+#create-spot-form-header{
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+#create-spot-form{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.create-spot-label-input-containers{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-spot-form-labels{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.required::after{
+  content: '*';
+  color: red;
+}
+
+.create-spot-form-inputs{
+  width: 60%;
+  height: 30px;
+  padding: 1%;
+  border-radius: 12px;
+  background-color: lightcyan;
+}
+
+.create-spot-form-inputs:focus{
+  background-color: rgb(174, 254, 254);
+}
+
+#create-spot-form-description{
+  height: 50px;
+  overflow-y:auto;
+  resize: none;
+}
+
+#create-spot-submit-button{
+  width: 60%;
+  height: 30px;
+  margin-bottom: 20px;
+  align-self: center;
+  background-color: lightcyan;
+}
+
+#create-spot-submit-button:hover{
+  background-color: rgb(174, 254, 254);
+}

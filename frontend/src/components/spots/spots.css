@@ -1,29 +1,4 @@
 
-.spot-form-container{
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 200px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 10px;
-  left: 54%;
-}
-
-.create-spot-form{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background-color: lightgreen;
-  margin-bottom: 50px;
-  height: 140px;
-  width: 100%;
-  border: 3px solid black;
-  align-items: center;
-  border-radius: 12px;
-}
-
 .spot-card-containers{
   border: 1px solid black;
   margin: 10px;
