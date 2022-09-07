@@ -17,6 +17,15 @@ export default function EditReview({review, setShowModal}) {
   const [rating, setRating] = useState(review?.rating)
   const [userId, setUserId] = useState(review?.userId)
   const [spotId, setSpotId] = useState(review?.spotId)
+  const [errors, setErrors] = useState([])
+  const [showErrors, setShowErrors] = useState(false);
+
+  useEffect(() => {
+    const errors = []
+    if(!content) errors.push('Review content is required.')
+    if(content.length > 1000) errors.push('Review content must be 1000 characters or less.')
+    setErrors(errors)
+  }, [content])
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -33,14 +42,19 @@ export default function EditReview({review, setShowModal}) {
       userId,
       spotId
     }
-    await dispatch(thunkEditReview(review))
-    await dispatch(thunkGetReviews())
-    setShowModal(false)
+    if(!errors.length){
+      await dispatch(thunkEditReview(review))
+      await dispatch(thunkGetReviews())
+      setShowModal(false)
+    }
   }
   if(!spot) return null;
   return(
     <>
       <div id="create-review-form-container">
+      {showErrors && <ul id="review-errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
         <form id="create-review-form" onSubmit={handleUpdateReview}>
         <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
         <h3 id="review-spot-title">{spot.name}</h3>
@@ -57,7 +71,7 @@ export default function EditReview({review, setShowModal}) {
               value={content}
               onChange={updateContent}
               />
-          <button id='review-form-submit-button' type="submit">Edit Review</button>
+          <button id='review-form-submit-button' onClick={() => {setShowErrors(true)}} type="submit">Edit Review</button>
         </form>
       </div>
     </>

@@ -23,6 +23,23 @@ export default function EditSpotForm({spot, setShowModal}) {
   const [spotImage, setSpotImage] = useState(spot?.image)
   const [spotDescription, setSpotDescription] = useState(spot?.description)
   const [marinaId, setMarinaId] = useState(spot?.marinaId);
+  const [errors, setErrors] = useState([]);
+  const [showErrors, setShowErrors] = useState(false);
+
+  useEffect(() => {
+    const errors = []
+    if(!spotName) errors.push("Name is required.")
+    if(!spotPrice) errors.push("Price is required.")
+    if(!spotImage) errors.push("Image is required.")
+    if(!spotDescription) errors.push("Description is required.")
+    if(!marinaId) errors.push("Please choose a marina.")
+    if(spotName.length > 100) errors.push("Name must be 100 characters or less.")
+    if(spotPrice < 1) errors.push('Price must be a positive amount.')
+    if(spotImage.length > 2000) errors.push('Image Url must be 2000 characters or less.')
+    if(spotDescription.length > 1000) errors.push('Description must be 1000 characters or less.')
+    if(spotImage && (!spotImage.endsWith('.jpg') || !spotImage.endsWith('.jpeg') || spotImage.endsWith('.png'))) errors.push('Image must be a jpg, jpeg, or png.')
+    setErrors(errors)
+  }, [spotName, spotPrice, spotImage, spotDescription, marinaId])
 
   useEffect(() => {
     dispatch(thunkGetMarinas())
@@ -52,14 +69,19 @@ export default function EditSpotForm({spot, setShowModal}) {
       userId: sessionUser.id,
       marinaId
     }
-    await dispatch(thunkEditSpot(newSpot))
-    setShowModal(false);
+    if(!errors.length){
+      await dispatch(thunkEditSpot(newSpot))
+      setShowModal(false);
+    }
   }
 
 
 return (
   <>
     <div id="create-spot-form-container">
+    {showErrors && <ul id="errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
     <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
       <h2 id="create-spot-form-header">Edit {spot.name}</h2>
       <form id='create-spot-form' onSubmit={handleSubmit}>
@@ -120,7 +142,7 @@ return (
                   }
           </select>
         </div>
-        <button id='create-spot-submit-button' type="submit">Edit Spot</button>
+        <button id='create-spot-submit-button' onClick={() => setShowErrors(true)} type="submit">Edit Spot</button>
       </form>
     </div>
   </>

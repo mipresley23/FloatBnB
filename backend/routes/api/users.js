@@ -30,8 +30,8 @@ const validateSignup = [
     .withMessage('Username cannot be an email.'),
   check('password')
     .exists({ checkFalsy: true })
-    .isLength({ min: 6 })
-    .withMessage('Password must be 6 characters or more.'),
+    .isLength({ min: 8 })
+    .withMessage('Password must be 8 characters or more.'),
   handleValidationErrors
 ];
 
