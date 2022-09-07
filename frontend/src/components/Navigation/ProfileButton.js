@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import MenuIcon from '../assets/menuIcon.png'
 import './Navigation.css';
 
 function ProfileButton({ user }) {
@@ -32,8 +33,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button id='nav-menu-button' onClick={openMenu}>
+      <img id='nav-menu-icon' src={MenuIcon}/>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
