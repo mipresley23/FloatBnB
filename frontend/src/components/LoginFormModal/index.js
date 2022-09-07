@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
+import { ReviewModal } from '../../context/ReviewModal';
 import LoginForm from './LoginForm';
 
 function LoginFormModal() {
@@ -9,9 +9,9 @@ function LoginFormModal() {
     <>
       <button onClick={() => setShowModal(true)}>Log In</button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <ReviewModal onClose={() => setShowModal(false)}>
           <LoginForm />
-        </Modal>
+        </ReviewModal>
       )}
     </>
   );

@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 import '../../index.css';
+import SignupFormModal from '../SignupFormPage/signupFormModal';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -18,9 +19,10 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <LoginFormModal />
-        <NavLink id='signuplink' to="/signup">
+        <SignupFormModal />
+        {/* <NavLink id='signuplink' to="/signup">
           <img id='sign-up-image' src={require('./add-user.png')}></img>
-        </NavLink>
+        </NavLink> */}
       </>
     );
   }
