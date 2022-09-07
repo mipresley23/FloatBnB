@@ -14,8 +14,18 @@ export default function CreateReview({spot, setShowModal}){
 
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
+  const [errors, setErrors] = useState([]);
+  const [showErrors, setShowErrors] = useState(false);
 
   const sessionUser = useSelector(state => state.session.user)
+
+  useEffect(() => {
+    const errors = []
+    if(!rating) errors.push('Rating is required.')
+    if(!content) errors.push('Review content is required.')
+    if(content.length > 1000) errors.push('Review content must be 1000 characters or less.')
+    setErrors(errors)
+  }, [rating, content])
 
   const updateContent = (e) => {
     setContent(e.target.value)
@@ -33,16 +43,21 @@ export default function CreateReview({spot, setShowModal}){
       userId: sessionUser.id,
       spotId: spot.id
     }
-    await dispatch(thunkCreateReview(review))
-    await dispatch(thunkGetReviews())
-    history.push(`/spots/${spot.id}`)
-    setShowModal(false)
+    if(!errors.length){
+      await dispatch(thunkCreateReview(review))
+      await dispatch(thunkGetReviews())
+      history.push(`/spots/${spot.id}`)
+      setShowModal(false)
+    }
   }
 
 
   return(
     <>
       <div id="create-review-form-container">
+      {showErrors && <ul id="review-errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
         <form id="create-review-form" onSubmit={handleReviewSubmit}>
         <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
           <h3 id="review-spot-title">{spot.name}</h3>
@@ -60,7 +75,7 @@ export default function CreateReview({spot, setShowModal}){
               value={content}
               onChange={updateContent}
               />
-          <button id='review-form-submit-button' type="submit">Submit Review</button>
+          <button id='review-form-submit-button' onClick={() => setShowErrors(true)} type="submit">Submit Review</button>
         </form>
       </div>
     </>

@@ -246,3 +246,13 @@
   overflow-y:auto;
   resize: none;
 }
+
+#review-errors-list{
+  position: absolute;
+  left: 28%;
+  top: 60px;
+  list-style: none;
+  color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: small;
+}

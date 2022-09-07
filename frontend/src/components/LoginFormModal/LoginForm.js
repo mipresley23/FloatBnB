@@ -9,6 +9,7 @@ function LoginForm({setShowModal}) {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showErrors, setShowErrors] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,11 +32,11 @@ function LoginForm({setShowModal}) {
       <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
         <form id='login-form' onSubmit={handleSubmit}>
         <h2 id="login-form-header" >Welcome Back!</h2>
-          <ul>
+          {showErrors && <ul id="login-error-list">
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
               ))}
-          </ul>
+          </ul>}
           <div className='login-label-input-containers' id='username-container'>
             <label className='login-labels required'>
               Username or Email</label>
@@ -44,7 +45,6 @@ function LoginForm({setShowModal}) {
                 type="text"
                 value={credential}
                 onChange={(e) => setCredential(e.target.value)}
-                required
                 />
           </div>
           <div className='login-label-input-containers' id="password-container">
@@ -55,12 +55,11 @@ function LoginForm({setShowModal}) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
                 />
           </div>
           <div className='login-label-input-containers' id="login-buttons-container">
             <button id='demo-login-button' type="button" onClick={handleDemo}>Demo</button>
-            <button id='login-submit-button' type="submit">Log In</button>
+            <button id='login-submit-button' onClick={() => setShowErrors(true)}type="submit">Log In</button>
           </div>
         </form>
       </div>
