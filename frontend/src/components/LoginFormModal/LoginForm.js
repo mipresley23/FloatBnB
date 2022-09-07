@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import CloseButton from '../assets/close_x_icon.png';
 import './loginForm.css';
 
-function LoginForm() {
+function LoginForm({setShowModal}) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -25,42 +26,45 @@ function LoginForm() {
   }
 
   return (
-    <div id="login-form-container">
-      <h2 className="login-form-header" >Welcome Back!</h2>
-      <form id='login-form' onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-            ))}
-        </ul>
-        <div id='username-container'>
-          <label>
-            Username or Email
-            <input
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              required
-              />
-          </label>
-        </div>
-        <div id="password-container">
-          <label id="password-label">
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              />
-          </label>
-        </div>
-        <div id="login-buttons-container">
-          <button id='demo-login-button' type="button" onClick={handleDemo}>Demo</button>
-          <button id='login-submit-button' type="submit">Log In</button>
-        </div>
-      </form>
-    </div>
+    <>
+      <div id="login-form-container">
+      <button className='modal-cancel-buttons' id='signup-cancel-button' onClick={() => setShowModal(false)}><img id='review-modal-close-image' src={CloseButton} alt='x'/></button>
+        <form id='login-form' onSubmit={handleSubmit}>
+        <h2 id="login-form-header" >Welcome Back!</h2>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+              ))}
+          </ul>
+          <div className='login-label-input-containers' id='username-container'>
+            <label className='login-labels required'>
+              Username or Email</label>
+              <input
+                className="login-inputs"
+                type="text"
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+                />
+          </div>
+          <div className='login-label-input-containers' id="password-container">
+            <label className='login-labels required' id="password-label">
+              Password</label>
+              <input
+                className="login-inputs"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                />
+          </div>
+          <div className='login-label-input-containers' id="login-buttons-container">
+            <button id='demo-login-button' type="button" onClick={handleDemo}>Demo</button>
+            <button id='login-submit-button' type="submit">Log In</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
