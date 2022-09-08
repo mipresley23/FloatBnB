@@ -100,7 +100,6 @@ if(!user) return null;
                 <img id="each-user-spot-image" src={spot.image} alt={spot.name}/>
                 <p id="each-user-spot-price">${spot.price}/night</p>
               </NavLink>
-              <EditSpotFormModal spot={spot} />
             </div>
           ))
         }
