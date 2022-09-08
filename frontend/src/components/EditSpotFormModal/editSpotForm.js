@@ -37,7 +37,7 @@ export default function EditSpotForm({spot, setShowModal}) {
     if(spotPrice < 1) errors.push('Price must be a positive amount.')
     if(spotImage.length > 2000) errors.push('Image Url must be 2000 characters or less.')
     if(spotDescription.length > 1000) errors.push('Description must be 1000 characters or less.')
-    if(spotImage && (!spotImage.endsWith('.jpg') || !spotImage.endsWith('.jpeg') || spotImage.endsWith('.png'))) errors.push('Image must be a jpg, jpeg, or png.')
+    // if(spotImage && (!spotImage.endsWith('.jpg') || !spotImage.endsWith('.jpeg') || spotImage.endsWith('.png'))) errors.push('Image must be a jpg, jpeg, or png.')
     setErrors(errors)
   }, [spotName, spotPrice, spotImage, spotDescription, marinaId])
 

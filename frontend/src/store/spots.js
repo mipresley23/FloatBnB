@@ -11,7 +11,6 @@ const GET_ONE_SPOT = 'spots/getOneSpot'
 const UPDATE_SPOT = 'spots/updateSpot'
 //DELETE
 const DELETE_SPOT = 'spots/deleteSpot'
-const DELETE_BOOKING = 'bookings/deleteBooking'
 //action creators
 const actionCreateSpot = (spot) => {
   return {
@@ -45,13 +44,6 @@ const actionDeleteSpot = (spot, booking) => {
   }
 }
 
-const actionDeleteBooking = (booking) => {
-  return {
-    type: DELETE_BOOKING,
-    booking
-  }
-}
-
 //thunks
 export const thunkGetAllSpots = (spots) => async (dispatch) => {
   const res = await csrfFetch('/api/spots');
@@ -77,6 +69,9 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
     const newSpot = await response.json();
     dispatch(actionCreateSpot(newSpot));
     return response;
+  }else{
+    const error = await response.json();
+    return error;
   }
 };
 
@@ -133,7 +128,6 @@ const spotReducer = (state = {}, action) => {
       return newState
 
       case DELETE_SPOT:
-        console.log('newState: ', newState);
       const deleteSpotId = action.spot.id;
       delete newState[deleteSpotId]
       // delete newState[bookings.id[Spot.deleteSpotId]]

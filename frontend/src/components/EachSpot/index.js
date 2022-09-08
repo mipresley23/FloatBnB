@@ -44,8 +44,6 @@ export default function EachSpot() {
 
   const spot = spots.find(spot => spot.id === +id);
   const marina = spot && marinas && marinas.find(marina => marina.id === spot.marinaId)
-  console.log('marina: ', marina)
-  console.log('spot', spot)
 
   const todaysFullDate = new Date()
   const todaysDate = (todaysFullDate.getDate() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
