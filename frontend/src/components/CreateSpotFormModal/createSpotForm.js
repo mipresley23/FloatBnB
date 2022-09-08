@@ -22,6 +22,11 @@ export default function CreateSpotForm({setShowModal}) {
   const [errors, setErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(false);
 
+  const validateImg = (url) => {
+    let re = /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
+    return re.test(url);
+}
+
   useEffect(() => {
     const errors = []
     if(!spotName) errors.push("Name is required.")
@@ -33,7 +38,7 @@ export default function CreateSpotForm({setShowModal}) {
     if(spotPrice < 1) errors.push('Price must be a positive amount.')
     if(spotImage.length > 2000) errors.push('Image Url must be 2000 characters or less.')
     if(spotDescription.length > 1000) errors.push('Description must be 1000 characters or less.')
-    if(spotImage && (!spotImage.endsWith('.jpg') || !spotImage.endsWith('.jpeg') || spotImage.endsWith('.png'))) errors.push('Image must be a jpg, jpeg, or png.')
+    if (spotImage.length > 0 && !(validateImg(spotImage))) errors.push('Image must be a png, jpg, or jpeg.');
     setErrors(errors)
   }, [spotName, spotPrice, spotImage, spotDescription, marinaId])
 
