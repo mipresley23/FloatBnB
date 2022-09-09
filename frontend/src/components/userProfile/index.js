@@ -116,6 +116,7 @@ if(!user) return null;
       </div>
       {spotArray && spotArray.length > 0 ? <div id="user-spots-container">
         <h3 id="user-spots-header">Check out {user.username}'s Listings!</h3>
+        <div id="inner-user-spots-container">
         {
           spotArray.map(spot => (
             <div id="each-user-spot-edit-container">
@@ -124,12 +125,14 @@ if(!user) return null;
                 <img id="each-user-spot-image" src={spot.image} alt={spot.name}/>
                 <p id="each-user-spot-price">${spot.price}/night</p>
               </NavLink>
-            </div>
+             </div>
           ))
         }
+        </div>
       </div> : null}
       {sessionUser && sessionUser.id === user.id &&  <div id="user-bookings-container">
-        <h3 id="user-bookings-header">{user.username}'s booked listings</h3>
+        <h3 id="user-bookings-header">Your booked listings</h3>
+        <div id="inner-user-booking-container">
         {
           bookingArray && bookingArray.length > 0 ? bookingArray.map(booking => (
             <div id="each-user-booking-container">
@@ -140,11 +143,13 @@ if(!user) return null;
             </div>
           )) : <h3 id="no-bookings-message">{user.username} doesn't currently have any listings booked.</h3>
         }
+        </div>
       </div>}
       {sessionUser && sessionUser.id === user.id && <div id="users-favorites-container">
         <h3 id="user-favorites-header">Your Favorites</h3>
+        <div id="inner-user-favorites-container">
         {
-          favedSpots && favedSpots.length > 0 ? (spot => (
+          favedSpots && favedSpots.length > 0 ? favedSpots.map(spot => (
             <div id="each-user-faved-spot-container">
               <NavLink id="each-user-spot-container" to={`/spots/${spot.id}`}>
                 <h4 id="each-user-spot-name">{spot.name}</h4>
@@ -154,6 +159,7 @@ if(!user) return null;
             </div>
           )) : <h3 id="no-favorites-message">You don't currently have any favorites.</h3>
         }
+        </div>
       </div>}
     </>
   )
