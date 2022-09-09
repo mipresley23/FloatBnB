@@ -35,32 +35,38 @@
 
 #user-spots-container{
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 100px;
   margin-left: 10%;
+  margin-bottom: 100px;
   width: 80%;
-  min-height: 300px;
+  min-height: 200px;
   border: 1px solid black;
   border-radius: 12px;
   background-color: lightcyan;
   padding-top: 50px;
   padding-bottom: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#inner-user-spots-container{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 25px;
 }
 
 #user-spots-header{
-  position: absolute;
-  top: 670px;
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
 #each-user-spot-edit-container{
   width: 25%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -108,6 +114,13 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#inner-user-booking-container{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 25px;
+}
+
 #each-user-booking-container{
   display: flex;
   flex-direction: column;
@@ -129,7 +142,8 @@
 }
 
 #user-bookings-header{
-  padding-bottom: 10px;
+  justify-self: flex-start;
+  align-self: flex-start;
 }
 
 #users-favorites-container{
@@ -149,6 +163,13 @@
   padding-top: 50px;
   padding-bottom: 50px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#inner-user-favorites-container{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 25px;
 }
 
 #each-user-faved-spot-container{
