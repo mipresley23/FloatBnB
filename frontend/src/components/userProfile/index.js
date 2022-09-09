@@ -4,6 +4,7 @@ import {NavLink, useHistory, useParams} from 'react-router-dom'
 import {thunkGetAllUsers} from "../../store/users";
 import { thunkGetAllSpots, thunkDeleteSpot } from "../../store/spots";
 import { thunkGetBookings, thunkDeleteBooking } from "../../store/bookings";
+import { thunkGetFavorites } from "../../store/favorites";
 import EditSpotFormModal from "../EditSpotFormModal";
 import '../../index.css';
 import './userProfile.css';
@@ -13,14 +14,17 @@ export default function UserProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+
   const [users, setUsers] = useState();
   const [spots, setSpots] = useState([])
   const [bookings, setBookings] = useState([])
+  const [favorites, setFavorites] = useState([])
 
   const userSelector = useSelector(state => state.users);
   const spotSelector = useSelector(state => state.spots);
   const bookingSelector = useSelector(state => state.bookings);
   const sessionUser = useSelector(state => state.session.user);
+  const favoriteSelector = useSelector(state => state.favorites);
 
   const user = users && users.find(user => user.id === +id)
   const spotArray = spots && spots.filter(spot => spot.userId === +id)
@@ -51,6 +55,26 @@ export default function UserProfile() {
   useEffect(() => {
     setBookings(Object.values(bookingSelector))
   }, [bookingSelector])
+
+  useEffect(() => {
+    dispatch(thunkGetFavorites())
+  }, [dispatch])
+
+  useEffect(() => {
+    setFavorites(Object.values(favoriteSelector))
+  }, [favoriteSelector])
+
+  const thisUsersFavorites = favorites && favorites.filter(favorite => favorite.userId === user.id)
+  console.log('faves: ', thisUsersFavorites)
+
+  let favedSpots = [];
+  if(thisUsersFavorites.length){
+    for(let fave of thisUsersFavorites){
+      let faveSpot = spots && spots.find(spot => spot.id === fave.spotId)
+      favedSpots.push(faveSpot)
+    }
+  }
+  console.log('faved spots: ', favedSpots)
 
   const bookingArray = bookings && bookings.filter(booking => booking.userId === +id)
 
@@ -115,6 +139,20 @@ if(!user) return null;
              <button class='each-spot-buttons' type='button' value={booking.id} onClick={handleDeleteBooking}>Delete</button>
             </div>
           )) : <h3 id="no-bookings-message">{user.username} doesn't currently have any listings booked.</h3>
+        }
+      </div>}
+      {sessionUser && sessionUser.id === user.id && <div id="users-favorites-container">
+        <h3 id="user-favorites-header">Your Favorites</h3>
+        {
+          favedSpots && favedSpots.length > 0 ? (spot => (
+            <div id="each-user-faved-spot-container">
+              <NavLink id="each-user-spot-container" to={`/spots/${spot.id}`}>
+                <h4 id="each-user-spot-name">{spot.name}</h4>
+                <img id="each-user-spot-image" src={spot.image} alt={spot.name}/>
+                <p id="each-user-spot-price">${spot.price}/night</p>
+              </NavLink>
+            </div>
+          )) : <h3 id="no-favorites-message">You don't currently have any favorites.</h3>
         }
       </div>}
     </>

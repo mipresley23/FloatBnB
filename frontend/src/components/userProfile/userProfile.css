@@ -131,3 +131,36 @@
 #user-bookings-header{
   padding-bottom: 10px;
 }
+
+#users-favorites-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  margin-left: 10%;
+  margin-bottom: 100px;
+  width: 80%;
+  min-height: 200px;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-color: lightcyan;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#each-user-faved-spot-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 280px;
+  width: 25%;
+  border-radius: 12px;
+  background-color: darkcyan;
+  border: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:rgb(255, 186, 102);
+}
