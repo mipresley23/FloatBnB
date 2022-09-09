@@ -12,6 +12,8 @@ import EditReviewModal from "../editReviewModal/editReviewModal";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
 import FilledStar from '../assets/star_filled.png';
 import DeleteIcon from '../assets/delete_icon.png';
+import EmptyHeart from '../assets/heart_empty.png';
+import FilledHeart from '../assets/heart_filled.png';
 import '../../index.css';
 import './eachSpot.css';
 import EditSpotFormModal from "../EditSpotFormModal";
@@ -24,6 +26,7 @@ export default function EachSpot() {
   const [showModal, setShowModal] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [favorites, setFavorites] = useState([])
+  const [hasFavorited, setHasFavorited] = useState(false)
   const [spots, setSpots] = useState([]);
   const [images, setImages] = useState([]);
   const [bookingStartDate, setBookingStartDate] = useState('');
@@ -42,6 +45,7 @@ export default function EachSpot() {
   const bookingSelector = useSelector(state => state.bookings);
   const marinaSelector = useSelector(state => state.marinas);
   const favoriteSelector = useSelector(state => state.favorites);
+  console.log('favorite selector: ', favoriteSelector)
 
   const spot = spots.find(spot => spot.id === +id);
   const marina = spot && marinas && marinas.find(marina => marina.id === spot.marinaId)
@@ -66,6 +70,8 @@ export default function EachSpot() {
     if(ele[0] === +id) thisSpotsBookings.push(ele)
   })
 
+
+//Reviews and rating calculations
   const thisSpotsReviews = reviews && reviews.filter(review => review.spotId === +id)
 
   let ratingSum = 0;
@@ -77,7 +83,7 @@ export default function EachSpot() {
 
   const averageRating = (ratingSum / thisSpotsReviews.length).toFixed(2)
 
-
+//formatting booking date ranges
   const formatStartEndDate = (bookingDate) => {
     const dateArr = bookingDate.split('-')
     return `${dateArr[1]}-${dateArr[2]}-${dateArr[0]}`
@@ -105,6 +111,21 @@ export default function EachSpot() {
       realRange.push(ele)
     }
   }
+
+  const thisSpotsFavorites = spot && favorites && favorites.filter(favorite => favorite.spotId === spot.id)
+
+ let thisSpotFavoritedByUser;
+ if(sessionUser){
+   thisSpotFavoritedByUser = thisSpotsFavorites && thisSpotsFavorites.find(favorite => favorite.userId === sessionUser.id)
+ }
+
+  console.log('thisSpotsFavs: ', thisSpotsFavorites)
+  console.log('this spot is favorited by user: ', thisSpotFavoritedByUser)
+
+  useEffect(() => {
+    if(thisSpotFavoritedByUser) setHasFavorited(true)
+    else setHasFavorited(false)
+  }, [thisSpotFavoritedByUser])
 
   useEffect(() => {
     dispatch(thunkGetFavorites())
@@ -216,6 +237,23 @@ const handleDeleteReview = async(e) => {
   await dispatch(thunkDeleteReview(e.target.value))
 }
 
+const handleAddFavorite = async (e) => {
+  e.preventDefault();
+  const newFavorite = {
+    userId: sessionUser.id,
+    spotId: spot.id
+  }
+  await dispatch(thunkAddFavorite(newFavorite))
+  await setHasFavorited(true)
+}
+
+const handleDeleteFavorite = async (e) => {
+  e.preventDefault();
+  await dispatch(thunkDeleteFavorite(spot.id))
+  await setFavorites(Object.values(favoriteSelector))
+  await setHasFavorited(false)
+}
+
 
 if(!spots) return null;
 if(!marina) return null;
@@ -224,7 +262,10 @@ return(
   <>
     <div id="each-spot-main-content">
       <div className="each-spot-header-info">
+        <div id="spot-header-fave-container">
         <h2 id="spot-name-title">{spot.name}</h2>
+          {!hasFavorited ? <img className='each-spot-favorite-images' src={EmptyHeart} onClick={handleAddFavorite} alt=''/> : <img className='each-spot-favorite-images' src={FilledHeart} onClick={handleDeleteFavorite} alt=''/>}
+        </div>
         <div id="spot-header-labels">
           <p id="spot-header-hosted-by">Hosted by: {thisSpotsUser && thisSpotsUser.username}</p>
           <p id="spot-header-location">{marina.city}, {marina.state}, {marina.country}</p>
