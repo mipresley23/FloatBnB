@@ -46,6 +46,7 @@ export const thunkAddFavorite = (favorite) => async (dispatch) => {
 }
 
 export const thunkDeleteFavorite = (favoriteId) => async(dispatch) => {
+  console.log('thunk favoriteId: ', favoriteId)
   const res = await csrfFetch(`/api/favorites/${favoriteId}`, {
     method: "DELETE"
   })
@@ -68,7 +69,7 @@ const favoriteReducer = (state = {}, action) => {
       return newState;
 
     case DELETE_FAVORITE:
-      delete newState[action.favoriteId]
+      delete newState[action.favoriteId.id]
       return newState
 
     default:

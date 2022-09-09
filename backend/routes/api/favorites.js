@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const {Favorite} = require('../../db/models');
+const {Favorite, Spot} = require('../../db/models');
+
 const router = express.Router()
 
 router.get('/', asyncHandler(async(req, res) => {
@@ -14,7 +15,8 @@ router.post('/', asyncHandler(async(req, res) => {
 }))
 
 router.delete('/:id', asyncHandler(async(req, res) => {
-  const favorite = Favorite.findByPk(req.params.id)
+  const spot = await Spot.findByPk(req.params.id)
+  const favorite = await Favorite.findOne({where: {spotId: spot.id}})
   await favorite.destroy()
   return res.json(favorite)
 }))
