@@ -264,7 +264,7 @@ return(
       <div className="each-spot-header-info">
         <div id="spot-header-fave-container">
         <h2 id="spot-name-title">{spot.name}</h2>
-          {!hasFavorited ? <img className='each-spot-favorite-images' src={EmptyHeart} onClick={handleAddFavorite} alt=''/> : <img className='each-spot-favorite-images' src={FilledHeart} onClick={handleDeleteFavorite} alt=''/>}
+          {sessionUser && !hasFavorited ? <img className='each-spot-favorite-images' src={EmptyHeart} onClick={handleAddFavorite} alt=''/> : sessionUser && hasFavorited ? <img className='each-spot-favorite-images' src={FilledHeart} onClick={handleDeleteFavorite} alt=''/> : null}
         </div>
         <div id="spot-header-labels">
           <p id="spot-header-hosted-by">Hosted by: {thisSpotsUser && thisSpotsUser.username}</p>
