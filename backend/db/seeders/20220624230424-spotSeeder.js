@@ -12,7 +12,7 @@ module.exports = {
           {
             name: 'Go With The Flow',
             price: 1500,
-            image: 'https://www.filepicker.io/api/file/6wAxrobkRzWLIf6FjgSg',
+            image: 'https://www.bavariayachts.com/fileadmin/_processed_/2/7/csm_bavaria-sy-cruiserline-overview-cruiser37_61eaa58f0b.jpg',
             description: "Eventually, each spot will have its own description. For now, we've created this generic description to fill in the space and make FloatBnB look good. Keep in mind FloatBnB is not a real rental site and none of these spots actually exist.",
             userId: 1,
             marinaId: 1,

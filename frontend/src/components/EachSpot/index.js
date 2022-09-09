@@ -6,6 +6,7 @@ import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
 import { thunkGetReviews, thunkDeleteReview } from "../../store/reviews";
+import { thunkGetFavorites, thunkAddFavorite, thunkDeleteFavorite } from "../../store/favorites";
 import SpotReviewModal from "../spotReviewModal/spotReviewModal";
 import EditReviewModal from "../editReviewModal/editReviewModal";
 import ComingSoonImg from '../userProfile/nophoto.jpeg';
@@ -22,8 +23,7 @@ export default function EachSpot() {
 
   const [showModal, setShowModal] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [spotName, setSpotName] = useState();
-  const [spotPrice, setSpotPrice] = useState();
+  const [favorites, setFavorites] = useState([])
   const [spots, setSpots] = useState([]);
   const [images, setImages] = useState([]);
   const [bookingStartDate, setBookingStartDate] = useState('');
@@ -41,6 +41,7 @@ export default function EachSpot() {
   const sessionUser =  useSelector(state => state.session.user);
   const bookingSelector = useSelector(state => state.bookings);
   const marinaSelector = useSelector(state => state.marinas);
+  const favoriteSelector = useSelector(state => state.favorites);
 
   const spot = spots.find(spot => spot.id === +id);
   const marina = spot && marinas && marinas.find(marina => marina.id === spot.marinaId)
@@ -104,6 +105,16 @@ export default function EachSpot() {
       realRange.push(ele)
     }
   }
+
+  useEffect(() => {
+    dispatch(thunkGetFavorites())
+  }, [dispatch])
+
+  useEffect(() => {
+    setFavorites(Object.values(favoriteSelector))
+  }, [favoriteSelector])
+
+  console.log('favorites: ', favorites)
 
   useEffect(() => {
     dispatch(thunkGetReviews())
