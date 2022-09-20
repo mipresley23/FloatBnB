@@ -71,7 +71,7 @@ a:hover{
 
 #footer-container{
   position:fixed;
-  bottom: 1px;
+  bottom: 0px;
   width: 100%;
   height: fit-content;
   padding-top: 25px;

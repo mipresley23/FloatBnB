@@ -210,7 +210,7 @@ export default function EachSpot() {
       setErrors([]);
       window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
     }else{
-      history.push('/login')
+      setErrors(['Please Sign In To Book This Listing'])
     }
   }
 
