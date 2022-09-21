@@ -13,7 +13,14 @@ import Marinas from "./components/marinas";
 import CreateSpotForm from "./components/CreateSpotFormModal";
 import UserProfile from "./components/userProfile";
 import Footer from "./components/footer";
-
+import MichiganSpots from "./components/MichiganSpots";
+import BritishColumbiaSpots from "./components/BritishColumbiaSpots";
+import CaliforniaSpots from "./components/CaliforniaSpots";
+import FloridaSpots from "./components/FloridaSpots";
+import LouisianaSpots from "./components/LouisianaSpots";
+import OntarioSpots from "./components/OntarioSpots";
+import USVirginIslandsSpots from "./components/USVirginIslandsSpots";
+import WashingtonSpots from "./components/WashingtonSpots";
 
 
 function App() {
@@ -48,11 +55,29 @@ function App() {
           <Route path='/spots/:id'>
             <EachSpot />
           </Route>
-          <Route path='/bookings'>
-            <Bookings />
+          <Route path='/michigan'>
+            <MichiganSpots />
           </Route>
-          <Route path='/marinas'>
-            <Marinas />
+          <Route path='/britishcolumbia'>
+            <BritishColumbiaSpots />
+          </Route>
+          <Route path='/california'>
+            <CaliforniaSpots />
+          </Route>
+          <Route path='/florida'>
+            <FloridaSpots />
+          </Route>
+          <Route path='/louisiana'>
+            <LouisianaSpots />
+          </Route>
+          <Route path='/ontario'>
+            <OntarioSpots />
+          </Route>
+          <Route path='/usvirginislands'>
+            <USVirginIslandsSpots />
+          </Route>
+          <Route exact path='/washington'>
+            <WashingtonSpots />
           </Route>
         </Switch>
       )}

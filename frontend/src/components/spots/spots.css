@@ -100,3 +100,22 @@
 #spots-page-title{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+#spot-address{
+  align-self: flex-start;
+  margin-left: 2%;
+  width: 60%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  position: relative;
+  top: 4%;
+}
+
+.location-image-price{
+  align-self: flex-end;
+  margin-right: 2%;
+  width: 30%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  bottom: 1%;
+}

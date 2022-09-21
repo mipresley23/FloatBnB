@@ -78,6 +78,7 @@
   border: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color:rgb(255, 186, 102);
+  padding: 1%;
 }
 
 #each-user-spot-container:hover{
@@ -122,13 +123,14 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 280px;
+  min-height: 280px;
   width: 25%;
   border-radius: 12px;
   background-color: darkcyan;
   border: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color:rgb(255, 186, 102);
+  padding: 1%;
 }
 
 #booking-image{
@@ -175,4 +177,5 @@
   border: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color:rgb(255, 186, 102);
+  padding: 1%;
 }
