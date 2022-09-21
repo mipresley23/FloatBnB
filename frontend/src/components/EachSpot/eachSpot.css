@@ -1,6 +1,6 @@
 .each-spot-buttons{
-  height:40px;
-  width: 100px;
+  min-height:40px;
+  min-width: 100px;
   border-radius: 12px;
   display: block;
   background-color: azure;
@@ -218,13 +218,26 @@
 #spot-header-labels{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: fit-content;
 }
 
 #spot-header-hosted-by, #spot-header-location{
   margin-top: 0;
   font-size: 16px;
   margin-left: 5px;
+  margin-right: 5px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#each-spot-user-host{
+  background-color: beige;
+  text-decoration: none;
+  color:black;
+}
+
+#each-spot-user-host:hover{
+  font-weight: bold;
 }
 
 #spot-header-location{
@@ -396,6 +409,7 @@
   border-radius: 12px;
   background-color: lightcyan;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-bottom: 3%;
 }
 
 #each-review-container{

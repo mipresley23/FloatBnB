@@ -52,12 +52,12 @@ export const thunkGetAllSpots = (spots) => async (dispatch) => {
   return res;
 }
 
-export const thunkGetOneSpot = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId}`);
-  const data = await res.json();
-  dispatch(actionGetOneSpot(data));
-  return data;
-}
+// export const thunkGetOneSpot = (spotId) => async (dispatch) => {
+//   const res = await csrfFetch(`/api/spots/${spotId}`);
+//   const data = await res.json();
+//   dispatch(actionGetOneSpot(data));
+//   return data;
+// }
 
 export const thunkCreateSpot = (spot) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
