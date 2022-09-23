@@ -267,7 +267,7 @@ return(
           {thisSpotsReviews.length !== 1 ? <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3> :
           <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} review</h3>}
           <p id="spot-header-hosted-by">Hosted by: </p>
-          <NavLink id='each-spot-user-host' to={`/users/${thisSpotsUser.id}`}>{thisSpotsUser && thisSpotsUser.username}</NavLink>
+          <NavLink id='each-spot-user-host' to={`/users/${thisSpotsUser?.id}`}>{thisSpotsUser && thisSpotsUser.username}</NavLink>
           <p id="spot-header-location">{marina.city}, {marina.state}, {marina.country}</p>
         </div>
       </div>
