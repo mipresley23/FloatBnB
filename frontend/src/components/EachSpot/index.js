@@ -14,6 +14,7 @@ import FilledStar from '../assets/star_filled.png';
 import DeleteIcon from '../assets/delete_icon.png';
 import EmptyHeart from '../assets/heart_empty.png';
 import FilledHeart from '../assets/heart_filled.png';
+import NoImage from '../assets/no-image-avail.png';
 import '../../index.css';
 import './eachSpot.css';
 import EditSpotFormModal from "../EditSpotFormModal";
@@ -272,14 +273,14 @@ return(
         </div>
       </div>
       <div id="spot-images-container">
-        <img className='each-spot-images' id='each-spot-image-one' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
+        <img className='each-spot-images' id='each-spot-image-one' src={spot.image ? spot.image : NoImage} alt="spot"></img>
         <div id="spot-images-column-two">
-          <img className='each-spot-images' id='each-spot-image-two' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-three' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-two' src={spot.image ? spot.image : NoImage} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-three' src={spot.image ? spot.image : NoImage} alt="spot"></img>
         </div>
         <div id="spot-images-column-three">
-          <img className='each-spot-images' id='each-spot-image-four' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
-          <img className='each-spot-images' id='each-spot-image-five' src={spot.image ? spot.image : ComingSoonImg} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-four' src={spot.image ? spot.image : NoImage} alt="spot"></img>
+          <img className='each-spot-images' id='each-spot-image-five' src={spot.image ? spot.image : NoImage} alt="spot"></img>
         </div>
       </div>
       <div id="each-spot-button-container">

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { thunkGetAllSpots } from "../../store/spots";
 import './splash.css';
 import '../../index.css';
+import NoImage from '../assets/no-image-avail.png';
 
 export default function Splash() {
 
@@ -42,7 +43,7 @@ export default function Splash() {
             <div key={spot.id} className="splash-image-containers">
               <h2 className="splash-image-title">{spot.name}</h2>
               <NavLink to={`/spots/${spot.id}`}>
-                <img id={`spot-image-${spot.id}`} src={spot.image} alt={``}/>
+                <img id={`spot-image-${spot.id}`} src={spot.image ? spot.image : NoImage} alt={``}/>
               </NavLink>
               <h3 className="splash-image-price">{`$${spot.price}/night`}</h3>
             </div>
