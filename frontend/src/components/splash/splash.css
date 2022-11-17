@@ -37,7 +37,7 @@ img{
   background-color: lightblue;
   border: 1px solid black;
   border-radius: 5%;
-  margin: 5px;
+  margin: 2%;
 }
 
 .splash-image-title{
@@ -52,18 +52,29 @@ img{
 
 #main-title{
   text-align: center;
-  margin-top: 10px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-#navbar-links-container{
-  display: inline-flex;
-  width: 80%;
+#navbar-links-container-all{
+  display: flex;
+  width: 100vw;
+  height: 150px;
+  max-width: 100%;
+  overflow: hidden;
   justify-content: space-around;
-  margin-left:10%;
-  margin-right:10%;
   margin-bottom: 50px;
+}
 
+#navbar-links-container-one{
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  margin-left: 2%;
+  margin-right: 2%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #spots-nav-image{
@@ -81,4 +92,29 @@ img{
 #users-nav-image{
   height: 40px;
   width: auto;
+}
+
+.nav-images{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: darkgray;
+  width: 100px;
+  height: 100px;
+}
+
+.nav-images:hover{
+  color: black;
+  background-color: beige;
+}
+
+.state-icons{
+  height: 50px;
+  width: 50px;
+}
+
+.nav-image-label{
+  font-size: small;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

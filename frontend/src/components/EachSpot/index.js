@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { thunkGetOneSpot, thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
+import { useParams, useHistory, NavLink } from "react-router-dom";
+import { thunkDeleteSpot, thunkGetAllSpots, thunkEditSpot} from "../../store/spots";
 import { thunkCreateBooking, thunkDeleteBooking, thunkGetBookings } from "../../store/bookings";
 import { thunkGetMarinas } from "../../store/marinas";
 import { thunkGetAllUsers } from "../../store/users";
@@ -187,11 +187,6 @@ export default function EachSpot() {
     history.push('/spots')
   }
 
-
-  useEffect(() => {
-    dispatch(thunkGetOneSpot(id))
-  }, [dispatch, id])
-
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if(sessionUser){
@@ -211,7 +206,7 @@ export default function EachSpot() {
       setErrors([]);
       window.alert('Congratulations on your upcoming Vacation! \n Go to your profile to see the details of your stay!')
     }else{
-      history.push('/login')
+      setErrors(['Please Sign In To Book This Listing'])
     }
   }
 
@@ -268,7 +263,12 @@ return(
           {sessionUser && !hasFavorited ? <img className='each-spot-favorite-images' src={EmptyHeart} onClick={handleAddFavorite} alt=''/> : sessionUser && hasFavorited ? <img className='each-spot-favorite-images' src={FilledHeart} onClick={handleDeleteFavorite} alt=''/> : null}
         </div>
         <div id="spot-header-labels">
-          <p id="spot-header-hosted-by">Hosted by: {thisSpotsUser && thisSpotsUser.username}</p>
+          <img id='total-rating-star' src={FilledStar} alt='average rating'/>
+          <h3 id="total-rating-score">{averageRating !== 'NaN' ? averageRating : 0}</h3>
+          {thisSpotsReviews.length !== 1 ? <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3> :
+          <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} review</h3>}
+          <p id="spot-header-hosted-by">Hosted by: </p>
+          <NavLink id='each-spot-user-host' to={`/users/${thisSpotsUser?.id}`}>{thisSpotsUser && thisSpotsUser.username}</NavLink>
           <p id="spot-header-location">{marina.city}, {marina.state}, {marina.country}</p>
         </div>
       </div>
@@ -367,7 +367,8 @@ return(
           <div id="review-rating-total">
             <img id='total-rating-star' src={FilledStar} alt='average rating'/>
             <h3 id="total-rating-score">{averageRating !== 'NaN' ? averageRating : 0}</h3>
-          <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3>
+          {thisSpotsReviews.length !== 1 ? <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} reviews</h3> :
+          <h3 id="all-reviews-header">{thisSpotsReviews && thisSpotsReviews.length} review</h3>}
           {sessionUser && <SpotReviewModal spot={spot} />}
           </div>
           {
