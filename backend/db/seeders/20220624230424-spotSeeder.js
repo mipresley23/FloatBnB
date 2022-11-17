@@ -60,7 +60,7 @@ module.exports = {
           {
             name: 'Knot Working',
             price: 1800,
-            image: 'https://www.hanseyachtsag.com/fileadmin/_processed_/1/3/csm_Hanse_418_2017_11_08_Exterior_segeln_drohne_0059_v2_0020_retusche%402x_0f2e9c4ab9.jpg',
+            image: 'https://cdn.boatinternational.com/bi_prd/bi/library_images/ockXPtTlQqakijp7xEoX_creole-classic-yacht.jpg',
             description: "Eventually, each spot will have its own description. For now, we've created this generic description to fill in the space and make FloatBnB look good. Keep in mind FloatBnB is not a real rental site and none of these spots actually exist.",
             userId: 3,
             marinaId: 3,
